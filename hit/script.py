@@ -47,6 +47,7 @@ def render_to(name, multiplier = 1):
         bpy.data.scenes['Scene'].render.filepath = base_path + name + '-' + str(i)
         bpy.ops.render.render(write_still=True)
 
+    bpy.data.scenes['Scene'].frame_set(0)
     set_scale(multiplier)
 
     set_percentage(50)
