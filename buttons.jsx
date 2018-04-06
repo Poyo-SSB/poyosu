@@ -30,7 +30,7 @@ function process(hex, text, file) {
     exportFile(file, 500, 90);
 }
 
-process("#e8193b", "Back to Menu", "pause-back");
-process("#f69100", "Retry", "pause-retry");
-process("#a2c80c", "Continue", "pause-continue");
-process("#0078f2", "Watch Replay", "pause-replay");
+process("#e8193b", "BACK TO MENU", "pause-back");
+process("#f69100", "RETRY", "pause-retry");
+process("#a2c80c", "CONTINUE", "pause-continue");
+process("#0078f2", "WATCH REPLAY", "pause-replay");
