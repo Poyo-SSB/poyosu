@@ -3,6 +3,7 @@
 function exportFile(name, width, height) {
     var exportOptions = new ExportOptionsPNG24();
     exportOptions.matte = false;
+    exportOptions.artBoardClipping = true;
     exportOptions.horizontalScale = (width / document.width) * 100;
     exportOptions.verticalScale = (height / document.height) * 100;
     
@@ -18,14 +19,15 @@ function process(name, file) {
     document.layers.getByName("Mania").visible = false;
     document.layers.getByName(name).visible = true;
     
-    const normal = 496;
     const med = 216;
-    const small = 64;
     
+    document.artboards[0].artboardRect = [-46, 46, 46, -46];
     exportFile(file + "-med@2x", med, med);
     exportFile(file + "-med", med / 2, med / 2);
-    exportFile(file + "-small@2x", small, small);
-    exportFile(file + "-small", small / 2, small / 2);
+    
+    document.artboards[0].artboardRect = [-46, 46 + 50, 46 + 6, -46];
+    exportFile(file + "-small@2x", document.width, document.height);
+    exportFile(file + "-small", document.width / 2, document.height / 2);
 }
 
 process("Osu", "mode-osu");
