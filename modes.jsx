@@ -22,8 +22,6 @@ function process(name, file) {
     const med = 216;
     const small = 64;
     
-    exportFile(file + "@2x", normal, normal);
-    exportFile(file, normal / 2, normal / 2);
     exportFile(file + "-med@2x", med, med);
     exportFile(file + "-med", med / 2, med / 2);
     exportFile(file + "-small@2x", small, small);
