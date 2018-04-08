@@ -212,7 +212,11 @@ It took a lot of trial and error before I found the correct offset; simply measu
 
 ### Selection icons
 
-I decided to go with a more colorful look with the selection icons than the default skin has to contrast with my new black song-select panels, and I think it turned out quite well. One decision which was difficult to implement was the decision to remove the "Mode" text from the mode-selection icon in favor of just having the mode icon on its own. As mentioned earlier, it took a lot of trial and error to get the positioning right, but it looks perfect now. 
+I decided to go with a more colorful look with the selection icons than the default skin has to contrast with my new black song-select panels, and I think it turned out quite well. One decision which was difficult to implement was the decision to remove the "Mode" text from the mode-selection icon in favor of just having the mode icon on its own. As mentioned earlier, it took a lot of trial and error to get the positioning right, but it looks perfect now.
+
+### Score numbers
+
+I actually quite like the default score numbers, but I don't like their black outlines. I just feel like it muddies things up. To get around this, I set up a Photoshop action which pastes each character onto a black background and uses the resulting image as an alpha channel on a pure white image. The result is essentially the same as the original except without the black background.
 
 [sequential-colors]: https://i.imgur.com/xniVlGC.png
 [sequential-color-hit-circles]: https://i.imgur.com/WxaP7Zn.png
