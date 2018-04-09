@@ -1,11 +1,11 @@
 ﻿var document = app.activeDocument;
 
-function exportFile(name, width, height) {
+function exportFile(name, width, height, multiplier) {
     var exportOptions = new ExportOptionsPNG24();
     exportOptions.matte = false;
     exportOptions.artBoardClipping = true;
-    exportOptions.horizontalScale = (width / document.width) * 100;
-    exportOptions.verticalScale = (height / document.height) * 100;
+    exportOptions.horizontalScale = (width / document.width) * 100 * multiplier;
+    exportOptions.verticalScale = (height / document.height) * 100 * multiplier;
     
     var path = document.path + "/" + name + ".png"
     
@@ -16,8 +16,9 @@ var textItem = document.textFrames.getByName("Text");
 
 function process(text) {
     textItem.contents = text;
-    exportFile("default-" + text + "@2x", 90, 90);
-    exportFile("default-" + text, 45, 45);
+    document.artboards[0].artboardRect = [0, 0, textItem.width, -100]
+    exportFile("default-" + text + "@2x", textItem.width, 100, 0.9);
+    exportFile("default-" + text, textItem.width / 2, 50, 0.45);
 }
 
 for (var i = 0; i < 10; i++) {
