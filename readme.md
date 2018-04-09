@@ -216,7 +216,11 @@ I decided to go with a more colorful look with the selection icons than the defa
 
 ### Score numbers
 
-I actually quite like the default score numbers, but I don't like their black outlines. I just feel like it muddies things up. To get around this, I set up a Photoshop action which pastes each character onto a black background and uses the resulting image as an alpha channel on a pure white image. The result is essentially the same as the original except without the black background.
+I actually quite like the default score numbers, but I don't like their black outlines. I just feel like it muddies things up. To get around this, I set up a Photoshop action which pastes each character onto a black background and uses the resulting image as an alpha channel on a pure white image. The result is essentially the same as the original except without the black background. I also did this on the `scoreentry` numbers, used for the input overlay and in-game score listings.
+
+### Input overlay
+
+This was probably one of the most annoying parts of the development of this skin. There are two parts to the input overlay that you see in-game: `inputoverlay-background` and `inputoverlay-key`. These are placed arbitrarily, which makes it very difficult to skin them in a pleasing manner if one needs alignment as I do. I ended up actually going through the game's code to find where the images are placed. I had to do some squashing and stretching to the files to make the images more closely squarelike.
 
 [sequential-colors]: https://i.imgur.com/xniVlGC.png
 [sequential-color-hit-circles]: https://i.imgur.com/WxaP7Zn.png
