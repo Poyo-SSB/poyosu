@@ -222,6 +222,10 @@ I actually quite like the default score numbers, but I don't like their black ou
 
 This was probably one of the most annoying parts of the development of this skin. There are two parts to the input overlay that you see in-game: `inputoverlay-background` and `inputoverlay-key`. These are placed arbitrarily, which makes it very difficult to skin them in a pleasing manner if one needs alignment as I do. I ended up actually going through the game's code to find where the images are placed. I had to do some squashing and stretching to the files to make the images more closely squarelike.
 
+### Results screen
+
+It's just rectangles. It's my least-favorite part of this skin. If you are not completely graphically challenged as I am and have ideas on how it could be made to look better, please reach out to me.
+
 [sequential-colors]: https://i.imgur.com/xniVlGC.png
 [sequential-color-hit-circles]: https://i.imgur.com/WxaP7Zn.png
 [simple-buttons]: https://i.imgur.com/LYOYso6.png
