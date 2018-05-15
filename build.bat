@@ -3,8 +3,8 @@
 set /p directory="Build directory (%localappdata%\osu!)"
 IF "%directory%" == "" set directory=%localappdata%\osu!
 
-set standard=%directory%\Skins\Poyo (Standard)
-set lite=%directory%\Skins\Poyo (Lite)
+set standard=%directory%\Skins\poyosu! (Standard)
+set lite=%directory%\Skins\poyosu! (Lite)
 set output=%directory%\Exports
 
 :: Delete preexisting skin folders.
@@ -39,8 +39,8 @@ echo Building .osk files...
 :: 7zip is very noisy. Please be quiet.
 "C:\Program Files\7-Zip\7z.exe" a "%output%\standard.zip" "%standard%\*" > nul
 "C:\Program Files\7-Zip\7z.exe" a "%output%\lite.zip" "%lite%\*" > nul
-del "%output%\Poyo (Standard).osk" 2>nul
-del "%output%\Poyo (Lite).osk" 2>nul
-ren "%output%\standard.zip" "Poyo (Standard).osk"
-ren "%output%\lite.zip" "Poyo (Lite).osk"
+del "%output%\poyosu! (Standard).osk" 2>nul
+del "%output%\poyosu! (Lite).osk" 2>nul
+ren "%output%\standard.zip" "poyosu! (Standard).osk"
+ren "%output%\lite.zip" "poyosu! (Lite).osk"
 echo Done!
