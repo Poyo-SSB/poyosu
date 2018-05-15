@@ -45,7 +45,7 @@ def render_to(name, multiplier=1, render_animation=False):
 
     if render_animation:
         set_scale(2.125)
-        set_percentage(25)
+        set_percentage(20)
         for i in range(bpy.data.scenes['Scene'].frame_start, bpy.data.scenes['Scene'].frame_end):
             bpy.data.scenes['Scene'].frame_set(i)
             bpy.data.scenes['Scene'].render.filepath = os.path.join(
