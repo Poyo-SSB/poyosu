@@ -1,4 +1,5 @@
 import bpy
+import os
 
 
 def set_scale(scale):
@@ -33,29 +34,34 @@ def hidden(thing, should):
     bpy.data.objects[thing].hide_render = should
 
 
-base_path = 'C:\\Users\\poyo_\\AppData\\Local\\osu!\\Skins\\poyosu\\'
+filepath = bpy.data.filepath
+directory = os.path.dirname(filepath)
 
 
-def render_to(name, multiplier = 1):
-    global base_path
+def render_to(name, multiplier=1):
+    global directory
+
+    base_path = os.path.join(directory, name)
 
     set_scale(8.5)
     set_percentage(100)
 
     for i in range(bpy.data.scenes['Scene'].frame_start, bpy.data.scenes['Scene'].frame_end):
         bpy.data.scenes['Scene'].frame_set(i)
-        bpy.data.scenes['Scene'].render.filepath = base_path + name + '-' + str(i)
+        bpy.data.scenes['Scene'].render.filepath = os.path.join(
+            base_path, name + '-' + str(i))
         bpy.ops.render.render(write_still=True)
 
     bpy.data.scenes['Scene'].frame_set(0)
     set_scale(multiplier)
 
     set_percentage(50)
-    bpy.data.scenes['Scene'].render.filepath = base_path + name + '@2x'
+    bpy.data.scenes['Scene'].render.filepath = os.path.join(
+        base_path, name + '@2x')
     bpy.ops.render.render(write_still=True)
 
     set_percentage(25)
-    bpy.data.scenes['Scene'].render.filepath = base_path + name
+    bpy.data.scenes['Scene'].render.filepath = os.path.join(base_path, name)
     bpy.ops.render.render(write_still=True)
 
 
