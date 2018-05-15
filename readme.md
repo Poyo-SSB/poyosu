@@ -1,6 +1,11 @@
 # poyosu!
 
-I'm Poyo. This is my *osu!* skin. **If you want to download the skin, go to the [releases section of this repository](https://github.com/Poyo-SSB/poyosu/releases).**
+I'm Poyo. This is my *osu!* skin. **If you want to download the skin, go to the [releases section of this repository](https://github.com/Poyo-SSB/poyosu/releases).** The standard version is colorful and flashy, while the lite version is much more minimal. Click the images for previews!
+
+|[![](./logostandard.png)](https://streamable.com/ndmiz)|[![](./logolite.png)](https://streamable.com/1ufvu)|
+|-|-|
+
+If you would like a custom version of the skin with a custom flag and name above the health bar, feel free to contact me in *osu!* (Poyo_SSB) or through Discord (Poyo#4440).
 
 If you want to know about the process of making the skin for some reason, read below.
 
@@ -8,11 +13,11 @@ If you want to know about the process of making the skin for some reason, read b
 
 *osu!* is not an ugly game. Its default skin, in my opinion, isn't that bad. That's apparently an unpopular opinion, but the design is clean and consistent. In gameplay, it can be a little bit noisy, but I was perfectly content using it for my first few months playing *osu!*, even though I knew about the existence of skins from the very beginning.
 
-I did actually try many, *many* skins during that time, but every single one was inferior to the default skin in one way or another. Whether it was an excess of anime girls, or inconsistency in design, or overexaggerated elements, there was always something I could point to which was a deal-breaker.
+I did actually try many, *many* skins during that time, but every single one was inferior to the default skin in one way or another. Whether it was an excess of anime girls, inconsistency in design, or overexaggerated elements, there was always something which annoyed me enough to make it usuable for practical purposes.
 
 In late 2017, a few months after I really began playing, I discovered a skin called [Project VOEZ](https://osu.ppy.sh/community/forums/topics/471776) by a user named -yuo-. This skin, though completely impractical to play with, looked super cool and was the inspiration for me starting this project.
 
-Over time, as I began to contribute to contrinbute to [osu!lazer](https://github.com/ppy/osu), I started to take inspiration from [flyte](https://twitter.com/_flyte), the mastermind behind [osu!lazer's design](http://osunext.tumblr.com). I'm not actually a designer, so the elements in this skin are completely disorganized and don't have a contiguous theme, but I tried my best to make it as consistent as possible. My goal with this skin was to balance the prettiness of Project VOEZ and the playability and readability of traditional skins, using lazer as a guidelines.
+Over time, as I began to contribute to contribute to [osu!lazer](https://github.com/ppy/osu), I started to take inspiration from [flyte](https://twitter.com/_flyte), the mastermind behind [osu!lazer's design](http://osunext.tumblr.com). I'm not actually a designer, so the elements in this skin are completely disorganized and don't have a contiguous theme, but I tried my best to make it as consistent as possible. My goal with this skin was to balance the prettiness of Project VOEZ and the playability and readability of traditional skins, using lazer as a guidelines.
 
 ## How?
 
@@ -225,6 +230,10 @@ This was probably one of the most annoying parts of the development of this skin
 ### Results screen
 
 It's just rectangles. It's my least-favorite part of this skin. If you are not completely graphically challenged as I am and have ideas on how it could be made to look better, please reach out to me.
+
+## The lite version
+
+I don't know why I added a lite version. While I think it looks quite nice, I personally prefer the colorful standard version better. For those who like minimal distractions during gameplay but still like the font/styles/UI, it's there now, I suppose.
 
 [sequential-colors]: https://i.imgur.com/xniVlGC.png
 [sequential-color-hit-circles]: https://i.imgur.com/WxaP7Zn.png
