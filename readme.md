@@ -2,7 +2,7 @@
 
 I'm Poyo. This is my *osu!* skin. **If you want to download the skin, go to the [releases section of this repository](https://github.com/Poyo-SSB/poyosu/releases).** The standard version is colorful and flashy, while the lite version is much more minimal. Click the images for previews!
 
-|[![](./logostandard.png)](https://streamable.com/ndmiz)|[![](./logolite.png)](https://streamable.com/1ufvu)|
+|[![](./logostandard.png)](https://streamable.com/ndmiz)|[![](./logolite.png)](https://streamable.com/urs8q)|
 |-|-|
 
 If you would like a custom version of the skin with a custom flag and name above the health bar, feel free to contact me in *osu!* (Poyo_SSB) or through Discord (Poyo#4440).
