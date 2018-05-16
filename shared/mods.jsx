@@ -67,7 +67,7 @@ process("#b77e1c", "Question Mark", "fadein");
 process("#b77e1c", "Question Mark", "fadeout");
 process("#1e1e1e", "Flashlight", "flashlight");
 process("#391989", "Half Time", "halftime");
-process("#bd1343", "Hard Rock", "hardrock");
+process("#a2091b", "Hard Rock", "hardrock");
 process("#de9915", "Hidden", "hidden");
 process("#201717", "1K", "key1");
 process("#201717", "2K", "key2");
