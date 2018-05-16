@@ -1,6 +1,6 @@
 @echo off
 
-set /p directory="Build directory (%localappdata%\osu!)"
+set /p directory="Build directory (%localappdata%\osu!): "
 IF "%directory%" == "" set directory=%localappdata%\osu!
 
 set standard=%directory%\Skins\poyosu! (Standard)
