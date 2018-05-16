@@ -23,27 +23,41 @@ function exportFile(name, width, height) {
 
 var rectangle = document.pathItems.getByName("Rectangle");
 var border = document.pathItems.getByName("Border");
-var textItem = document.textFrames.getByName("Text");
 
-function process(width, hex, text, file) {
-    textItem.contents = text;
-    
+function process(width, hex, unhide, file) {
+    document.compoundPathItems.getByName("Mods").hidden = true;
+    document.compoundPathItems.getByName("Options").hidden = true;
+    document.compoundPathItems.getByName("Random").hidden = true;
+
+    if (unhide != null) {
+        document.compoundPathItems.getByName(unhide).hidden = false;
+        var pathItems = document.compoundPathItems.getByName(unhide).pathItems;
+    }
+
     document.artboards[0].artboardRect = [0, 0, width, -180];
     
     rectangle.fillColor = colorFromHex(hex);
-    textItem.textRange.fillColor = colorFromHex("#ffffff");
+    if (unhide != null) {
+        for (var i = 0; i < pathItems.length; i++) {
+            pathItems[i].fillColor = colorFromHex("#ffffff");
+        }
+    }
     border.fillColor = colorFromHex("#ffffff");
     exportFile("selection-" + file + "@2x", width, 180);
     exportFile("selection-" + file, width / 2, 180 / 2);
     
     rectangle.fillColor = colorFromHex("#ffffff");
-    textItem.textRange.fillColor = colorFromHex(hex);
+    if (unhide != null) {
+        for (var i = 0; i < pathItems.length; i++) {
+            pathItems[i].fillColor = colorFromHex(hex);
+        }
+    }
     border.fillColor = colorFromHex(hex);
     exportFile("selection-" + file + "-over@2x", width, 180);
     exportFile("selection-" + file + "-over", width / 2, 180 / 2);
 }
 
-process(178, "#8b3bee", "", "mode");
+process(178, "#8b3bee", null, "mode");
 process(148, "#d747ad", "Mods", "mods");
 process(148, "#0096ed", "Options", "options");
 process(148, "#8ed700", "Random", "random");
