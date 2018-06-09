@@ -17,8 +17,8 @@ var textItem = document.textFrames.getByName("Text");
 function process(text) {
     textItem.contents = text;
     document.artboards[0].artboardRect = [0, 0, textItem.width, -100]
-    exportFile("default-" + text + "@2x", textItem.width, 100, 0.9);
-    exportFile("default-" + text, textItem.width / 2, 50, 0.45);
+    exportFile("default-" + text + "@2x", textItem.width, 100, 0.95);
+    exportFile("default-" + text, textItem.width / 2, 50, 0.475);
 }
 
 for (var i = 0; i < 10; i++) {
