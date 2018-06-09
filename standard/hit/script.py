@@ -44,7 +44,7 @@ def render_to(name, multiplier=1):
     base_path = os.path.join(directory, name)
 
     set_scale(8.5)
-    set_percentage(100)
+    set_percentage(80)
 
     for i in range(bpy.data.scenes['Scene'].frame_start, bpy.data.scenes['Scene'].frame_end):
         bpy.data.scenes['Scene'].frame_set(i)
