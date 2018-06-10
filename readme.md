@@ -1,6 +1,6 @@
 # poyosu!
 
-I'm Poyo. This is my *osu!* skin. **If you want to download the skin, go to the [releases section of this repository](https://github.com/Poyo-SSB/poyosu/releases).** The standard version is colorful and flashy, while the lite version is much more minimal. Click the images for previews!
+I'm Poyo. This is my *osu!* skin. **If you want to download the skin, go to the [releases section of this repository](https://github.com/Poyo-SSB/poyosu/releases).** The standard version is colorful and flashy, while the lite version is much more minimal. Click the images for previews (from version 0.4.0)!
 
 |[![](./logostandard.png)](https://streamable.com/ndmiz)|[![](./logolite.png)](https://streamable.com/urs8q)|
 |-|-|
