@@ -17,7 +17,7 @@ I did actually try many, *many* skins during that time, but every single one was
 
 In late 2017, a few months after I really began playing, I discovered a skin called [Project VOEZ](https://osu.ppy.sh/community/forums/topics/471776) by a user named -yuo-. This skin, though completely impractical to play with, looked super cool and was the inspiration for me starting this project.
 
-Over time, as I began to contribute to contribute to [osu!lazer](https://github.com/ppy/osu), I started to take inspiration from [flyte](https://twitter.com/_flyte), the mastermind behind [osu!lazer's design](http://osunext.tumblr.com). I'm not actually a designer, so the elements in this skin are completely disorganized and don't have a contiguous theme, but I tried my best to make it as consistent as possible. My goal with this skin was to balance the prettiness of Project VOEZ and the playability and readability of traditional skins, using lazer as a guidelines.
+Over time, as I began to contribute to contribute to [osu!lazer](https://github.com/ppy/osu), I started to take inspiration from [flyte](https://twitter.com/_flyte), the mastermind behind [osu!lazer's design](http://osunext.tumblr.com). I'm not actually a designer, so the elements in this skin are completely disorganized and don't have a contiguous theme, but I tried my best to make it as consistent as possible. My goal with this skin was to balance the prettiness of Project VOEZ and the playability and readability of traditional skins, using lazer as a guideline.
 
 ## How?
 
