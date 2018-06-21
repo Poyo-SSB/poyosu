@@ -15,7 +15,7 @@ mkdir "%lite%"
 
 echo Building shared assets...
 pushd .\shared
-for /r %%a in (*.png, *.wav) do (
+for /r %%a in (*.png, *.wav, *.mp3) do (
 	COPY /y "%%a" "%standard%\%%~nxa" > nul
 	COPY /y "%%a" "%lite%\%%~nxa" > nul
 )
@@ -23,14 +23,14 @@ popd
 
 echo Building standard-only assets...
 pushd .\standard
-for /r %%a in (*.png, *.wav, *.ini) do (
+for /r %%a in (*.png, *.wav, *.mp3, *.ini) do (
 	COPY /y "%%a" "%standard%\%%~nxa" > nul
 )
 popd
 
 echo Building lite-only assets...
 pushd .\lite
-for /r %%a in (*.png, *.wav, *.ini) do (
+for /r %%a in (*.png, *.wav, *.mp3, *.ini) do (
 	COPY /y "%%a" "%lite%\%%~nxa" > nul
 )
 popd
