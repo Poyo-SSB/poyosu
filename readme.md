@@ -56,6 +56,8 @@ The sounds are almost entirely taken from a skin called [Aesthetic](https://osu.
 
 A few sounds (notably slider-related ones) have been made silent using this [44-byte silent wav file](http://up.ppy.sh/files/blank.wav).
 
+The loop that plays during the pause screen is *[Chill](https://tobyfox.bandcamp.com/track/chill)* from the soundtrack of Undertale. 
+
 ### Cursor and trail
 
 I don't actually recall what skin inspired the cursor in this skin, but it can really be boiled down to a white circle glowing pink.
