@@ -4,8 +4,8 @@ function exportFile(name, width, height, multiplier) {
     var exportOptions = new ExportOptionsPNG24();
     exportOptions.matte = false;
     exportOptions.artBoardClipping = true;
-    exportOptions.horizontalScale = (width / document.width) * 100 * multiplier;
-    exportOptions.verticalScale = (height / document.height) * 100 * multiplier;
+    exportOptions.horizontalScale = 100 * width / document.width * multiplier;
+    exportOptions.verticalScale = 100 * height / document.height * multiplier;
     
     var path = document.path + "/" + name + ".png"
     

@@ -132,8 +132,8 @@ This one parses a hexadecimal color into a Illustrator-compatible color.
 function exportFile(name, width, height) {
     var exportOptions = new ExportOptionsPNG24();
     exportOptions.matte = false;
-    exportOptions.horizontalScale = (width / document.width) * 100;
-    exportOptions.verticalScale = (height / document.height) * 100;
+    exportOptions.horizontalScale = 100 * width / document.width;
+    exportOptions.verticalScale = 100 * height / document.height;
     
     var path = document.path + "/" + name + ".png"
     
