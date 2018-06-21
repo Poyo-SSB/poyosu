@@ -22,6 +22,7 @@ function exportFile(name, width, height) {
 
 var cursorSize = 128; //px
 var cursorColor = "#ff7fb3";
+var cursorGlowOpacity = 100; // %
 
 var standardTrailSize = 12; //px
 var standardTrailColor = "#ff7fb3";
@@ -69,5 +70,6 @@ trail.hidden = true;
 ring.fillColor = colorFromHex(cursorColor);
 innerGlow.fillColor = colorFromHex(cursorColor);
 glow.fillColor = colorFromHex(cursorColor);
+glow.opacity = cursorGlowOpacity;
 exportFile("cursor@2x", cursorSize, cursorSize);
 exportFile("cursor", cursorSize / 2, cursorSize / 2);
