@@ -52,11 +52,11 @@ This is how it looks in-game, using the default skin:
 
 ### Sounds
 
-The sounds are almost entirely taken from a skin called [Aesthetic](https://osu.ppy.sh/community/forums/topics/189843) by a user named Redon.
+The hitsounds are almost entirely taken from a skin called [Aesthetic](https://osu.ppy.sh/community/forums/topics/189843) by a user named Redon.
 
 A few sounds (notably slider-related ones) have been made silent using this [44-byte silent wav file](http://up.ppy.sh/files/blank.wav).
 
-The loop that plays during the pause screen is *[Chill](https://tobyfox.bandcamp.com/track/chill)* from the soundtrack of Undertale. 
+The loop that plays during the pause screen is *[Chill](https://tobyfox.bandcamp.com/track/chill)* from the soundtrack of [Undertale](https://store.steampowered.com/app/391540/Undertale/), and the rest of the sounds are taken from [WaveLand](https://store.steampowered.com/app/532170/WaveLand/).
 
 ### Cursor and trail
 
