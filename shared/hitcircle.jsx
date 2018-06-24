@@ -20,36 +20,30 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-var standardHitCircleOpacity = 80; //%
-var liteHitCircleOpacity = 55; //%
 var liteSliderBallWidth = 12.5; //px
 
 var overlay = document.layers.getByName("Overlay");
 var overlayCircle = document.pathItems.getByName("Overlay Circle");
-var overlayGlow = document.pathItems.getByName("Overlay Glow");
-var hitCircle = document.layers.getByName("Hit Circle");
-var circle = document.pathItems.getByName("Circle");
+var standard = document.layers.getByName("Standard");
+var lite = document.layers.getByName("Lite");
 
 overlay.visible = false;
-overlayGlow.hidden = true;
-hitCircle.visible = true;
-
-circle.fillColor = colorFromHex("#000000");
-circle.opacity = liteHitCircleOpacity;
+standard.visible = false;
+lite.visible = true;
 
 exportFile("../lite/hitcircle@2x", 288, 288);
 exportFile("../lite/hitcircle", 144, 144);
 
-overlayGlow.hidden = false;
-
-circle.fillColor = colorFromHex("#ffffff");
-circle.opacity = standardHitCircleOpacity;
+overlay.visible = false;
+standard.visible = true;
+lite.visible = false;
 
 exportFile("../standard/hitcircle@2x", 288, 288);
 exportFile("../standard/hitcircle", 144, 144);
 
 overlay.visible = true;
-hitCircle.visible = false;
+standard.visible = false;
+lite.visible = false;
 
 overlayCircle.strokeWidth = liteSliderBallWidth;
 
@@ -62,6 +56,5 @@ exportFile("hitcircleoverlay@2x", 288, 288);
 exportFile("hitcircleoverlay", 144, 144);
 
 overlay.visible = true;
-hitCircle.visible = true;
-overlayGlow.hidden = false;
-hitCircle.visible = true;
+standard.visible = true;
+lite.visible = false;
