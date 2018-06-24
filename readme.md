@@ -68,7 +68,7 @@ Upon loading the skin, one might notice that the cursor is very small and the tr
 
 ![A picture of the pink cursor and its trail, which is subtly segmented.][strange-cursor]
 
-This is done so that the cursor trail looks nicer. *osu!* has a setting which allows a user to resize the cursor anywhere from half to twice its regular size. However, the implementation of this feature also affects the scale of the cursor trail itself, not just its individual segments (`cursortrail.png`). This means that making the cursor and trail half its size and resizing it to twice its size in the options results in a normally-sized cursor, but with a cursor-trail with twice the fidelity of a typical one. That's why it's so lovely and smooth.
+This is done so that the cursor trail looks nicer. *osu!* has a setting which allows a user to resize the cursor anywhere from half to twice its regular size. However, the implementation of this feature also affects the scale of the cursor trail's individual segments (`cursortrail.png`), not just the trail as a whole. This means that making the cursor and trail half its size and resizing it to twice its size in the options results in a normally-sized cursor, but with a cursor-trail with twice the fidelity of a typical one. That's why it's so lovely and smooth.
 
 ![A picture of the pink cursor and its trail, which appears to have no segmenting.][smooth-cursor]
 
