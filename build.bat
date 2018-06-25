@@ -74,7 +74,7 @@ echo Building .osk files...
 :: 7zip is very noisy. Please be quiet.
 "C:\Program Files\7-Zip\7z.exe" a "%output%\standard.zip" "%standard%\*" > nul
 "C:\Program Files\7-Zip\7z.exe" a "%output%\lite.zip" "%lite%\*" > nul
-"C:\Program Files\7-Zip\7z.exe" a "%classic%\classic.zip" "%classic%\*" > nul
+"C:\Program Files\7-Zip\7z.exe" a "%output%\classic.zip" "%classic%\*" > nul
 del "%output%\poyosu! (Standard).osk" 2>nul
 del "%output%\poyosu! (Lite).osk" 2>nul
 del "%output%\poyosu! (Classic).osk" 2>nul
