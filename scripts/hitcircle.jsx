@@ -20,16 +20,26 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-var liteSliderBallWidth = 12.5; //px
+var sliderBallWidth = 12.5; //px
 
 var overlay = document.layers.getByName("Overlay");
 var overlayCircle = document.pathItems.getByName("Overlay Circle");
 var standard = document.layers.getByName("Standard");
 var lite = document.layers.getByName("Lite");
+var classic = document.layers.getByName("Classic");
+
+overlay.visible = false;
+standard.visible = false;
+lite.visible = false;
+classic.visible = true;
+
+exportFile("../classic/hitcircle@2x", 288, 288);
+exportFile("../classic/hitcircle", 144, 144);
 
 overlay.visible = false;
 standard.visible = false;
 lite.visible = true;
+classic.visible = false;
 
 exportFile("../lite/hitcircle@2x", 288, 288);
 exportFile("../lite/hitcircle", 144, 144);
@@ -37,6 +47,7 @@ exportFile("../lite/hitcircle", 144, 144);
 overlay.visible = false;
 standard.visible = true;
 lite.visible = false;
+classic.visible = false;
 
 exportFile("../standard/hitcircle@2x", 288, 288);
 exportFile("../standard/hitcircle", 144, 144);
@@ -44,17 +55,19 @@ exportFile("../standard/hitcircle", 144, 144);
 overlay.visible = true;
 standard.visible = false;
 lite.visible = false;
+classic.visible = false;
 
-overlayCircle.strokeWidth = liteSliderBallWidth;
+overlayCircle.strokeWidth = sliderBallWidth;
 
-exportFile("../lite/sliderb0@2x", 288, 288);
-exportFile("../lite/sliderb0", 144, 144);
+exportFile("../standard+lite/sliderb0@2x", 288, 288);
+exportFile("../standard+lite/sliderb0", 144, 144);
 
 overlayCircle.strokeWidth = 15;
 
-exportFile("hitcircleoverlay@2x", 288, 288);
-exportFile("hitcircleoverlay", 144, 144);
+exportFile("../shared/hitcircleoverlay@2x", 288, 288);
+exportFile("../shared/hitcircleoverlay", 144, 144);
 
 overlay.visible = true;
 standard.visible = true;
 lite.visible = false;
+classic.visible = false;
