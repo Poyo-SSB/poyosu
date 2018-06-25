@@ -43,7 +43,7 @@ var trail = document.pathItems.getByName("Trail");
 cursor.visible = false;
 trail.hidden = true;
 
-exportFile("../standard/cursormiddle", 1, 1);
+exportFile("../standard+classic/cursormiddle", 1, 1);
 
 cursor.visible = false;
 trail.hidden = false;
@@ -53,8 +53,8 @@ trail.fillColor.gradient.gradientStops[1].color = colorFromHex(standardTrailColo
 trail.fillColor.gradient.gradientStops[2].color = colorFromHex(standardTrailColor);
 trail.fillColor.gradient.gradientStops[1].rampPoint = standardTrailCurveShallowness;
 trail.opacity = standardTrailOpacity;
-exportFile("../standard/cursortrail@2x", standardTrailSize, standardTrailSize);
-exportFile("../standard/cursortrail", standardTrailSize / 2, standardTrailSize / 2);
+exportFile("../standard+classic/cursortrail@2x", standardTrailSize, standardTrailSize);
+exportFile("../standard+classic/cursortrail", standardTrailSize / 2, standardTrailSize / 2);
 
 trail.fillColor.gradient.gradientStops[0].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[1].color = colorFromHex(liteTrailColor);
@@ -71,5 +71,5 @@ ring.fillColor = colorFromHex(cursorColor);
 innerGlow.fillColor = colorFromHex(cursorColor);
 glow.fillColor = colorFromHex(cursorColor);
 glow.opacity = cursorGlowOpacity;
-exportFile("cursor@2x", cursorSize, cursorSize);
-exportFile("cursor", cursorSize / 2, cursorSize / 2);
+exportFile("../shared/cursor@2x", cursorSize, cursorSize);
+exportFile("../shared/cursor", cursorSize / 2, cursorSize / 2);
