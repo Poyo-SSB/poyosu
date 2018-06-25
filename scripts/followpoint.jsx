@@ -17,11 +17,11 @@ document.pathItems.getByName("Followpoint").hidden = true;
 const hidden = 25;
 
 for (var i = 0; i < hidden; i++) {
-    exportFile("followpoint-" + i, 1, 1);
+    exportFile("../shared/followpoint-" + i, 1, 1);
 }
 
 document.pathItems.getByName("Followpoint").hidden = false;
 
 for (var i = hidden; i < 60; i++) {
-    exportFile("followpoint-" + i, 128, 50);
+    exportFile("../shared/followpoint-" + i, 128, 50);
 }
