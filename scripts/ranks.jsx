@@ -35,10 +35,10 @@ function process(hex, name, file) {
     document.groupItems.getByName(name).hidden = false;
     const big = 900;
     const small = 80;
-    exportFile("ranking-" + file + "@2x", big, big);
-    exportFile("ranking-" + file, big / 2, big / 2);
-    exportFile("ranking-" + file + "-small@2x", small, small);
-    exportFile("ranking-" + file + "-small", small / 2, small / 2);
+    exportFile("../shared/ranking-" + file + "@2x", big, big);
+    exportFile("../shared/ranking-" + file, big / 2, big / 2);
+    exportFile("../shared/ranking-" + file + "-small@2x", small, small);
+    exportFile("../shared/ranking-" + file + "-small", small / 2, small / 2);
 }
 
 process("#5fcd0b", "A", "A");
