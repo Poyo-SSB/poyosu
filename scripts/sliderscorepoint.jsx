@@ -12,5 +12,5 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-exportFile("sliderscorepoint@2x", 50, 50);
-exportFile("sliderscorepoint", 25, 25);
+exportFile("../shared/sliderscorepoint@2x", 50, 50);
+exportFile("../shared/sliderscorepoint", 25, 25);
