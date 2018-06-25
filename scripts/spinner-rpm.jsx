@@ -12,5 +12,5 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-exportFile("spinner-spin@2x", 650, 250);
-exportFile("spinner-spin", 325, 125);
+exportFile("../shared/spinner-rpm@2x", 700, 112);
+exportFile("../shared/spinner-rpm", 350, 56);

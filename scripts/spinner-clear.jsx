@@ -12,5 +12,5 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-exportFile("spinner-clear@2x", 700, 250);
-exportFile("spinner-clear", 350, 125);
+exportFile("../shared/spinner-clear@2x", 700, 250);
+exportFile("../shared/spinner-clear", 350, 125);
