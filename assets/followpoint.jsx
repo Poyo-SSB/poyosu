@@ -12,16 +12,29 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-document.pathItems.getByName("Followpoint").hidden = true;
+var followpoint = document.pathItems.getByName("Followpoint");
 
-const hidden = 25;
-
-for (var i = 0; i < hidden; i++) {
-    exportFile("../shared/followpoint-" + i, 1, 1);
+for (var i = 0; i < 52; i++) {
+    followpoint.opacity = alphaCurve(i);
+    
+    if (followpoint.opacity != 0) {
+        exportFile("../shared/followpoint-" + i, 128, 50);
+    } else {
+        exportFile("../shared/followpoint-" + i, 1, 1);
+    }
 }
 
-document.pathItems.getByName("Followpoint").hidden = false;
 
-for (var i = hidden; i < 60; i++) {
-    exportFile("../shared/followpoint-" + i, 128, 50);
+function alphaCurve(t) {
+    if (t <= 24) {
+        return 0;
+    } else if (t <= 30) {
+        return 100 * (t - 24) / 6;
+    } else if (t <= 45) {
+        return 100;
+    } else if (t <= 51) {
+        return 100 - 100 * (t - 45) / 6;
+    } else {
+        return 0;
+    }
 }
