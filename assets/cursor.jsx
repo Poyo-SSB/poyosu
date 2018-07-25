@@ -31,7 +31,7 @@ var standardTrailCurveShallowness = 75; //%
 
 var liteTrailSize = 48; //px
 var liteTrailColor = "#ffffff";
-var liteTrailOpacity = 18; // %
+var liteTrailOpacity = 45; // %
 var liteTrailCurveShallowness = 50; //%
 
 var cursor = document.layers.getByName("Cursor");
