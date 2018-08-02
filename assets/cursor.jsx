@@ -61,8 +61,8 @@ trail.fillColor.gradient.gradientStops[1].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[2].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[1].rampPoint = liteTrailCurveShallowness;
 trail.opacity = liteTrailOpacity;
-exportFile("../lite/cursortrail@2x", liteTrailSize, liteTrailSize);
-exportFile("../lite/cursortrail", liteTrailSize / 2, liteTrailSize / 2);
+//exportFile("../lite/cursortrail@2x", liteTrailSize, liteTrailSize);
+//exportFile("../lite/cursortrail", liteTrailSize / 2, liteTrailSize / 2);
 
 cursor.visible = true;
 trail.hidden = true;
