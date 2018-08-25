@@ -46,6 +46,6 @@ process("#026af3", "B", "B");
 process("#bf17df", "C", "C");
 process("#e20012", "D", "D");
 process("#ff702e", "S", "S");
-process("#bdbdbd", "S", "SH");
+process("#8e8e8e", "S", "SH");
 process("#ffbd0d", "SS", "X");
 process("#bdbdbd", "SS", "XH");
