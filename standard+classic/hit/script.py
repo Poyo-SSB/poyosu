@@ -44,12 +44,12 @@ def render_to(name, multiplier=1):
     base_path = os.path.join(directory, name)
 
     set_scale(8.5)
-    set_percentage(80)
+    set_percentage(160)
 
     for i in range(bpy.data.scenes['Scene'].frame_start, bpy.data.scenes['Scene'].frame_end):
         bpy.data.scenes['Scene'].frame_set(i)
         bpy.data.scenes['Scene'].render.filepath = os.path.join(
-            base_path, name + '-' + str(i))
+            base_path, name + '-' + str(i) + '@2x')
         bpy.ops.render.render(write_still=True)
 
     bpy.data.scenes['Scene'].frame_set(0)
