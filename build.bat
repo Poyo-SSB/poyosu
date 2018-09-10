@@ -2,6 +2,8 @@
 
 set /p directory="Build directory (%localappdata%\osu!): "
 IF "%directory%" == "" set directory=%localappdata%\osu!
+set /p version="Version (1.0.0 beta): "
+IF "%version%" == "" set version=1.0.0 beta
 
 set standard=%directory%\Skins\poyosu! (Standard)
 set lite=%directory%\Skins\poyosu! (Lite)
@@ -75,10 +77,10 @@ echo Building .osk files...
 "C:\Program Files\7-Zip\7z.exe" a "%output%\standard.zip" "%standard%\*" > nul
 "C:\Program Files\7-Zip\7z.exe" a "%output%\lite.zip" "%lite%\*" > nul
 "C:\Program Files\7-Zip\7z.exe" a "%output%\classic.zip" "%classic%\*" > nul
-del "%output%\poyosu! (Standard).osk" 2>nul
-del "%output%\poyosu! (Lite).osk" 2>nul
-del "%output%\poyosu! (Classic).osk" 2>nul
-ren "%output%\standard.zip" "poyosu! (Standard).osk"
-ren "%output%\lite.zip" "poyosu! (Lite).osk"
-ren "%output%\classic.zip" "poyosu! (Classic).osk"
+del "%output%\poyosu! (Standard %version%).osk" 2>nul
+del "%output%\poyosu! (Lite %version%).osk" 2>nul
+del "%output%\poyosu! (Classic %version%).osk" 2>nul
+ren "%output%\standard.zip" "poyosu! (Standard %version%).osk"
+ren "%output%\lite.zip" "poyosu! (Lite %version%).osk"
+ren "%output%\classic.zip" "poyosu! (Classic %version%).osk"
 echo Done!
