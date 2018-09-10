@@ -32,11 +32,6 @@ def render_to(name):
         base_path, 'mania-' + name + '@2x')
     bpy.ops.render.render(write_still=True)
 
-    set_percentage(25)
-    bpy.data.scenes['Scene'].render.filepath = os.path.join(
-        base_path, 'mania-' + name)
-    bpy.ops.render.render(write_still=True)
-
 
 set_rainbow(True)
 

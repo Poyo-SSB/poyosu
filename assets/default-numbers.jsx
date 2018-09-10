@@ -18,7 +18,6 @@ function process(text) {
     textItem.contents = text;
     document.artboards[0].artboardRect = [0, 0, textItem.width, -100]
     exportFile("../shared/default-" + text + "@2x", textItem.width, 100, 0.95);
-    exportFile("../shared/default-" + text, textItem.width / 2, 50, 0.475);
 }
 
 for (var i = 0; i < 10; i++) {

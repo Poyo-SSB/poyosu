@@ -41,7 +41,6 @@ scorebar.strokeWidth = 3;
 scorebar.strokeColor = colorFromHex("#ffffff");
 
 exportFile("../shared/scorebar-bg@2x", 1164, 80);
-exportFile("../shared/scorebar-bg", 582, 40);
 
 artboard.artboardRect = [-41, -23, 1115, -71];
 
@@ -53,4 +52,3 @@ scorebar.stroked = false;
 scorebar.fillColor = colorFromHex("#ffffff");
 
 exportFile("../shared/scorebar-colour@2x", 1156, 48);
-exportFile("../shared/scorebar-colour", 578, 24);

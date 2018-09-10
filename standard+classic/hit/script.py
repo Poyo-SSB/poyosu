@@ -60,10 +60,6 @@ def render_to(name, multiplier=1):
         base_path, name + '@2x')
     bpy.ops.render.render(write_still=True)
 
-    set_percentage(25)
-    bpy.data.scenes['Scene'].render.filepath = os.path.join(base_path, name)
-    bpy.ops.render.render(write_still=True)
-
 
 hidden('White Ring', True)
 hidden('Rainbow', True)

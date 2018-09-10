@@ -23,11 +23,9 @@ function process(name, file) {
     
     document.artboards[0].artboardRect = [-46, 46, 46, -46];
     exportFile("../shared/" + file + "-med@2x", med, med);
-    exportFile("../shared/" + file + "-med", med / 2, med / 2);
     
     document.artboards[0].artboardRect = [-46, 46 + 50, 46 + 6, -46];
     exportFile("../shared/" + file + "-small@2x", document.width, document.height);
-    exportFile("../shared/" + file + "-small", document.width / 2, document.height / 2);
 }
 
 process("Osu", "mode-osu");

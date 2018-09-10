@@ -36,9 +36,7 @@ function process(hex, name, file) {
     const big = 900;
     const small = 80;
     exportFile("../shared/ranking-" + file + "@2x", big, big);
-    exportFile("../shared/ranking-" + file, big / 2, big / 2);
     exportFile("../shared/ranking-" + file + "-small@2x", small, small);
-    exportFile("../shared/ranking-" + file + "-small", small / 2, small / 2);
 }
 
 process("#5fcd0b", "A", "A");

@@ -44,7 +44,6 @@ function process(width, hex, unhide, file) {
     }
     border.fillColor = colorFromHex("#ffffff");
     exportFile("../shared/selection-" + file + "@2x", width, 180);
-    exportFile("../shared/selection-" + file, width / 2, 180 / 2);
     
     rectangle.fillColor = colorFromHex("#ffffff");
     if (unhide != null) {
@@ -54,7 +53,6 @@ function process(width, hex, unhide, file) {
     }
     border.fillColor = colorFromHex(hex);
     exportFile("../shared/selection-" + file + "-over@2x", width, 180);
-    exportFile("../shared/selection-" + file + "-over", width / 2, 180 / 2);
 }
 
 process(178, "#8b3bee", null, "mode");

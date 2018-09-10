@@ -29,16 +29,13 @@ quack.hidden = true;
 color.fillColor = colorFromHex("#88d7fc");
 
 exportFile("../shared/fruit-catcher-idle@2x", 622, 590);
-exportFile("../shared/fruit-catcher-idle", 311, 295);
 
 color.fillColor = colorFromHex("#ff6647");
 
 exportFile("../shared/fruit-catcher-fail@2x", 622, 590);
-exportFile("../shared/fruit-catcher-fail", 311, 295);
 
 color.fillColor = colorFromHex("#55b5f4");
 
 duck.hidden = true;
 quack.hidden = false;
 exportFile("../shared/fruit-catcher-kiai@2x", 622, 590);
-exportFile("../shared/fruit-catcher-kiai", 311, 295);

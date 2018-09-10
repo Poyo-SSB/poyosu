@@ -13,4 +13,3 @@ function exportFile(name, width, height) {
 }
 
 exportFile("../shared/spinner-spin@2x", 650, 250);
-exportFile("../shared/spinner-spin", 325, 125);

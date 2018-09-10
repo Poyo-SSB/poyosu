@@ -27,7 +27,6 @@ function process(hex, text, file) {
     background.fillColor = colorFromHex(hex);
     textItem.contents = text;
     exportFile("../shared/" + file + "@2x", 1000, 180);
-    exportFile("../shared/" + file, 500, 90);
 }
 
 process("#e8193b", "BACK TO MENU", "pause-back");

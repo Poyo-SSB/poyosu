@@ -13,4 +13,3 @@ function exportFile(name, width, height) {
 }
 
 exportFile("../standard+classic/star2@2x", 300, 300);
-exportFile("../standard+classic/star2", 150, 150);

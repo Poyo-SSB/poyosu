@@ -56,7 +56,6 @@ function process(hex, name, file) {
     
     const size = 132;
     exportFile("../shared/selection-mod-" + file + "@2x", size, size);
-    exportFile("../shared/selection-mod-" + file, size / 2, size / 2);
 }
 
 process("#0062ab", "Auto", "autoplay");

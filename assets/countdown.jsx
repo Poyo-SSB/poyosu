@@ -19,7 +19,6 @@ function process(text, file, x, y) {
     textItem.contents = text;
     artboard.artboardRect = [-x / 2, y / 2, x / 2, -y / 2];
     exportFile("../shared/" + file + "@2x", x, y);
-    exportFile("../shared/" + file, x / 2, y / 2);
 }
 
 process("3", "count3", 400, 500);

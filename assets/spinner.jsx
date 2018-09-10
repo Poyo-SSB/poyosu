@@ -18,8 +18,6 @@ var middle2 = document.layers.getByName("Middle2");
 bottom.visible = true;
 middle2.visible = false;
 exportFile("../shared/spinner-bottom@2x", 1190, 1190);
-exportFile("../shared/spinner-bottom", 1190, 1190);
 bottom.visible = false;
 middle2.visible = true;
 exportFile("../shared/spinner-middle2@2x", 1190, 1190);
-exportFile("../shared/spinner-middle2", 1190, 1190);

@@ -13,4 +13,3 @@ function exportFile(name, width, height) {
 }
 
 exportFile("../shared/approachcircle@2x", 256, 256);
-exportFile("../shared/approachcircle", 128, 128);

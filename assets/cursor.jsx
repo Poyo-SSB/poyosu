@@ -54,7 +54,6 @@ trail.fillColor.gradient.gradientStops[2].color = colorFromHex(standardTrailColo
 trail.fillColor.gradient.gradientStops[1].rampPoint = standardTrailCurveShallowness;
 trail.opacity = standardTrailOpacity;
 exportFile("../standard+classic/cursortrail@2x", standardTrailSize, standardTrailSize);
-exportFile("../standard+classic/cursortrail", standardTrailSize / 2, standardTrailSize / 2);
 
 trail.fillColor.gradient.gradientStops[0].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[1].color = colorFromHex(liteTrailColor);
@@ -62,7 +61,6 @@ trail.fillColor.gradient.gradientStops[2].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[1].rampPoint = liteTrailCurveShallowness;
 trail.opacity = liteTrailOpacity;
 //exportFile("../lite/cursortrail@2x", liteTrailSize, liteTrailSize);
-//exportFile("../lite/cursortrail", liteTrailSize / 2, liteTrailSize / 2);
 
 cursor.visible = true;
 trail.hidden = true;
@@ -72,4 +70,3 @@ innerGlow.fillColor = colorFromHex(cursorColor);
 glow.fillColor = colorFromHex(cursorColor);
 glow.opacity = cursorGlowOpacity;
 exportFile("../shared/cursor@2x", cursorSize, cursorSize);
-exportFile("../shared/cursor", cursorSize / 2, cursorSize / 2);

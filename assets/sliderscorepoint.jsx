@@ -13,4 +13,3 @@ function exportFile(name, width, height) {
 }
 
 exportFile("../shared/sliderscorepoint@2x", 88, 88);
-exportFile("../shared/sliderscorepoint", 44, 44);

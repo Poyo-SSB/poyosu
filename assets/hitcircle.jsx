@@ -68,20 +68,13 @@ lite.visible = false;
 classic.visible = false;
 
 exportFile("../standard/fruit-apple@2x", 316, 316);
-exportFile("../standard/fruit-apple", 158, 158);
 exportFile("../standard/fruit-grapes@2x", 316, 316);
-exportFile("../standard/fruit-grapes", 158, 158);
 exportFile("../standard/fruit-orange@2x", 316, 316);
-exportFile("../standard/fruit-orange", 158, 158);
 exportFile("../standard/fruit-pear@2x", 316, 316);
-exportFile("../standard/fruit-pear", 158, 158);
 exportFile("../standard/fruit-bananas@2x", 316, 316);
-exportFile("../standard/fruit-bananas", 158, 158);
 exportFile("../standard/fruit-drop@2x", 316, 316);
-exportFile("../standard/fruit-drop", 158, 158);
 
 exportFile("../standard/hitcircle@2x", 288, 288);
-exportFile("../standard/hitcircle", 144, 144);
 
 overlay.visible = true;
 standard.visible = false;
@@ -91,25 +84,17 @@ classic.visible = false;
 overlayCircle.strokeWidth = sliderBallWidth;
 
 exportFile("../standard+lite/sliderb0@2x", 288, 288);
-exportFile("../standard+lite/sliderb0", 144, 144);
 
 overlayCircle.strokeWidth = 15;
 
 exportFile("../shared/fruit-apple-overlay@2x", 316, 316);
-exportFile("../shared/fruit-apple-overlay", 158, 158);
 exportFile("../shared/fruit-grapes-overlay@2x", 316, 316);
-exportFile("../shared/fruit-grapes-overlay", 158, 158);
 exportFile("../shared/fruit-orange-overlay@2x", 316, 316);
-exportFile("../shared/fruit-orange-overlay", 158, 158);
 exportFile("../shared/fruit-pear-overlay@2x", 316, 316);
-exportFile("../shared/fruit-pear-overlay", 158, 158);
 exportFile("../shared/fruit-bananas-overlay@2x", 316, 316);
-exportFile("../shared/fruit-bananas-overlay", 158, 158);
 exportFile("../shared/fruit-drop-overlay@2x", 316, 316);
-exportFile("../shared/fruit-drop-overlay", 158, 158);
 
 exportFile("../shared/hitcircleoverlay@2x", 288, 288);
-exportFile("../shared/hitcircleoverlay", 144, 144);
 
 overlay.visible = true;
 standard.visible = true;

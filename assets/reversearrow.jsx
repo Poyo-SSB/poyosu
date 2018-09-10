@@ -15,4 +15,3 @@ function exportFile(name, width, height) {
 // I don't know how to export normally and I don't care enough to find out how. Scripts forever. B)
 
 exportFile("../shared/reversearrow@2x", 120, 120);
-exportFile("../shared/reversearrow", 60, 60);
