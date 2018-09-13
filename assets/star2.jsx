@@ -12,4 +12,4 @@ function exportFile(name, width, height) {
     document.exportFile(new File(path), ExportType.PNG24, exportOptions);
 }
 
-exportFile("../standard+classic/star2@2x", 300, 300);
+exportFile("../standard/star2@2x", 300, 300);

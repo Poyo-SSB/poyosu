@@ -43,7 +43,7 @@ var trail = document.pathItems.getByName("Trail");
 cursor.visible = false;
 trail.hidden = true;
 
-exportFile("../standard+classic/cursormiddle", 1, 1);
+exportFile("../standard/cursormiddle", 1, 1);
 
 cursor.visible = false;
 trail.hidden = false;
@@ -53,7 +53,7 @@ trail.fillColor.gradient.gradientStops[1].color = colorFromHex(standardTrailColo
 trail.fillColor.gradient.gradientStops[2].color = colorFromHex(standardTrailColor);
 trail.fillColor.gradient.gradientStops[1].rampPoint = standardTrailCurveShallowness;
 trail.opacity = standardTrailOpacity;
-exportFile("../standard+classic/cursortrail@2x", standardTrailSize, standardTrailSize);
+exportFile("../standard/cursortrail@2x", standardTrailSize, standardTrailSize);
 
 trail.fillColor.gradient.gradientStops[0].color = colorFromHex(liteTrailColor);
 trail.fillColor.gradient.gradientStops[1].color = colorFromHex(liteTrailColor);

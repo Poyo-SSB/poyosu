@@ -27,35 +27,25 @@ var overlayCircle = document.pathItems.getByName("Overlay Circle");
 var standard = document.layers.getByName("Standard");
 var lite = document.layers.getByName("Lite");
 var liteCircle = document.pathItems.getByName("Lite Circle");
-var classic = document.layers.getByName("Classic");
-
-overlay.visible = false;
-standard.visible = false;
-lite.visible = false;
-classic.visible = true;
-
-exportFile("../classic/hitcircle@2x", 288, 288);
-exportFile("../classic/hitcircle", 144, 144);
 
 overlay.visible = false;
 standard.visible = false;
 lite.visible = true;
-classic.visible = false;
 
 liteCircle.fillColor = colorFromHex("#ffffff");
 
-exportFile("../lite+classic/fruit-apple@2x", 316, 316);
-exportFile("../lite+classic/fruit-apple", 158, 158);
-exportFile("../lite+classic/fruit-grapes@2x", 316, 316);
-exportFile("../lite+classic/fruit-grapes", 158, 158);
-exportFile("../lite+classic/fruit-orange@2x", 316, 316);
-exportFile("../lite+classic/fruit-orange", 158, 158);
-exportFile("../lite+classic/fruit-pear@2x", 316, 316);
-exportFile("../lite+classic/fruit-pear", 158, 158);
-exportFile("../lite+classic/fruit-bananas@2x", 316, 316);
-exportFile("../lite+classic/fruit-bananas", 158, 158);
-exportFile("../lite+classic/fruit-drop@2x", 316, 316);
-exportFile("../lite+classic/fruit-drop", 158, 158);
+exportFile("../lite/fruit-apple@2x", 316, 316);
+exportFile("../lite/fruit-apple", 158, 158);
+exportFile("../lite/fruit-grapes@2x", 316, 316);
+exportFile("../lite/fruit-grapes", 158, 158);
+exportFile("../lite/fruit-orange@2x", 316, 316);
+exportFile("../lite/fruit-orange", 158, 158);
+exportFile("../lite/fruit-pear@2x", 316, 316);
+exportFile("../lite/fruit-pear", 158, 158);
+exportFile("../lite/fruit-bananas@2x", 316, 316);
+exportFile("../lite/fruit-bananas", 158, 158);
+exportFile("../lite/fruit-drop@2x", 316, 316);
+exportFile("../lite/fruit-drop", 158, 158);
 
 liteCircle.fillColor = colorFromHex("#000000");
 
@@ -65,7 +55,6 @@ exportFile("../lite/hitcircle", 144, 144);
 overlay.visible = false;
 standard.visible = true;
 lite.visible = false;
-classic.visible = false;
 
 exportFile("../standard/fruit-apple@2x", 316, 316);
 exportFile("../standard/fruit-grapes@2x", 316, 316);
@@ -79,7 +68,6 @@ exportFile("../standard/hitcircle@2x", 288, 288);
 overlay.visible = true;
 standard.visible = false;
 lite.visible = false;
-classic.visible = false;
 
 overlayCircle.strokeWidth = sliderBallWidth;
 
@@ -99,4 +87,3 @@ exportFile("../shared/hitcircleoverlay@2x", 288, 288);
 overlay.visible = true;
 standard.visible = true;
 lite.visible = false;
-classic.visible = false;
