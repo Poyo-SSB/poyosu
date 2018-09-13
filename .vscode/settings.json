@@ -1,7 +1,7 @@
 {
 	"files.exclude": {
-		"**/**.ai": true,
-		"**/**.blend": true,
-		"**/**.psd": true
+		"**/*.ai": true,
+		"**/*.blend": true,
+		"**/*.psd": true
 	}
 }
