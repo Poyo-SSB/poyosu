@@ -12,6 +12,7 @@ function colorFromHex(hex) {
 function exportFile(name, width, height) {
     var exportOptions = new ExportOptionsPNG24();
     exportOptions.matte = false;
+    exportOptions.artBoardClipping = true;
     exportOptions.horizontalScale = 100 * width / document.width;
     exportOptions.verticalScale = 100 * height / document.height;
     
@@ -31,7 +32,6 @@ function process(hex, name, file) {
     document.rasterItems.getByName("Flashlight").hidden = true;
     document.rasterItems.getByName("Half Time").hidden = true;
     document.rasterItems.getByName("Hard Rock").hidden = true;
-    document.rasterItems.getByName("Question Mark").hidden = true;
     document.rasterItems.getByName("Nightcore").hidden = true;
     document.rasterItems.getByName("No Fail").hidden = true;
     document.rasterItems.getByName("Perfect").hidden = true;
@@ -42,6 +42,9 @@ function process(hex, name, file) {
     document.rasterItems.getByName("Spun-out").hidden = true;
     document.rasterItems.getByName("Sudden Death").hidden = true;
     document.rasterItems.getByName("Target Practice").hidden = true;
+    document.rasterItems.getByName("Fade In").hidden = true;
+    document.rasterItems.getByName("Fade Out").hidden = true;
+    document.rasterItems.getByName("Co-op").hidden = true;
     document.rasterItems.getByName("1K").hidden = true;
     document.rasterItems.getByName("2K").hidden = true;
     document.rasterItems.getByName("3K").hidden = true;
@@ -62,8 +65,8 @@ process("#0062ab", "Auto", "autoplay");
 process("#525353", "Cinema", "cinema");
 process("#8635c2", "Double Time", "doubletime");
 process("#6eac19", "Easy", "easy");
-process("#976700", "Question Mark", "fadein");
-process("#976700", "Question Mark", "fadeout");
+process("#976700", "Fade In", "fadein");
+process("#976700", "Fade Out", "fadeout");
 process("#282828", "Flashlight", "flashlight");
 process("#4c4355", "Half Time", "halftime");
 process("#9d0034", "Hard Rock", "hardrock");
@@ -77,7 +80,7 @@ process("#2f1e1e", "6K", "key6");
 process("#2f1e1e", "7K", "key7");
 process("#2f1e1e", "8K", "key8");
 process("#2f1e1e", "9K", "key9");
-process("#2f1e1e", "Question Mark", "keycoop");
+process("#2f1e1e", "Co-op", "keycoop");
 process("#3f00a5", "Nightcore", "nightcore");
 process("#202e80", "No Fail", "nofail");
 process("#954a00", "Perfect", "perfect");
