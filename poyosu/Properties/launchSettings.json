@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "poyosu": {
+      "commandName": "Project",
+      "commandLineArgs": "-c config.json -o C:\\Users\\poyo_\\AppData\\Local\\osu!\\Skins"
+    }
+  }
+}

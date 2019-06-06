@@ -1,0 +1,17 @@
+﻿[
+	{
+		"folder": "test",
+
+		"hd": true,
+		"animation_framerate": 60,
+
+		"scorebar_name": "Poyo",
+		"scorebar_flag": "US",
+
+		"followpoint_width": 9,
+
+		"parameters": {
+			"cursor_trail_enabled": false
+		}
+	}
+]

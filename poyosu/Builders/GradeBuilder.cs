@@ -71,7 +71,7 @@ namespace poyosu.Builders
                 {
                     outerGlow.Mutate(ctx => ctx
                         .Fill(color, token)
-                        .TrueGaussianBlur(base_glow_blur));
+                        .GaussianBlur(base_glow_blur));
 
                     grade.Mutate(ctx => ctx.DrawImage(outerGlow));
                 }
