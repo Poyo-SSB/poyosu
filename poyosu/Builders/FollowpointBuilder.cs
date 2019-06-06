@@ -16,8 +16,8 @@ namespace poyosu.Builders
         private const int base_image_padding = 2;
 
         private const int base_reference_fps = 60;
-        private const int base_delay_frames = 20;
-        private const int base_visible_frames = 30;
+        private const int base_delay_frames = 25;
+        private const int base_visible_frames = 25;
         private const int base_fade_frames = 3;
 
         public override string Folder => "followpoints";
@@ -50,14 +50,15 @@ namespace poyosu.Builders
                 var rectangle = new RectangularPolygon(0, (imageHeight - followpointWidth) / 2f, imageWidth, followpointWidth);
 
                 followpoint.Mutate(ctx => ctx
-                    .Fill(Rgba32.Red, rectangle));
+                    .Fill(Rgba32.White, rectangle));
 
                 var taperGradient = new LinearGradientBrush(
                     new PointF(0, 0),
                     new PointF(0, imageHeight),
                     GradientRepetitionMode.None,
                     new ColorStop(0, Rgba32.Black),
-                    new ColorStop(1 / 2f, Rgba32.White),
+                    new ColorStop(1 / 3f, Rgba32.White),
+                    new ColorStop(2 / 3f, Rgba32.White),
                     new ColorStop(1, Rgba32.Black));
 
                 if (parameters.AnimationEnabled)
@@ -103,7 +104,7 @@ namespace poyosu.Builders
                                 }
 
                                 float slide = xEnd - xStart >= 1 / 2f ?
-                                    1 / 4f :
+                                    1 / 3f :
                                     (xEnd - xStart) / 2f;
 
                                 var baseGradient = new LinearGradientBrush(
@@ -117,8 +118,7 @@ namespace poyosu.Builders
 
                                 mask.Mutate(ctx => ctx
                                     .Fill(taperGradient)
-                                    .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient)
-                                    .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Add, 1), baseGradient));
+                                    .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient));
 
                                 using (Image<Rgba32> frame = followpoint.Clone())
                                 {
