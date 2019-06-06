@@ -58,6 +58,7 @@ namespace poyosu
                     new ScorebarBuilder().Build(parameters),
                     new FollowpointBuilder().Build(parameters),
                     new GradeBuilder().Build(parameters),
+                    new InterfaceBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 });

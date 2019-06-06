@@ -14,6 +14,12 @@ namespace poyosu.Configuration
         [JsonProperty("animation_framerate")]
         public int AnimationFramerate { get; private set; } = 60;
 
+        [JsonProperty("combo_colors")]
+        public Rgba32[] ComboColors { get; private set; } = {
+            Rgba32.FromHex("00BAFF"),
+            Rgba32.FromHex("00FF90")
+        };
+
         [JsonProperty("cursor_inner_color")]
         public Rgba32 CursorInnerColor { get; private set; } = Rgba32.FromHex("FFFFFF");
         [JsonProperty("cursor_outer_color")]
