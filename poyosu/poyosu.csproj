@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-dev000149" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-dev002724" />
+  </ItemGroup>
+
+</Project>
