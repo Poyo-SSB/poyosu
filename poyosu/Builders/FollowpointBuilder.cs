@@ -16,8 +16,8 @@ namespace poyosu.Builders
         private const int base_image_padding = 2;
 
         private const int base_reference_fps = 60;
-        private const int base_delay_frames = 25;
-        private const int base_visible_frames = 25;
+        private const int base_delay_frames = 22;
+        private const int base_visible_frames = 28;
         private const int base_fade_frames = 3;
 
         public override string Folder => "followpoints";

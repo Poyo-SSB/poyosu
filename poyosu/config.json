@@ -1,4 +1,4 @@
-﻿[
+[
 	{
 		"folder": "test",
 
@@ -8,7 +8,7 @@
 		"scorebar_name": "Poyo",
 		"scorebar_flag": "US",
 
-		"followpoint_width": 9,
+		"followpoint_width": 10,
 
 		"parameters": {
 		}
