@@ -32,15 +32,15 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            await GenerateButton(color_back, "back", "back", path, parameters);
-            await GenerateButton(color_retry, "retry", "retry", path, parameters);
-            await GenerateButton(color_continue, "continue", "continue", path, parameters);
-            await GenerateButton(color_replay, "watch replay", "replay", path, parameters);
+            await GenerateButton(path, parameters, color_back, "back", "back");
+            await GenerateButton(path, parameters, color_retry, "retry", "retry");
+            await GenerateButton(path, parameters, color_continue, "continue", "continue");
+            await GenerateButton(path, parameters, color_replay, "watch replay", "replay");
 
             await Task.CompletedTask;
         }
 
-        private async Task GenerateButton(Rgba32 color, string label, string name, string path, Parameters parameters)
+        private async Task GenerateButton(string path, Parameters parameters, Rgba32 color, string label, string name)
         {
             int width = base_image_width;
             int height = base_image_height;

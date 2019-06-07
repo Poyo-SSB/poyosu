@@ -111,10 +111,10 @@ namespace poyosu.Builders
                 }
             }
 
-            await this.GenerateSelectionButton(color_selection_mode, null, wide_selection_width, "mode", path, parameters);
-            await this.GenerateSelectionButton(color_selection_mods, Assets.ImageIconStar, base_selection_width, "mods", path, parameters);
-            await this.GenerateSelectionButton(color_selection_options, Assets.ImageIconCog, base_selection_width, "options", path, parameters);
-            await this.GenerateSelectionButton(color_selection_random, Assets.ImageIconDice, base_selection_width, "random", path, parameters);
+            await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, wide_selection_width, "mode");
+            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, base_selection_width, "mods");
+            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, base_selection_width, "options");
+            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, base_selection_width, "random");
 
             using var menuButton = new Image<Rgba32>(buttonImageWidth, buttonImageHeight);
 
@@ -133,7 +133,7 @@ namespace poyosu.Builders
             await Task.CompletedTask;
         }
 
-        private async Task GenerateSelectionButton(Rgba32 color, Image<Rgba32> icon, int baseWidth, string name, string path, Parameters parameters)
+        private async Task GenerateSelectionButton(string path, Parameters parameters, Rgba32 color, Image<Rgba32> icon, int baseWidth, string name)
         {
             int width = baseWidth;
             int height = base_selection_height;

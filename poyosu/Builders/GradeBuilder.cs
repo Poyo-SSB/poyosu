@@ -42,26 +42,26 @@ namespace poyosu.Builders
         {
             var center = new PointF(base_large_size / 2f, base_large_size / 2f);
 
-            var hexagon = new RegularPolygon(center, 6, base_hexagon_size);
-            //IPath token = PolygonRounder.Round(hexagon, base_border_radius, 32);
+            var hexagon = RegularPolygonGenerator.Generate(6, base_hexagon_size, 0, center);
+            IPath token = PolygonRounder.Round(hexagon, base_border_radius, 32);
 
-            var smallHexagon = new RegularPolygon(center, 6, base_border_ratio * base_hexagon_size);
-            //IPath smallToken = PolygonRounder.Round(smallHexagon, base_border_ratio * base_border_radius, 32);
+            var smallHexagon = RegularPolygonGenerator.Generate(6, base_border_ratio * base_hexagon_size, 0, center);
+            IPath smallToken = PolygonRounder.Round(smallHexagon, base_border_ratio * base_border_radius, 32);
 
             await Task.WhenAll(new List<Task>
             {
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_xh, "S", "xh", true),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_x, "S", "x", true),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_sh, "S", "sh", false),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_s, "S", "s", false),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_a, "A", "a", false),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_b, "B", "b", false),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_c, "C", "c", false),
-                this.DrawGrade(path, parameters, hexagon, smallHexagon, color_d, "D", "d", false)
+                this.DrawGrade(path, parameters, token, smallToken, color_xh, "S", "xh", true),
+                this.DrawGrade(path, parameters, token, smallToken, color_x, "S", "x", true),
+                this.DrawGrade(path, parameters, token, smallToken, color_sh, "S", "sh", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_s, "S", "s", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_a, "A", "a", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_b, "B", "b", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_c, "C", "c", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_d, "D", "d", false)
             });
         }
 
-        private async Task DrawGrade(string path, Parameters config, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two)
+        private async Task DrawGrade(string path, Parameters parameters, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two)
         {
             using var grade = new Image<Rgba32>(base_large_size, base_large_size);
 

@@ -69,46 +69,47 @@ namespace poyosu.Builders
         {
             await Task.WhenAll(new List<Task>
             {
-                this.CreateMod("autoplay", path, Assets.ImageIconCogs, 0.9f, default_autoplay_color, parameters.HD, -1, 0),
-                this.CreateMod("cinema", path, Assets.ImageIconCinema, 0.85f, default_cinema_color, parameters.HD),
-                this.CreateMod("doubletime", path, Assets.ImageIconDoubleTime, 0.9f, default_doubletime_color, parameters.HD),
-                this.CreateMod("easy", path, Assets.ImageIconEasy, 0.9f, default_easy_color, parameters.HD),
-                this.CreateMod("fadein", path, Assets.ImageIconFadeIn, 1.2f, default_hidden_color, parameters.HD),
-                this.CreateMod("fadeout", path, Assets.ImageIconFadeOut, 1.2f, default_hidden_color, parameters.HD),
-                this.CreateMod("flashlight", path, Assets.ImageIconFlashlight, 0.90f, default_flashlight_color, parameters.HD, -5, 0),
-                this.CreateMod("halftime", path, Assets.ImageIconHalfTime, 0.875f, default_halftime_color, parameters.HD),
-                this.CreateMod("hardrock", path, Assets.ImageIconHardRock, 0.9f, default_hardrock_color, parameters.HD, -4, 1),
-                this.CreateMod("hidden", path, Assets.ImageIconHidden, 0.9f, default_hidden_color, parameters.HD),
-                this.CreateMod("key1", path, Assets.ImageIcon1K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key2", path, Assets.ImageIcon2K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key3", path, Assets.ImageIcon3K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key4", path, Assets.ImageIcon4K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key5", path, Assets.ImageIcon5K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key6", path, Assets.ImageIcon6K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key7", path, Assets.ImageIcon7K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key8", path, Assets.ImageIcon8K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("key9", path, Assets.ImageIcon9K, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("keycoop", path, Assets.ImageIconCoop, 1.2f, default_keymod_color, parameters.HD),
-                this.CreateMod("nightcore", path, Assets.ImageIconNightcore, 0.8f, default_nightcore_color, parameters.HD),
-                this.CreateMod("nofail", path, Assets.ImageIconNoFail, 0.9f, default_nofail_color, parameters.HD),
-                this.CreateMod("perfect", path, Assets.ImageIconPerfect, 0.78f, default_suddendeath_color, parameters.HD),
-                this.CreateMod("random", path, Assets.ImageIconRandom, 0.9f, default_random_color, parameters.HD),
-                this.CreateMod("relax", path, Assets.ImageIconRelax, 0.9f, default_relax_color, parameters.HD, 3, 2),
-                this.CreateMod("relax2", path, Assets.ImageIconAutopilot, 0.8f, default_relax2_color, parameters.HD, -2, 2),
-                this.CreateMod("scorev2", path, Assets.ImageIconTachometer, 0.85f, default_scorev2_color, parameters.HD, 0, -1),
-                this.CreateMod("spunout", path, Assets.ImageIconSpunOut, 0.9f, default_spunout_color, parameters.HD),
-                this.CreateMod("suddendeath", path, Assets.ImageIconSuddenDeath, 0.96f, default_suddendeath_color, parameters.HD),
-                this.CreateMod("target", path, Assets.ImageIconTargetPractice, 1, default_target_color, parameters.HD),
+                this.CreateMod(path, parameters, "autoplay", Assets.ImageIconCogs, 0.9f, default_autoplay_color, -1, 0),
+                this.CreateMod(path, parameters, "cinema", Assets.ImageIconCinema, 0.85f, default_cinema_color),
+                this.CreateMod(path, parameters, "doubletime", Assets.ImageIconDoubleTime, 0.9f, default_doubletime_color),
+                this.CreateMod(path, parameters, "easy", Assets.ImageIconEasy, 0.9f, default_easy_color),
+                this.CreateMod(path, parameters, "fadein", Assets.ImageIconFadeIn, 1.2f, default_hidden_color),
+                this.CreateMod(path, parameters, "fadeout", Assets.ImageIconFadeOut, 1.2f, default_hidden_color),
+                this.CreateMod(path, parameters, "flashlight", Assets.ImageIconFlashlight, 0.90f, default_flashlight_color, -5, 0),
+                this.CreateMod(path, parameters, "halftime", Assets.ImageIconHalfTime, 0.875f, default_halftime_color),
+                this.CreateMod(path, parameters, "hardrock", Assets.ImageIconHardRock, 0.9f, default_hardrock_color, -4, 1),
+                this.CreateMod(path, parameters, "hidden", Assets.ImageIconHidden, 0.9f, default_hidden_color),
+                this.CreateMod(path, parameters, "key1", Assets.ImageIcon1K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key2", Assets.ImageIcon2K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key3", Assets.ImageIcon3K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key4", Assets.ImageIcon4K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key5", Assets.ImageIcon5K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key6", Assets.ImageIcon6K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key7", Assets.ImageIcon7K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key8", Assets.ImageIcon8K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "key9", Assets.ImageIcon9K, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "keycoop", Assets.ImageIconCoop, 1.2f, default_keymod_color),
+                this.CreateMod(path, parameters, "nightcore", Assets.ImageIconNightcore, 0.8f, default_nightcore_color),
+                this.CreateMod(path, parameters, "nofail", Assets.ImageIconNoFail, 0.9f, default_nofail_color),
+                this.CreateMod(path, parameters, "perfect", Assets.ImageIconPerfect, 0.78f, default_suddendeath_color),
+                this.CreateMod(path, parameters, "random", Assets.ImageIconRandom, 0.9f, default_random_color),
+                this.CreateMod(path, parameters, "relax", Assets.ImageIconRelax, 0.9f, default_relax_color, 3, 2),
+                this.CreateMod(path, parameters, "relax2", Assets.ImageIconAutopilot, 0.8f, default_relax2_color, -2, 2),
+                this.CreateMod(path, parameters, "scorev2", Assets.ImageIconTachometer, 0.85f, default_scorev2_color, 0, -1),
+                this.CreateMod(path, parameters, "spunout", Assets.ImageIconSpunOut, 0.9f, default_spunout_color),
+                this.CreateMod(path, parameters, "suddendeath", Assets.ImageIconSuddenDeath, 0.96f, default_suddendeath_color),
+                this.CreateMod(path, parameters, "target", Assets.ImageIconTargetPractice, 1, default_target_color),
 
-                this.CreateMod("touchdevice", path, Assets.ImageIconTouchDevice, 0.94f, default_scorev2_color, parameters.HD, 0, 6),
+                this.CreateMod(path, parameters, "touchdevice", Assets.ImageIconTouchDevice, 0.94f, default_scorev2_color, 0, 6),
 
-                // McOsu mods.
-                this.CreateMod("vaporwave", path, Assets.ImageIconVaporwave, 0.875f, default_daycore_color, parameters.HD),
-                this.CreateMod("nightmare", path, Assets.ImageIconLemon, 0.72f, default_nightmare_color, parameters.HD)
+                // McOsu mods
+
+                this.CreateMod(path, parameters, "vaporwave", Assets.ImageIconVaporwave, 0.875f, default_daycore_color),
+                this.CreateMod(path, parameters, "nightmare", Assets.ImageIconLemon, 0.72f, default_nightmare_color)
             });
         }
 
-        private async Task CreateMod(string filename, string path, Image<Rgba32> icon, float sizeMultiplier, ColorSet colors, bool hd, int xOffset = 0, int yOffset = 0)
+        private async Task CreateMod(string path, Parameters parameters, string filename, Image<Rgba32> icon, float sizeMultiplier, ColorSet colors, int xOffset = 0, int yOffset = 0)
         {
             int imageSize = base_image_size;
 
@@ -123,7 +124,7 @@ namespace poyosu.Builders
 
             float borderRadius = base_border_radius;
 
-            if (!hd)
+            if (!parameters.HD)
             {
                 imageSize /= 2;
 
@@ -220,7 +221,7 @@ namespace poyosu.Builders
                 mod.Mutate(ctx => ctx.DrawImage(tokenContents));
             }
 
-            if (hd)
+            if (parameters.HD)
             {
                 mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
             }
