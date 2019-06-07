@@ -28,24 +28,24 @@ namespace poyosu.Builders
             }
         }
 
-        private static readonly ColorSet default_autoplay_color = new ColorSet("001d30", "52AFEA", "C0E5FE");
+        private static readonly ColorSet default_autoplay_color = new ColorSet("001D30", "52AFEA", "C0E5FE");
         private static readonly ColorSet default_cinema_color = new ColorSet("121212", "787878", "D3D3D3");
-        private static readonly ColorSet default_doubletime_color = new ColorSet("28002e", "D14DE6", "F5BEFD");
-        private static readonly ColorSet default_easy_color = new ColorSet("082c01", "68D44F", "C6FEB7");
+        private static readonly ColorSet default_doubletime_color = new ColorSet("28002E", "D14DE6", "F5BEFD");
+        private static readonly ColorSet default_easy_color = new ColorSet("082C01", "68D44F", "C6FEB7");
         private static readonly ColorSet default_flashlight_color = new ColorSet("080808", "363636", "F9F9F9");
-        private static readonly ColorSet default_halftime_color = new ColorSet("0d0b13", "64586E", "E7E1EF");
+        private static readonly ColorSet default_halftime_color = new ColorSet("0D0B13", "64586E", "E7E1EF");
         private static readonly ColorSet default_hardrock_color = new ColorSet("300007", "E4596F", "FFC1CB");
-        private static readonly ColorSet default_hidden_color = new ColorSet("2f1e01", "F6B443", "FEE7C0");
-        private static readonly ColorSet default_keymod_color = new ColorSet("0c0f0f", "596264", "C7CDCD");
-        private static readonly ColorSet default_nightcore_color = new ColorSet("12012e", "874DE5", "D6BDFD");
-        private static readonly ColorSet default_nofail_color = new ColorSet("01092d", "566ED8", "BCC8FE");
-        private static readonly ColorSet default_suddendeath_color = new ColorSet("2f1700", "F29B4B", "FEDEC1");
+        private static readonly ColorSet default_hidden_color = new ColorSet("2F1E01", "F6B443", "FEE7C0");
+        private static readonly ColorSet default_keymod_color = new ColorSet("0C0F0F", "596264", "C7CDCD");
+        private static readonly ColorSet default_nightcore_color = new ColorSet("12012E", "874DE5", "D6BDFD");
+        private static readonly ColorSet default_nofail_color = new ColorSet("01092D", "566ED8", "BCC8FE");
+        private static readonly ColorSet default_suddendeath_color = new ColorSet("2F1700", "F29B4B", "FEDEC1");
         private static readonly ColorSet default_random_color = new ColorSet("002910", "37D574", "B2FECE");
         private static readonly ColorSet default_relax_color = new ColorSet("002229", "3ABED5", "B2F2FE");
         private static readonly ColorSet default_relax2_color = new ColorSet("001029", "3B7ED4", "B3D3FE");
-        private static readonly ColorSet default_scorev2_color = new ColorSet("0c0c0c", "565656", "EDEDED");
-        private static readonly ColorSet default_spunout_color = new ColorSet("1e001b", "A22A96", "F4A6EC");
-        private static readonly ColorSet default_target_color = new ColorSet("2b012b", "D847D6", "FFB7FD");
+        private static readonly ColorSet default_scorev2_color = new ColorSet("0C0C0C", "565656", "EDEDED");
+        private static readonly ColorSet default_spunout_color = new ColorSet("1E001B", "A22A96", "F4A6EC");
+        private static readonly ColorSet default_target_color = new ColorSet("2B012B", "D847D6", "FFB7FD");
         private static readonly ColorSet default_daycore_color = new ColorSet("082727", "AB509C", "4FF2F3");
         private static readonly ColorSet default_nightmare_color = new ColorSet("260900", "FF3D06", "FFC0AE");
 
