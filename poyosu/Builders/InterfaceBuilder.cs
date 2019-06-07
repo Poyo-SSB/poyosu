@@ -39,8 +39,8 @@ namespace poyosu.Builders
         private const int base_selection_height = 180;
         private const int base_selection_top = 6;
 
-        private const int base_selection_glow_blur = 16;
-        private const float base_selection_glow_opacity = 0.8f;
+        private const int base_selection_glow_blur = 12;
+        private const float base_selection_glow_opacity = 0.5f;
 
         private static readonly Rgba32 color_selection_mode = Rgba32.FromHex("8B3BEE");
         private static readonly Rgba32 color_selection_mods = Rgba32.FromHex("D747AD");
