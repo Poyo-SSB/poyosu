@@ -36,5 +36,8 @@ namespace poyosu.Utilities
 
         public static IImageProcessingContext Mask(this IImageProcessingContext source, Image image)
             => source.ApplyProcessor(new MaskProcessor(image));
+
+        public static IImageProcessingContext Trim(this IImageProcessingContext source)
+            => source.ApplyProcessor(new TrimProcessor());
     }
 }

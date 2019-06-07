@@ -29,9 +29,11 @@ namespace poyosu.Builders
         private const float base_hexagon_size = 355;
         private const float base_border_radius = 80;
 
-        private const float base_font_size = 400f;
+        private const float base_font_size = 350f;
+        private const float base_text_glow_blur = 24;
+        private const float base_text_glow_opacity = 0.55f;
 
-        private const float base_glow_blur = 10;
+        private const float base_glow_blur = 40;
 
         private const float base_border_ratio = 0.86f;
 
@@ -55,56 +57,108 @@ namespace poyosu.Builders
                 this.DrawGrade(path, parameters, token, smallToken, color_sh, "S", "sh", false),
                 this.DrawGrade(path, parameters, token, smallToken, color_s, "S", "s", false),
                 this.DrawGrade(path, parameters, token, smallToken, color_a, "A", "a", false),
-                this.DrawGrade(path, parameters, token, smallToken, color_b, "B", "b", false),
+                this.DrawGrade(path, parameters, token, smallToken, color_b, "B", "b", false, 0.02f),
                 this.DrawGrade(path, parameters, token, smallToken, color_c, "C", "c", false),
-                this.DrawGrade(path, parameters, token, smallToken, color_d, "D", "d", false)
+                this.DrawGrade(path, parameters, token, smallToken, color_d, "D", "d", false, 0.03f)
             });
         }
 
-        private async Task DrawGrade(string path, Parameters parameters, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two)
+        private async Task DrawGrade(string path, Parameters parameters, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two, float xOffset = 0)
         {
-            using var grade = new Image<Rgba32>(base_large_size, base_large_size);
+            int largeSize = base_large_size;
+            int smallSize = base_small_size;
+            
+            float hexagonSize = base_hexagon_size;
+            float borderRadius = base_border_radius;
+            
+            float fontSize = base_font_size;
+            float textGlowBlur = base_text_glow_blur;
+            
+            float glowBlur = base_glow_blur;
 
-            var center = new PointF(base_large_size / 2f, base_large_size / 2f);
+            if (!parameters.HD)
+            {
+                largeSize /= 2;
+                smallSize /= 2;
 
-            using (var outerGlow = new Image<Rgba32>(base_large_size, base_large_size))
+                hexagonSize /= 2;
+                borderRadius /= 2;
+
+                fontSize /= 2;
+                textGlowBlur /= 2;
+
+                glowBlur /= 2;
+            }
+
+            using var grade = new Image<Rgba32>(largeSize, largeSize);
+
+            var center = new PointF(grade.Width / 2f, grade.Height / 2f);
+
+            using (var outerGlow = new Image<Rgba32>(largeSize, largeSize))
             {
                 outerGlow.Mutate(ctx => ctx
                     .Fill(color, token)
-                    .GaussianBlur(base_glow_blur));
-
+                    .GaussianBlur(glowBlur));
                 grade.Mutate(ctx => ctx.DrawImage(outerGlow));
             }
 
-            using (var outerRing = new Image<Rgba32>(base_large_size, base_large_size))
+            using (var outerRing = new Image<Rgba32>(largeSize, largeSize))
             {
                 outerRing.Mutate(ctx => ctx.Fill(Rgba32.White, token));
-
                 grade.Mutate(ctx => ctx.DrawImage(outerRing));
             }
 
-            using (var innerToken = new Image<Rgba32>(base_large_size, base_large_size))
+            using (var innerToken = new Image<Rgba32>(largeSize, largeSize))
             {
                 innerToken.Mutate(ctx => ctx.Fill(color, smallToken));
-
                 grade.Mutate(ctx => ctx.DrawImage(innerToken));
             }
 
-            using (var text = new Image<Rgba32>(base_large_size, base_large_size))
+            using (var text = new Image<Rgba32>(largeSize, largeSize))
             {
                 text.Mutate(ctx => ctx
                     .DrawText(new TextGraphicsOptions(true)
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, label, new Font(Assets.ExoBlack, base_font_size), Rgba32.White, center));
+                    }, label, new Font(Assets.ExoBlack, fontSize), Rgba32.White, center));
 
-                grade.Mutate(ctx => ctx.DrawImage(text));
+                if (two)
+                {
+                    text.Mutate(ctx => ctx
+                        .DrawText(new TextGraphicsOptions(true)
+                        {
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                        }, label, new Font(Assets.ExoBlack, fontSize), Rgba32.White, center + new Point((int)(fontSize * 0.45f), (int)(fontSize * 0.09f))));
+                }
+
+                text.Mutate(ctx => ctx.Trim());
+
+                using (var textGlow = text.Clone())
+                {
+                    textGlow.Mutate(ctx => ctx
+                        .Pad(text.Width * 2, text.Height * 2)
+                        .GaussianBlur(textGlowBlur));
+
+                    grade.Mutate(ctx => ctx.DrawImage(textGlow, new Point(((largeSize - textGlow.Width) / 2) + (int)(fontSize * xOffset), (largeSize - textGlow.Height) / 2), base_text_glow_opacity));
+                }
+
+                grade.Mutate(ctx => ctx.DrawImage(text, new Point(((largeSize - text.Width) / 2) + (int)(fontSize * xOffset), (largeSize - text.Height) / 2)));
             }
 
-            grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
-            grade.Mutate(ctx => ctx.Resize(grade.Width * base_small_size / base_large_size, grade.Height * base_small_size / base_large_size));
-            grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
+            if (parameters.HD)
+            {
+                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
+                grade.Mutate(ctx => ctx.Resize(grade.Width * smallSize / largeSize, grade.Height * smallSize / largeSize));
+                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
+            }
+            else
+            {
+                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}.png"));
+                grade.Mutate(ctx => ctx.Resize(grade.Width * smallSize / largeSize, grade.Height * smallSize / largeSize));
+                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small.png"));
+            }
 
             await Task.CompletedTask;
         }
