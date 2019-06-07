@@ -75,7 +75,7 @@ namespace poyosu.Builders
                 this.CreateMod("easy", path, Assets.ImageIconEasy, 0.9f, default_easy_color, parameters.HD),
                 this.CreateMod("fadein", path, Assets.ImageIconFadeIn, 1.2f, default_hidden_color, parameters.HD),
                 this.CreateMod("fadeout", path, Assets.ImageIconFadeOut, 1.2f, default_hidden_color, parameters.HD),
-                this.CreateMod("flashlight", path, Assets.ImageIconFlashlight, 1, default_flashlight_color, parameters.HD),
+                this.CreateMod("flashlight", path, Assets.ImageIconFlashlight, 0.90f, default_flashlight_color, parameters.HD, -5, 0),
                 this.CreateMod("halftime", path, Assets.ImageIconHalfTime, 0.875f, default_halftime_color, parameters.HD),
                 this.CreateMod("hardrock", path, Assets.ImageIconHardRock, 0.9f, default_hardrock_color, parameters.HD, -4, 1),
                 this.CreateMod("hidden", path, Assets.ImageIconHidden, 0.9f, default_hidden_color, parameters.HD),
