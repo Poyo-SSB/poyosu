@@ -46,7 +46,7 @@ namespace poyosu.Builders
 
             for (int i = 0; i < gaussian_samples; i++)
             {
-                float sample = ImageMath.GaussianFunction ((float)i / gaussian_samples, 1, 0, 1 / 3f);
+                float sample = ImageMath.GaussianFunction((float)i / gaussian_samples, 1, 0, 1 / 3f);
 
                 colors[i] = new ColorStop((float)i / gaussian_samples, new Rgba32(
                     color.R,
@@ -55,35 +55,34 @@ namespace poyosu.Builders
                     (byte)Math.Round(sample * color.A)));
             }
 
-            using (var trail = new Image<Rgba32>(size, size))
+            using var trail = new Image<Rgba32>(size, size);
+
+            var center = new PointF(radius, radius);
+
+            var brush = new EllipticGradientBrush(
+                new PointF(size / 2f, size / 2f),
+                new PointF(size, size / 2f),
+                1, GradientRepetitionMode.None, colors);
+
+            trail.Mutate(ctx => ctx.Fill(brush, new EllipsePolygon(center, radius)));
+
+            if (size < minSize)
             {
-                var center = new PointF(radius, radius);
+                Logger.Log($"The cursor trail size is less than {minSize}--the trail may not render in-game. Adjust cursor_trail_radius to fix this.", Logger.MessageType.Warning);
+            }
 
-                var brush = new EllipticGradientBrush(
-                    new PointF(size / 2f, size / 2f),
-                    new PointF(size, size / 2f),
-                    1, GradientRepetitionMode.None, colors);
+            if (parameters.HD)
+            {
+                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail@2x.png"));
+            }
+            else
+            {
+                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
+            }
 
-                trail.Mutate(ctx => ctx.Fill(brush, new EllipsePolygon(center, radius)));
-
-                if (size < minSize)
-                {
-                    Logger.Log($"The cursor trail size is less than {minSize}--the trail may not render in-game. Adjust cursor_trail_radius to fix this.", Logger.MessageType.Warning);
-                }
-
-                if (parameters.HD)
-                {
-                    trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail@2x.png"));
-                }
-                else
-                {
-                    trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
-                }
-
-                if (parameters.CursorTrailSmooth)
-                {
-                    Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursormiddle.png"));
-                }
+            if (parameters.CursorTrailSmooth)
+            {
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursormiddle.png"));
             }
 
             await Task.CompletedTask;

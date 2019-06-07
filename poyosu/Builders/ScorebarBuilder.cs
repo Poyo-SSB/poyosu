@@ -143,36 +143,35 @@ namespace poyosu.Builders
                 };
             }
 
-            using (var color = new Image<Rgba32>(bgWidth, bgHeight))
-            {
-                rectangle = new RectangularPolygon(
-                    barPadding + (barHeight / 2),
-                    barPadding,
-                    barWidth - barHeight,
-                    barHeight);
-                leftEllipse = new EllipsePolygon(
-                    barPadding + (barHeight / 2),
-                    barPadding + (barHeight / 2),
-                    barHeight / 2);
-                rightEllipse = new EllipsePolygon(
-                    barPadding + barWidth - (barHeight / 2),
-                    barPadding + (barHeight / 2),
-                    barHeight / 2);
+            using var color = new Image<Rgba32>(bgWidth, bgHeight);
 
-                IPath fill = canvas.Clip(canvas.Clip(rectangle).Clip(leftEllipse).Clip(rightEllipse));
+            rectangle = new RectangularPolygon(
+                barPadding + (barHeight / 2),
+                barPadding,
+                barWidth - barHeight,
+                barHeight);
+            leftEllipse = new EllipsePolygon(
+                barPadding + (barHeight / 2),
+                barPadding + (barHeight / 2),
+                barHeight / 2);
+            rightEllipse = new EllipsePolygon(
+                barPadding + barWidth - (barHeight / 2),
+                barPadding + (barHeight / 2),
+                barHeight / 2);
+
+            IPath fill = canvas.Clip(canvas.Clip(rectangle).Clip(leftEllipse).Clip(rightEllipse));
                 
-                color.Mutate(ctx => ctx.Fill(Rgba32.White, fill));
+            color.Mutate(ctx => ctx.Fill(Rgba32.White, fill));
 
-                color.Mutate(ctx => ctx.Crop(new Rectangle(colorOffsetX, colorOffsetY, bgWidth - colorOffsetX, bgHeight - colorOffsetY)));
+            color.Mutate(ctx => ctx.Crop(new Rectangle(colorOffsetX, colorOffsetY, bgWidth - colorOffsetX, bgHeight - colorOffsetY)));
 
-                if (parameters.HD)
-                {
-                    color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour@2x.png"));
-                }
-                else
-                {
-                    color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour.png"));
-                }
+            if (parameters.HD)
+            {
+                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour@2x.png"));
+            }
+            else
+            {
+                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour.png"));
             }
         }
     }

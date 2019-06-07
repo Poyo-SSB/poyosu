@@ -142,95 +142,94 @@ namespace poyosu.Builders
                 yOffset /= 2;
             }
 
-            using (var mod = new Image<Rgba32>(imageSize, imageSize))
+            using var mod = new Image<Rgba32>(imageSize, imageSize);
+
+            var center = new PointF(imageSize / 2, imageSize / 2);
+            var hexagon = RegularPolygonGenerator.Generate(6, tokenRadius, 0, center);
+            IPath roundedHexagon = PolygonRounder.Round(hexagon, borderRadius, 32);
+
+            icon.Mutate(ctx => ctx
+                .Resize((int)(2 * iconRadius * sizeMultiplier), (int)(2 * iconRadius * sizeMultiplier))
+                .Pad(imageSize, imageSize));
+
+            using (var tokenGlow = new Image<Rgba32>(imageSize, imageSize))
             {
-                var center = new PointF(imageSize / 2, imageSize / 2);
-                var hexagon = RegularPolygonGenerator.Generate(6, tokenRadius, 0, center);
-                IPath roundedHexagon = PolygonRounder.Round(hexagon, borderRadius, 32);
+                tokenGlow.Mutate(ctx => ctx
+                    .Fill(colors.Mid, roundedHexagon)
+                    .GaussianBlur(tokenGlowBlur));
 
-                icon.Mutate(ctx => ctx
-                    .Resize((int)(2 * iconRadius * sizeMultiplier), (int)(2 * iconRadius * sizeMultiplier))
-                    .Pad(imageSize, imageSize));
-
-                using (var tokenGlow = new Image<Rgba32>(imageSize, imageSize))
-                {
-                    tokenGlow.Mutate(ctx => ctx
-                        .Fill(colors.Mid, roundedHexagon)
-                        .GaussianBlur(tokenGlowBlur));
-
-                    mod.Mutate(ctx => ctx.DrawImage(tokenGlow));
-                }
-
-                using (var token = new Image<Rgba32>(imageSize, imageSize))
-                {
-                    token.Mutate(ctx => ctx
-                        .Fill(colors.Dark, roundedHexagon));
-
-                    mod.Mutate(ctx => ctx.DrawImage(token));
-                }
-
-                using (var tokenContents = new Image<Rgba32>(imageSize, imageSize))
-                {
-                    using (var iconOuterSpread = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        iconOuterSpread.Mutate(ctx => ctx
-                            .DrawImage(icon, new Point(xOffset, yOffset))
-                            .SetColor(colors.Mid)
-                            .GaussianBlur(outerSpreadGlowBlur));
-
-                        tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterSpread));
-                    }
-                    using (var iconInnerSpread = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        iconInnerSpread.Mutate(ctx => ctx
-                            .DrawImage(icon, new Point(xOffset, yOffset))
-                            .SetColor(colors.Mid)
-                            .GaussianBlur(innerSpreadGlowBlur));
-
-                        tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerSpread));
-                    }
-                    using (var iconOuterGlow = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        iconOuterGlow.Mutate(ctx => ctx
-                            .DrawImage(icon, new Point(xOffset, yOffset))
-                            .SetColor(colors.Mid)
-                            .GaussianBlur(outerGlowBlur));
-
-                        tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterGlow));
-                    }
-                    using (var iconInnerGlow = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        iconInnerGlow.Mutate(ctx => ctx
-                            .DrawImage(icon, new Point(xOffset, yOffset))
-                            .SetColor(colors.Light)
-                            .GaussianBlur(innerGlowBlur));
-
-                        tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerGlow));
-                    }
-
-                    tokenContents.Mutate(ctx => ctx.DrawImage(icon, new Point(xOffset, yOffset)));
-
-                    var graphicOptions = new GraphicsOptions(true)
-                    {
-                        AlphaCompositionMode = PixelAlphaCompositionMode.DestOut
-                    };
-
-                    tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, imageSize, imageSize).Clip(roundedHexagon)));
-
-                    mod.Mutate(ctx => ctx.DrawImage(tokenContents));
-                }
-
-                if (hd)
-                {
-                    mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
-                }
-                else
-                {
-                    mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}.png"));
-                }
-
-                await Task.CompletedTask;
+                mod.Mutate(ctx => ctx.DrawImage(tokenGlow));
             }
+
+            using (var token = new Image<Rgba32>(imageSize, imageSize))
+            {
+                token.Mutate(ctx => ctx
+                    .Fill(colors.Dark, roundedHexagon));
+
+                mod.Mutate(ctx => ctx.DrawImage(token));
+            }
+
+            using (var tokenContents = new Image<Rgba32>(imageSize, imageSize))
+            {
+                using (var iconOuterSpread = new Image<Rgba32>(imageSize, imageSize))
+                {
+                    iconOuterSpread.Mutate(ctx => ctx
+                        .DrawImage(icon, new Point(xOffset, yOffset))
+                        .SetColor(colors.Mid)
+                        .GaussianBlur(outerSpreadGlowBlur));
+
+                    tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterSpread));
+                }
+                using (var iconInnerSpread = new Image<Rgba32>(imageSize, imageSize))
+                {
+                    iconInnerSpread.Mutate(ctx => ctx
+                        .DrawImage(icon, new Point(xOffset, yOffset))
+                        .SetColor(colors.Mid)
+                        .GaussianBlur(innerSpreadGlowBlur));
+
+                    tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerSpread));
+                }
+                using (var iconOuterGlow = new Image<Rgba32>(imageSize, imageSize))
+                {
+                    iconOuterGlow.Mutate(ctx => ctx
+                        .DrawImage(icon, new Point(xOffset, yOffset))
+                        .SetColor(colors.Mid)
+                        .GaussianBlur(outerGlowBlur));
+
+                    tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterGlow));
+                }
+                using (var iconInnerGlow = new Image<Rgba32>(imageSize, imageSize))
+                {
+                    iconInnerGlow.Mutate(ctx => ctx
+                        .DrawImage(icon, new Point(xOffset, yOffset))
+                        .SetColor(colors.Light)
+                        .GaussianBlur(innerGlowBlur));
+
+                    tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerGlow));
+                }
+
+                tokenContents.Mutate(ctx => ctx.DrawImage(icon, new Point(xOffset, yOffset)));
+
+                var graphicOptions = new GraphicsOptions(true)
+                {
+                    AlphaCompositionMode = PixelAlphaCompositionMode.DestOut
+                };
+
+                tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, imageSize, imageSize).Clip(roundedHexagon)));
+
+                mod.Mutate(ctx => ctx.DrawImage(tokenContents));
+            }
+
+            if (hd)
+            {
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
+            }
+            else
+            {
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}.png"));
+            }
+
+            await Task.CompletedTask;
         }
     }
 }

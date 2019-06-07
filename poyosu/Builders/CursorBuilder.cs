@@ -13,7 +13,6 @@ namespace poyosu.Builders
     public class CursorBuilder : Builder
     {
         private const int reference_image_size = 256;
-        private const int reference_cursor_size = 26;
 
         private const float base_fill_radius = 20;
         private const float base_ring_radius = 26;
@@ -127,9 +126,9 @@ namespace poyosu.Builders
                 {
                     cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor.png"));
                 }
-            }
 
-            await Task.CompletedTask;
+                await Task.CompletedTask;
+            }
         }
     }
 }

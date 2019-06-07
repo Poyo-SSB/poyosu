@@ -19,8 +19,8 @@ namespace poyosu.Builders
         private static readonly Rgba32 color_c = Rgba32.FromHex("BF17DF");
         private static readonly Rgba32 color_d = Rgba32.FromHex("E20012");
         private static readonly Rgba32 color_s = Rgba32.FromHex("FF702E");
-        private static readonly Rgba32 color_x = Rgba32.FromHex("BDBDBD");
-        private static readonly Rgba32 color_sh = Rgba32.FromHex("FFBD0D");
+        private static readonly Rgba32 color_x = Rgba32.FromHex("FFBD0D");
+        private static readonly Rgba32 color_sh = Rgba32.FromHex("BDBDBD");
         private static readonly Rgba32 color_xh = Rgba32.FromHex("BDBDBD");
 
         private const int base_large_size = 900;
@@ -63,51 +63,50 @@ namespace poyosu.Builders
 
         private async Task DrawGrade(string path, Parameters config, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two)
         {
-            using (var grade = new Image<Rgba32>(base_large_size, base_large_size))
+            using var grade = new Image<Rgba32>(base_large_size, base_large_size);
+
+            var center = new PointF(base_large_size / 2f, base_large_size / 2f);
+
+            using (var outerGlow = new Image<Rgba32>(base_large_size, base_large_size))
             {
-                var center = new PointF(base_large_size / 2f, base_large_size / 2f);
+                outerGlow.Mutate(ctx => ctx
+                    .Fill(color, token)
+                    .GaussianBlur(base_glow_blur));
 
-                using (var outerGlow = new Image<Rgba32>(base_large_size, base_large_size))
-                {
-                    outerGlow.Mutate(ctx => ctx
-                        .Fill(color, token)
-                        .GaussianBlur(base_glow_blur));
-
-                    grade.Mutate(ctx => ctx.DrawImage(outerGlow));
-                }
-
-                using (var outerRing = new Image<Rgba32>(base_large_size, base_large_size))
-                {
-                    outerRing.Mutate(ctx => ctx.Fill(Rgba32.White, token));
-
-                    grade.Mutate(ctx => ctx.DrawImage(outerRing));
-                }
-
-                using (var innerToken = new Image<Rgba32>(base_large_size, base_large_size))
-                {
-                    innerToken.Mutate(ctx => ctx.Fill(color, smallToken));
-
-                    grade.Mutate(ctx => ctx.DrawImage(innerToken));
-                }
-
-                using (var text = new Image<Rgba32>(base_large_size, base_large_size))
-                {
-                    text.Mutate(ctx => ctx
-                        .DrawText(new TextGraphicsOptions(true)
-                        {
-                            HorizontalAlignment = HorizontalAlignment.Center,
-                            VerticalAlignment = VerticalAlignment.Center,
-                        }, label, new Font(Assets.ExoBlack, base_font_size), Rgba32.White, center));
-
-                    grade.Mutate(ctx => ctx.DrawImage(text));
-                }
-
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
-                grade.Mutate(ctx => ctx.Resize(grade.Width * base_small_size / base_large_size, grade.Height * base_small_size / base_large_size));
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
-
-                await Task.CompletedTask;
+                grade.Mutate(ctx => ctx.DrawImage(outerGlow));
             }
+
+            using (var outerRing = new Image<Rgba32>(base_large_size, base_large_size))
+            {
+                outerRing.Mutate(ctx => ctx.Fill(Rgba32.White, token));
+
+                grade.Mutate(ctx => ctx.DrawImage(outerRing));
+            }
+
+            using (var innerToken = new Image<Rgba32>(base_large_size, base_large_size))
+            {
+                innerToken.Mutate(ctx => ctx.Fill(color, smallToken));
+
+                grade.Mutate(ctx => ctx.DrawImage(innerToken));
+            }
+
+            using (var text = new Image<Rgba32>(base_large_size, base_large_size))
+            {
+                text.Mutate(ctx => ctx
+                    .DrawText(new TextGraphicsOptions(true)
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                    }, label, new Font(Assets.ExoBlack, base_font_size), Rgba32.White, center));
+
+                grade.Mutate(ctx => ctx.DrawImage(text));
+            }
+
+            grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
+            grade.Mutate(ctx => ctx.Resize(grade.Width * base_small_size / base_large_size, grade.Height * base_small_size / base_large_size));
+            grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
+
+            await Task.CompletedTask;
         }
     }
 }

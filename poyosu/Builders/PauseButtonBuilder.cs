@@ -60,54 +60,53 @@ namespace poyosu.Builders
                 bigBlur /= 2;
             }
 
-            using (var button = new Image<Rgba32>(width, height))
+            using var button = new Image<Rgba32>(width, height);
+
+            var center = new PointF(width / 2f, height / 2f);
+
+            using (var text = new Image<Rgba32>(width, height))
             {
-                var center = new PointF(width / 2f, height / 2f);
+                text.Mutate(ctx => ctx
+                    .DrawText(new TextGraphicsOptions(true)
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                    }, label, new Font(Assets.UniSansBook, fontSize), Rgba32.White, center));
 
-                using (var text = new Image<Rgba32>(width, height))
+                using (var bigGlow = text.Clone())
                 {
-                    text.Mutate(ctx => ctx
-                        .DrawText(new TextGraphicsOptions(true)
-                        {
-                            HorizontalAlignment = HorizontalAlignment.Center,
-                            VerticalAlignment = VerticalAlignment.Center,
-                        }, label, new Font(Assets.UniSansBook, fontSize), Rgba32.White, center));
-
-                    using (var bigGlow = text.Clone())
-                    {
-                        bigGlow.Mutate(ctx => ctx
-                            .SetColor(color)
-                            .GaussianBlur(bigBlur));
-                        button.Mutate(ctx => ctx.DrawImage(bigGlow));
-                    }
-
-                    using (var smallGlow = text.Clone())
-                    {
-                        smallGlow.Mutate(ctx => ctx
-                            .SetColor(color)
-                            .GaussianBlur(smallBlur));
-                        button.Mutate(ctx => ctx.DrawImage(smallGlow));
-                    }
-
-                    using (var tinyGlow = text.Clone())
-                    {
-                        tinyGlow.Mutate(ctx => ctx
-                            .SetColor(color)
-                            .GaussianBlur(tinyBlur));
-                        button.Mutate(ctx => ctx.DrawImage(tinyGlow));
-                    }
-
-                    button.Mutate(ctx => ctx.DrawImage(text));
+                    bigGlow.Mutate(ctx => ctx
+                        .SetColor(color)
+                        .GaussianBlur(bigBlur));
+                    button.Mutate(ctx => ctx.DrawImage(bigGlow));
                 }
 
-                if (parameters.HD)
+                using (var smallGlow = text.Clone())
                 {
-                    button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}@2x.png"));
+                    smallGlow.Mutate(ctx => ctx
+                        .SetColor(color)
+                        .GaussianBlur(smallBlur));
+                    button.Mutate(ctx => ctx.DrawImage(smallGlow));
                 }
-                else
+
+                using (var tinyGlow = text.Clone())
                 {
-                    button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}.png"));
+                    tinyGlow.Mutate(ctx => ctx
+                        .SetColor(color)
+                        .GaussianBlur(tinyBlur));
+                    button.Mutate(ctx => ctx.DrawImage(tinyGlow));
                 }
+
+                button.Mutate(ctx => ctx.DrawImage(text));
+            }
+
+            if (parameters.HD)
+            {
+                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}@2x.png"));
+            }
+            else
+            {
+                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}.png"));
             }
 
             await Task.CompletedTask;

@@ -116,19 +116,18 @@ namespace poyosu.Builders
             await this.GenerateSelectionButton(color_selection_options, Assets.ImageIconCog, base_selection_width, "options", path, parameters);
             await this.GenerateSelectionButton(color_selection_random, Assets.ImageIconDice, base_selection_width, "random", path, parameters);
 
-            using (var menuButton = new Image<Rgba32>(buttonImageWidth, buttonImageHeight))
-            {
-                menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, buttonTopMargin, buttonWidth, buttonHeight)));
-                menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, buttonTopMargin, buttonBorder, buttonHeight)));
+            using var menuButton = new Image<Rgba32>(buttonImageWidth, buttonImageHeight);
 
-                if (parameters.HD)
-                {
-                    menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background@2x.png"));
-                }
-                else
-                {
-                    menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background.png"));
-                }
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, buttonTopMargin, buttonWidth, buttonHeight)));
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, buttonTopMargin, buttonBorder, buttonHeight)));
+
+            if (parameters.HD)
+            {
+                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background@2x.png"));
+            }
+            else
+            {
+                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background.png"));
             }
 
             await Task.CompletedTask;
