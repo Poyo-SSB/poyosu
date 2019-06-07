@@ -1,4 +1,5 @@
 ﻿using SixLabors.Primitives;
+using SixLabors.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ namespace poyosu.Geometry
 {
     public static class PolygonRounder
     {
-        public static PointF[] Round(PointF[] points, float cornerRadius, int vertices)
+        public static IPath Round(PointF[] points, float cornerRadius, int vertices)
         {
             // I wrote this like two months ago in JavaScript and I don't care enough to document it.
             // Found a bug? Good luck, idiot.
@@ -90,7 +91,12 @@ namespace poyosu.Geometry
 
             }
 
-            return roundedPoints.ToArray();
+            var builder = new PathBuilder();
+
+            builder.AddLines(roundedPoints.ToArray());
+            builder.CloseFigure();
+
+            return builder.Build();
         }
     }
 }

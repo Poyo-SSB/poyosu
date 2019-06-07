@@ -37,6 +37,10 @@ namespace poyosu.Builders
         private const int base_selection_width = 148;
         private const int wide_selection_width = 178;
         private const int base_selection_height = 180;
+        private const int base_selection_top = 6;
+
+        private const int base_selection_glow_blur = 16;
+        private const float base_selection_glow_opacity = 0.8f;
 
         private static readonly Rgba32 color_selection_mode = Rgba32.FromHex("8B3BEE");
         private static readonly Rgba32 color_selection_mods = Rgba32.FromHex("D747AD");
@@ -134,7 +138,9 @@ namespace poyosu.Builders
         {
             int width = baseWidth;
             int height = base_selection_height;
-            int topHeight = 6;
+            int topHeight = base_selection_top;
+
+            int blur = base_selection_glow_blur;
 
             double size = 0.3;
 
@@ -144,8 +150,12 @@ namespace poyosu.Builders
                 height /= 2;
                 topHeight /= 2;
 
+                blur /= 2;
+
                 size /= 2;
             }
+
+            icon?.Mutate(ctx => ctx.Resize((int)(icon.Width * size), (int)(icon.Height * size)));
 
             using (var button = new Image<Rgba32>(width, height))
             {
@@ -154,11 +164,18 @@ namespace poyosu.Builders
 
                 if (icon != null)
                 {
-                    icon.Mutate(ctx => ctx.Resize((int)(icon.Width * size), (int)(icon.Height * size)));
+                    var baseCenter = new Point((width - icon.Width) / 2, (topHeight - icon.Height + height) / 2);
+                    var glowCenter = new Point((width - (3 * icon.Width)) / 2, (topHeight - (3 * icon.Height) + height) / 2);
+                    
+                    using (var glow = icon.Clone())
+                    {
+                        glow.Mutate(ctx => ctx
+                            .Pad(glow.Width * 3, glow.Height * 3)
+                            .GaussianBlur(blur));
+                        button.Mutate(ctx => ctx.DrawImage(glow, glowCenter, base_selection_glow_opacity));
+                    }
 
-                    var point = new Point((width - icon.Width) / 2, (topHeight - icon.Height + height) / 2);
-
-                    button.Mutate(ctx => ctx.DrawImage(icon, point));
+                    button.Mutate(ctx => ctx.DrawImage(icon, baseCenter));
                 }
 
                 if (parameters.HD)
@@ -178,12 +195,11 @@ namespace poyosu.Builders
 
                 if (icon != null)
                 {
-                    icon.Mutate(ctx => ctx
-                        .SetColor(color)); // Icon was already resized.
+                    icon.Mutate(ctx => ctx.SetColor(color)); // Icon was already resized.
 
-                    var point = new Point((width - icon.Width) / 2, (topHeight - icon.Height + height) / 2);
+                    var center = new Point((width - icon.Width) / 2, (topHeight - icon.Height + height) / 2);
 
-                    hovered.Mutate(ctx => ctx.DrawImage(icon, point));
+                    hovered.Mutate(ctx => ctx.DrawImage(icon, center));
                 }
 
                 if (parameters.HD)

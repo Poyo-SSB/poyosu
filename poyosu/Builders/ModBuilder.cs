@@ -1,4 +1,5 @@
 ﻿using poyosu.Configuration;
+using poyosu.Geometry;
 using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -6,6 +7,7 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.Primitives;
 using SixLabors.Shapes;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace poyosu.Builders
@@ -57,6 +59,8 @@ namespace poyosu.Builders
         private const float base_outer_spread_glow_blur = 24f;
         private const float base_inner_glow_blur = 3f;
         private const float base_outer_glow_blur = 5f;
+
+        private const float base_border_radius = 8;
 
         public override string Folder => "mods";
         public override string Name => "mod icons";
@@ -117,6 +121,8 @@ namespace poyosu.Builders
             float innerGlowBlur = base_inner_glow_blur;
             float outerGlowBlur = base_outer_glow_blur;
 
+            float borderRadius = base_border_radius;
+
             if (!hd)
             {
                 imageSize /= 2;
@@ -130,6 +136,8 @@ namespace poyosu.Builders
                 innerGlowBlur /= 2;
                 outerGlowBlur /= 2;
 
+                borderRadius /= 2;
+
                 xOffset /= 2;
                 yOffset /= 2;
             }
@@ -137,7 +145,8 @@ namespace poyosu.Builders
             using (var mod = new Image<Rgba32>(imageSize, imageSize))
             {
                 var center = new PointF(imageSize / 2, imageSize / 2);
-                var hexagon = new RegularPolygon(center, 6, tokenRadius);
+                var hexagon = RegularPolygonGenerator.Generate(6, tokenRadius, 0, center);
+                IPath roundedHexagon = PolygonRounder.Round(hexagon, borderRadius, 32);
 
                 icon.Mutate(ctx => ctx
                     .Resize((int)(2 * iconRadius * sizeMultiplier), (int)(2 * iconRadius * sizeMultiplier))
@@ -146,7 +155,7 @@ namespace poyosu.Builders
                 using (var tokenGlow = new Image<Rgba32>(imageSize, imageSize))
                 {
                     tokenGlow.Mutate(ctx => ctx
-                        .Fill(colors.Mid, hexagon)
+                        .Fill(colors.Mid, roundedHexagon)
                         .GaussianBlur(tokenGlowBlur));
 
                     mod.Mutate(ctx => ctx.DrawImage(tokenGlow));
@@ -155,7 +164,7 @@ namespace poyosu.Builders
                 using (var token = new Image<Rgba32>(imageSize, imageSize))
                 {
                     token.Mutate(ctx => ctx
-                        .Fill(colors.Dark, hexagon));
+                        .Fill(colors.Dark, roundedHexagon));
 
                     mod.Mutate(ctx => ctx.DrawImage(token));
                 }
@@ -206,7 +215,7 @@ namespace poyosu.Builders
                         AlphaCompositionMode = PixelAlphaCompositionMode.DestOut
                     };
 
-                    tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, imageSize, imageSize).Clip(hexagon)));
+                    tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, imageSize, imageSize).Clip(roundedHexagon)));
 
                     mod.Mutate(ctx => ctx.DrawImage(tokenContents));
                 }

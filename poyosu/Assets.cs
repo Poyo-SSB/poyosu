@@ -9,6 +9,8 @@ namespace poyosu
         public static readonly Font ExoSemiBold;
         public static readonly Font ExoBlack;
 
+        public static readonly Font UniSansBook;
+
         public static Image<Rgba32> ImageBlank => new Image<Rgba32>(1, 1);
 
         public static Image<Rgba32> ImageModeOsu => Image.Load<Rgba32>("Resources/osu/mode-osu.png");
@@ -62,6 +64,8 @@ namespace poyosu
 
             ExoSemiBold = collection.Install("Resources/fonts/Exo-SemiBold.ttf").CreateFont(0);
             ExoBlack = collection.Install("Resources/fonts/Exo-Black.ttf").CreateFont(0);
+
+            UniSansBook = collection.Install("Resources/fonts/Uni-Sans-Book.ttf").CreateFont(0);
         }
     }
 }
