@@ -20,7 +20,7 @@ namespace poyosu.Builders
         private const int base_text_padding = 24;
         private const int base_flag_padding = 52;
         private const int base_flag_width = 44;
-        private const float base_font_size = 24f;
+        private const float base_font_size = 28f;
 
         private const int color_offset_x = 9;
         private const int color_offset_y = 8;
@@ -101,22 +101,21 @@ namespace poyosu.Builders
                     Image<Rgba32> flag = null;
                     if (parameters.ScorebarLabelFlagEnabled)
                     {
-                        using (var client = new WebClient())
-                        {
-                            try
-                            {
-                                flag = Image.Load<Rgba32>(await client.OpenReadTaskAsync($"https://osu.ppy.sh/images/flags/{parameters.ScorebarLabelFlag.ToUpperInvariant()}.png"));
+                        using var client = new WebClient();
 
-                                flag.Mutate(ctx => ctx.Resize(flagWidth, flagWidth * flag.Height / flag.Width));
-                            }
-                            catch (WebException)
-                            {
-                                Logger.Log($"Failed to get the {parameters.ScorebarLabelFlag.ToUpperInvariant()} flag from the osu! website. Omitting flag from scorebar.", Logger.MessageType.Error);
-                            }
+                        try
+                        {
+                            flag = Image.Load<Rgba32>(await client.OpenReadTaskAsync($"https://osu.ppy.sh/images/flags/{parameters.ScorebarLabelFlag.ToUpperInvariant()}.png"));
+
+                            flag.Mutate(ctx => ctx.Resize(flagWidth, flagWidth * flag.Height / flag.Width));
+                        }
+                        catch (WebException)
+                        {
+                            Logger.Log($"Failed to get the {parameters.ScorebarLabelFlag.ToUpperInvariant()} flag from the osu! website. Omitting flag from scorebar.", Logger.MessageType.Error);
                         }
                     }
 
-                    var textPoint = new PointF(2 * barPadding, ((barPadding + textPadding) / 2) - (textPadding / 8));
+                    var textPoint = new PointF(2 * barPadding, ((barPadding + textPadding) / 2) - (textPadding / 12));
 
                     if (flag != null)
                     {
@@ -130,7 +129,7 @@ namespace poyosu.Builders
                         {
                             HorizontalAlignment = HorizontalAlignment.Left,
                             VerticalAlignment = VerticalAlignment.Center
-                        }, parameters.ScorebarLabelName, new Font(Assets.ExoSemiBold, fontSize), Rgba32.White, textPoint));
+                        }, parameters.ScorebarLabelName, new Font(Assets.UniSansSemiBold, fontSize), Rgba32.White, textPoint));
                 }
 
                 if (parameters.HD)
