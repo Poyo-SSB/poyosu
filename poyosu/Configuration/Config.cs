@@ -22,6 +22,9 @@ namespace poyosu.Configuration
         [JsonProperty("followpoint_width")]
         public float FollowpointWidth;
 
+        [JsonProperty("slider_end_enabled")]
+        public bool SliderEndEnabled;
+
         [JsonProperty("parameters")]
         public JObject Parameters;
     }

@@ -1,4 +1,4 @@
-[
+﻿[
 	{
 		"folder": "test",
 
@@ -10,7 +10,8 @@
 
 		"followpoint_width": 10,
 
-		"parameters": {
-		}
+		"slider_end_enabled": false,
+
+		"parameters": { }
 	}
 ]
