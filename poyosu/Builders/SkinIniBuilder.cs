@@ -45,6 +45,9 @@ namespace poyosu.Builders
             builder.AppendLine();
             builder.AppendLine($"SpinnerBackground: 255,255,255");
             builder.AppendLine();
+            builder.AppendLine($"[Fonts]");
+            builder.AppendLine($"HitCircleOverlap: -4");
+            builder.AppendLine();
             builder.AppendLine($"[Mania]");
             builder.AppendLine($"Keys: 1");
             builder.AppendLine($"JudgementLine: 0");
