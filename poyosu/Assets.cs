@@ -7,6 +7,7 @@ namespace poyosu
     public static class Assets
     {
         public static readonly Font ExoSemiBold;
+        public static readonly Font ExoExtraBold;
         public static readonly Font ExoBlack;
 
         public static readonly Font UniSansBook;
@@ -65,6 +66,7 @@ namespace poyosu
             var collection = new FontCollection();
 
             ExoSemiBold = collection.Install("Resources/fonts/Exo-SemiBold.ttf").CreateFont(0);
+            ExoExtraBold = collection.Install("Resources/fonts/Exo-ExtraBold.ttf").CreateFont(0);
             ExoBlack = collection.Install("Resources/fonts/Exo-Black.ttf").CreateFont(0);
 
             UniSansBook = collection.Install("Resources/fonts/Uni-Sans-Book.ttf").CreateFont(0);

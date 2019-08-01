@@ -52,8 +52,8 @@ namespace poyosu
 
                 await Task.WhenAll(new List<Task>
                 {
-                    //new CursorBuilder().Build(parameters),
-                    //new CursorTrailBuilder().Build(parameters),
+                    new CursorBuilder().Build(parameters),
+                    new CursorTrailBuilder().Build(parameters),
                     //new ModBuilder().Build(parameters),
                     //new ScorebarBuilder().Build(parameters),
                     //new FollowpointBuilder().Build(parameters),
@@ -61,9 +61,10 @@ namespace poyosu
                     //new InterfaceBuilder().Build(parameters),
                     //new PauseButtonBuilder().Build(parameters),
                     new HitCircleBuilder().Build(parameters),
+                    new DefaultHitNumberBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
-                });
+                }.AsParallel());
 
                 string path = Path.Combine(arguments.Output, config.Folder);
                 DirectoryUtilities.EmptyOrCreateDirectory(path);
