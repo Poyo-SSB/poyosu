@@ -65,74 +65,71 @@ namespace poyosu.Builders
             float innerGlowBlur = base_inner_glow_blur * multiplier;
             float outerGlowBlur = base_outer_glow_blur * multiplier;
 
-            using (var cursor = new Image<Rgba32>(imageSize, imageSize))
+            using var cursor = new Image<Rgba32>(imageSize, imageSize);
+
+            if (cursorGlowEnabled)
             {
-                if (cursorGlowEnabled)
+                using (var outerGlow = new Image<Rgba32>(imageSize, imageSize))
                 {
-                    using (var outerGlow = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        outerGlow.Mutate(ctx => ctx
-                            .Fill(cursorGlowColor, new EllipsePolygon(center, outerGlowRadius))
-                            .GaussianBlur(outerGlowBlur));
+                    outerGlow.Mutate(ctx => ctx
+                        .Fill(cursorGlowColor, new EllipsePolygon(center, outerGlowRadius))
+                        .GaussianBlur(outerGlowBlur));
 
-                        cursor.Mutate(ctx => ctx.DrawImage(outerGlow));
+                    cursor.Mutate(ctx => ctx.DrawImage(outerGlow));
+                }
+
+                if (!cursorBorderEnabled)
+                {
+                    using (var innerGlow = new Image<Rgba32>(imageSize, imageSize))
+                    {
+                        innerGlow.Mutate(ctx => ctx
+                            .Fill(cursorOuterColor, new EllipsePolygon(center, innerGlowRadius))
+                            .GaussianBlur(innerGlowBlur));
+
+                        cursor.Mutate(ctx => ctx.DrawImage(innerGlow));
                     }
 
-                    if (!cursorBorderEnabled)
-                    {
-                        using (var innerGlow = new Image<Rgba32>(imageSize, imageSize))
-                        {
-                            innerGlow.Mutate(ctx => ctx
-                                .Fill(cursorOuterColor, new EllipsePolygon(center, innerGlowRadius))
-                                .GaussianBlur(innerGlowBlur));
+                    using var ring = new Image<Rgba32>(imageSize, imageSize);
 
-                            cursor.Mutate(ctx => ctx.DrawImage(innerGlow));
-                        }
+                    ring.Mutate(ctx => ctx
+                        .Fill(cursorOuterColor, new EllipsePolygon(center, ringRadius))
+                        .GaussianBlur(ringBlur));
 
-                        using (var ring = new Image<Rgba32>(imageSize, imageSize))
-                        {
-                            ring.Mutate(ctx => ctx
-                                .Fill(cursorOuterColor, new EllipsePolygon(center, ringRadius))
-                                .GaussianBlur(ringBlur));
-
-                            cursor.Mutate(ctx => ctx.DrawImage(ring));
-                        }
-                    }
+                    cursor.Mutate(ctx => ctx.DrawImage(ring));
                 }
-
-                if (cursorBorderEnabled)
-                {
-                    using (var border = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        border.Mutate(ctx => ctx.Fill(cursorOuterColor, new EllipsePolygon(center, borderRadius)));
-
-                        cursor.Mutate(ctx => ctx.DrawImage(border));
-                    }
-                }
-
-                using (var fillCenter = new Image<Rgba32>(imageSize, imageSize))
-                {
-                    fillCenter.Mutate(ctx => ctx.Fill(cursorInnerColor, new EllipsePolygon(center, fillRadius)));
-
-                    if (!cursorBorderEnabled)
-                    {
-                        fillCenter.Mutate(ctx => ctx.GaussianBlur(fillBlur));
-                    }
-
-                    cursor.Mutate(ctx => ctx.DrawImage(fillCenter));
-                }
-
-                if (parameters.HD)
-                {
-                    cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor@2x.png"));
-                }
-                else
-                {
-                    cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor.png"));
-                }
-
-                await Task.CompletedTask;
             }
+
+            if (cursorBorderEnabled)
+            {
+                using var border = new Image<Rgba32>(imageSize, imageSize);
+
+                border.Mutate(ctx => ctx.Fill(cursorOuterColor, new EllipsePolygon(center, borderRadius)));
+
+                cursor.Mutate(ctx => ctx.DrawImage(border));
+            }
+
+            using (var fillCenter = new Image<Rgba32>(imageSize, imageSize))
+            {
+                fillCenter.Mutate(ctx => ctx.Fill(cursorInnerColor, new EllipsePolygon(center, fillRadius)));
+
+                if (!cursorBorderEnabled)
+                {
+                    fillCenter.Mutate(ctx => ctx.GaussianBlur(fillBlur));
+                }
+
+                cursor.Mutate(ctx => ctx.DrawImage(fillCenter));
+            }
+
+            if (parameters.HD)
+            {
+                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor@2x.png"));
+            }
+            else
+            {
+                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor.png"));
+            }
+
+            await Task.CompletedTask;
         }
     }
 }

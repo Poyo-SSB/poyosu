@@ -86,87 +86,84 @@ namespace poyosu.Builders
                         }
                         else
                         {
-                            using (var mask = new Image<Rgba32>(imageWidth, imageHeight))
+                            using var mask = new Image<Rgba32>(imageWidth, imageHeight);
+
+                            float localTime = i - delayFrames;
+
+                            float xStart = 0;
+                            float xEnd = 1;
+
+                            if (localTime <= fadeFrames)
                             {
-                                float localTime = i - delayFrames;
+                                xEnd = (localTime + 1) / (fadeFrames + 1);
+                            }
 
-                                float xStart = 0;
-                                float xEnd = 1;
+                            if (visibleFrames - localTime <= fadeFrames)
+                            {
+                                xStart = (fadeFrames + 1 - (visibleFrames - localTime)) / (fadeFrames + 1);
+                            }
 
-                                if (localTime <= fadeFrames)
-                                {
-                                    xEnd = (localTime + 1) / (fadeFrames + 1);
-                                }
+                            float slide = xEnd - xStart >= 1 / 2f ?
+                                1 / 3f :
+                                (xEnd - xStart) / 2f;
 
-                                if (visibleFrames - localTime <= fadeFrames)
-                                {
-                                    xStart = ((fadeFrames + 1) - (visibleFrames - localTime)) / (fadeFrames + 1);
-                                }
+                            var baseGradient = new LinearGradientBrush(
+                                new PointF(0, 0),
+                                new PointF(imageWidth, 0),
+                                GradientRepetitionMode.None,
+                                new ColorStop(xStart, Rgba32.Black),
+                                new ColorStop(xStart + slide, Rgba32.White),
+                                new ColorStop(xEnd - slide, Rgba32.White),
+                                new ColorStop(xEnd, Rgba32.Black));
 
-                                float slide = xEnd - xStart >= 1 / 2f ?
-                                    1 / 3f :
-                                    (xEnd - xStart) / 2f;
+                            mask.Mutate(ctx => ctx
+                                .Fill(taperGradient)
+                                .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient));
 
-                                var baseGradient = new LinearGradientBrush(
-                                    new PointF(0, 0),
-                                    new PointF(imageWidth, 0),
-                                    GradientRepetitionMode.None,
-                                    new ColorStop(xStart, Rgba32.Black),
-                                    new ColorStop(xStart + slide, Rgba32.White),
-                                    new ColorStop(xEnd - slide, Rgba32.White),
-                                    new ColorStop(xEnd, Rgba32.Black));
+                            using Image<Rgba32> frame = followpoint.Clone();
 
-                                mask.Mutate(ctx => ctx
-                                    .Fill(taperGradient)
-                                    .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient));
+                            frame.Mutate(ctx => ctx
+                                .Mask(mask)
+                                .Pad(imageWidth, imageHeight + (2 * imagePadding)));
 
-                                using (Image<Rgba32> frame = followpoint.Clone())
-                                {
-                                    frame.Mutate(ctx => ctx
-                                        .Mask(mask)
-                                        .Pad(imageWidth, imageHeight + (2 * imagePadding)));
-
-                                    if (parameters.HD)
-                                    {
-                                        frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
-                                    }
-                                    else
-                                    {
-                                        frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
-                                    }
-                                }
+                            if (parameters.HD)
+                            {
+                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
+                            }
+                            else
+                            {
+                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
                             }
                         }
                     }
                 }
                 else
                 {
-                    using (var mask = new Image<Rgba32>(imageWidth, imageHeight))
-                    {
-                        var baseGradient = new LinearGradientBrush(
+                    using var mask = new Image<Rgba32>(imageWidth, imageHeight);
+
+                    var baseGradient = new LinearGradientBrush(
                         new PointF(0, 0),
                         new PointF(imageWidth / 2f, 0),
                         GradientRepetitionMode.Reflect,
                         new ColorStop(0, Rgba32.Black),
                         new ColorStop(1 / 4f, Rgba32.White));
 
-                        mask.Mutate(ctx => ctx
-                            .Fill(taperGradient)
-                            .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient)
-                            .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Add, 1), baseGradient));
+                    mask.Mutate(ctx => ctx
+                        .Fill(taperGradient)
+                        .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient)
+                        .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Add, 1), baseGradient));
 
-                        followpoint.Mutate(ctx => ctx
-                            .Mask(mask)
-                            .Pad(imageWidth, imageHeight + (2 * imagePadding)));
+                    followpoint.Mutate(ctx => ctx
+                        .Mask(mask)
+                        .Pad(imageWidth, imageHeight + (2 * imagePadding)));
 
-                        if (parameters.HD)
-                        {
-                            followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint@2x.png"));
-                        }
-                        else
-                        {
-                            followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
-                        }
+                    if (parameters.HD)
+                    {
+                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint@2x.png"));
+                    }
+                    else
+                    {
+                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
                     }
                 }
             }

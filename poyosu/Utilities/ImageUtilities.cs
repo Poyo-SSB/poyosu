@@ -8,10 +8,8 @@ namespace poyosu.Utilities
     {
         public static void SaveToFileAsPng<T>(this Image<T> image, string path) where T : struct, IPixel<T>
         {
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                image.SaveAsPng(stream);
-            }
+            using var stream = new FileStream(path, FileMode.Create);
+            image.SaveAsPng(stream);
         }
     }
 }
