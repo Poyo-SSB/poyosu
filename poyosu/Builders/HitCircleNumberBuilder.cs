@@ -13,7 +13,7 @@ using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
-    public class DefaultHitNumberBuilder : Builder
+    public class HitCircleNumberBuilder : Builder
     {
         private const int base_image_width = 256;
         private const int base_image_height = 256;
@@ -46,7 +46,7 @@ namespace poyosu.Builders
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, i.ToString(), new Font(Assets.ExoExtraBold, fontSize), Rgba32.White, center)
+                    }, i.ToString(), new Font(Assets.UniSansBold, fontSize), Rgba32.White, center)
                     .Trim());
 
                 if (parameters.HD)

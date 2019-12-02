@@ -12,6 +12,7 @@ namespace poyosu
 
         public static readonly Font UniSansBook;
         public static readonly Font UniSansSemiBold;
+        public static readonly Font UniSansBold;
         public static readonly Font UniSansHeavy;
 
         public static Image<Rgba32> ImageBlank => new Image<Rgba32>(1, 1);
@@ -71,6 +72,7 @@ namespace poyosu
 
             UniSansBook = collection.Install("Resources/fonts/Uni-Sans-Book.ttf").CreateFont(0);
             UniSansSemiBold = collection.Install("Resources/fonts/Uni-Sans-SemiBold.ttf").CreateFont(0);
+            UniSansBold = collection.Install("Resources/fonts/Uni-Sans-Bold.ttf").CreateFont(0);
             UniSansHeavy = collection.Install("Resources/fonts/Uni-Sans-Heavy.ttf").CreateFont(0);
         }
     }
