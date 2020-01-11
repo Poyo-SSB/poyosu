@@ -149,15 +149,15 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
+                grade.SaveToFile(System.IO.Path.Combine(path, $"ranking-{name}@2x.png"));
                 grade.Mutate(ctx => ctx.Resize(grade.Width * smallSize / largeSize, grade.Height * smallSize / largeSize));
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
+                grade.SaveToFile(System.IO.Path.Combine(path, $"ranking-{name}-small@2x.png"));
             }
             else
             {
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}.png"));
+                grade.SaveToFile(System.IO.Path.Combine(path, $"ranking-{name}.png"));
                 grade.Mutate(ctx => ctx.Resize(grade.Width * smallSize / largeSize, grade.Height * smallSize / largeSize));
-                grade.SaveToFileAsPng(System.IO.Path.Combine(path, $"ranking-{name}-small.png"));
+                grade.SaveToFile(System.IO.Path.Combine(path, $"ranking-{name}-small.png"));
             }
 
             await Task.CompletedTask;

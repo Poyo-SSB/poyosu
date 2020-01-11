@@ -134,11 +134,11 @@ namespace poyosu.Builders
 
                 if (parameters.HD)
                 {
-                    bg.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-bg@2x.png"));
+                    bg.SaveToFile(System.IO.Path.Combine(path, "scorebar-bg@2x.png"));
                 }
                 else
                 {
-                    bg.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-bg.png"));
+                    bg.SaveToFile(System.IO.Path.Combine(path, "scorebar-bg.png"));
                 };
             }
 
@@ -166,11 +166,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour@2x.png"));
+                color.SaveToFile(System.IO.Path.Combine(path, "scorebar-colour@2x.png"));
             }
             else
             {
-                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour.png"));
+                color.SaveToFile(System.IO.Path.Combine(path, "scorebar-colour.png"));
             }
         }
     }

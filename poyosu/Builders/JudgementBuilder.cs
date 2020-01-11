@@ -79,7 +79,7 @@ namespace poyosu.Builders
                 judgement.Mutate(ctx => ctx.DrawImage(text));
             }
 
-            judgement.SaveToFileAsPng(Path.Combine(path, $"hit300@2x.png"));
+            judgement.SaveToFile(Path.Combine(path, $"hit300"));
 
             if (parameters.AnimationEnabled)
             {

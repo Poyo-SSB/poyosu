@@ -51,11 +51,11 @@ namespace poyosu.Builders
 
                 if (parameters.HD)
                 {
-                    text.SaveToFileAsPng(Path.Combine(path, $"default-{i}@2x.png"));
+                    text.SaveToFile(Path.Combine(path, $"default-{i}@2x.png"));
                 }
                 else
                 {
-                    text.SaveToFileAsPng(Path.Combine(path, $"default-{i}.png"));
+                    text.SaveToFile(Path.Combine(path, $"default-{i}.png"));
                 }
             }
 

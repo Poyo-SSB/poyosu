@@ -21,7 +21,7 @@ namespace poyosu.Builders
         {
             if (!parameters.SliderEndEnabled)
             {
-                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "sliderendcircle.png"));
+                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, "sliderendcircle.png"));
             }
 
             using var hitCircle = new Image<Rgba32>(234, 234);
@@ -30,8 +30,8 @@ namespace poyosu.Builders
                 .Fill(Rgba32.FromHex("000000A0"), new EllipsePolygon(new PointF(117, 117), new SizeF(206, 206)))
                 .Draw(Rgba32.FromHex("FFFFFF"), 15, new EllipsePolygon(new PointF(117, 117), new SizeF(234 - 15, 234 - 15))));
 
-            hitCircle.SaveToFileAsPng(System.IO.Path.Combine(path, "hitcircle@2x.png"));
-            Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "hitcircleoverlay.png"));
+            hitCircle.SaveToFile(System.IO.Path.Combine(path, "hitcircle@2x.png"));
+            Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, "hitcircleoverlay.png"));
 
             await Task.CompletedTask;
         }
