@@ -16,8 +16,14 @@ namespace poyosu.Configuration
 
         [JsonProperty("combo_colors")]
         public Rgba32[] ComboColors { get; private set; } = {
-            Rgba32.FromHex("80DAFD"),
-            Rgba32.FromHex("80FEC6")
+            Rgba32.FromHex("FF969F"),
+            Rgba32.FromHex("FFD387"),
+            Rgba32.FromHex("FFFE9A"),
+            Rgba32.FromHex("AAFF92"),
+            Rgba32.FromHex("86FFD3"),
+            Rgba32.FromHex("87E0FF"),
+            Rgba32.FromHex("92ADFF"),
+            Rgba32.FromHex("EF98F5"),
         };
 
         [JsonProperty("cursor_inner_color")]
@@ -61,6 +67,9 @@ namespace poyosu.Configuration
         [JsonProperty("slider_end_enabled")]
         public bool SliderEndEnabled { get; internal set; } = false;
 
+        [JsonProperty("judgement_length")]
+        public float JudgementLength { get; internal set; } = 1;
+
         public void Populate(Config config)
         {
             // This is run before values are populated from JSON.
@@ -86,6 +95,8 @@ namespace poyosu.Configuration
             this.FollowpointEnabled = this.FollowpointWidth > 0;
 
             this.SliderEndEnabled = config.SliderEndEnabled;
+
+            this.JudgementLength = config.JudgementLength;
         }
     }
 }

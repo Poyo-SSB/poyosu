@@ -25,6 +25,9 @@ namespace poyosu.Configuration
         [JsonProperty("slider_end_enabled")]
         public bool SliderEndEnabled;
 
+        [JsonProperty("judgement_length")]
+        public float JudgementLength;
+
         [JsonProperty("parameters")]
         public JObject Parameters;
     }
