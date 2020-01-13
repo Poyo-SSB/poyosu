@@ -1,4 +1,4 @@
-using SixLabors.Fonts;
+﻿using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -61,6 +61,8 @@ namespace poyosu
         public static Image<Rgba32> ImageIconLemon => Image.Load<Rgba32>("Resources/fa/icon-lemon.png");
         public static Image<Rgba32> ImageIconStar => Image.Load<Rgba32>("Resources/fa/icon-star.png");
         public static Image<Rgba32> ImageIconTachometer => Image.Load<Rgba32>("Resources/fa/icon-tachometer.png");
+        public static Image<Rgba32> ImageIconTimes => Image.Load<Rgba32>("Resources/fa/icon-times.png");
+        public static Image<Rgba32> ImageIconCheck => Image.Load<Rgba32>("Resources/fa/icon-check.png");
 
         public static Image<Rgba32> ImageGlyphGeki => Image.Load<Rgba32>("Resources/glyphs/glyph-geki.png");
         public static Image<Rgba32> ImageGlyphKatu => Image.Load<Rgba32>("Resources/glyphs/glyph-katu.png");
