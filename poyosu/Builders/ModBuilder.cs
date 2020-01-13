@@ -113,58 +113,26 @@ namespace poyosu.Builders
 
         private async Task CreateMod(string path, Parameters parameters, string filename, Image<Rgba32> icon, float sizeMultiplier, ColorSet colors, int xOffset = 0, int yOffset = 0)
         {
-            int imageSize = base_image_size;
+            using var mod = new Image<Rgba32>(base_image_size, base_image_size);
 
-            int tokenRadius = base_token_radius;
-            int iconRadius = base_icon_radius;
-
-            float tokenGlowBlur = base_token_glow_blur;
-            float innerSpreadGlowBlur = base_inner_spread_glow_blur;
-            float outerSpreadGlowBlur = base_outer_spread_glow_blur;
-            float innerGlowBlur = base_inner_glow_blur;
-            float outerGlowBlur = base_outer_glow_blur;
-
-            float borderRadius = base_border_radius;
-
-            if (!parameters.HD)
-            {
-                imageSize /= 2;
-
-                tokenRadius /= 2;
-                iconRadius /= 2;
-
-                tokenGlowBlur /= 2;
-                innerSpreadGlowBlur /= 2;
-                outerSpreadGlowBlur /= 2;
-                innerGlowBlur /= 2;
-                outerGlowBlur /= 2;
-
-                borderRadius /= 2;
-
-                xOffset /= 2;
-                yOffset /= 2;
-            }
-
-            using var mod = new Image<Rgba32>(imageSize, imageSize);
-
-            var center = new PointF(imageSize / 2, imageSize / 2);
-            var hexagon = RegularPolygonGenerator.Generate(6, tokenRadius, 0, center);
-            IPath roundedHexagon = PolygonRounder.Round(hexagon, borderRadius, 32);
+            var center = new PointF(base_image_size / 2, base_image_size / 2);
+            var hexagon = RegularPolygonGenerator.Generate(6, base_token_radius, 0, center);
+            IPath roundedHexagon = PolygonRounder.Round(hexagon, base_border_radius, 32);
 
             icon.Mutate(ctx => ctx
-                .Resize((int)(2 * iconRadius * sizeMultiplier), (int)(2 * iconRadius * sizeMultiplier))
-                .Pad(imageSize, imageSize));
+                .Resize((int)(2 * base_icon_radius * sizeMultiplier), (int)(2 * base_icon_radius * sizeMultiplier))
+                .Pad(base_image_size, base_image_size));
 
-            using (var tokenGlow = new Image<Rgba32>(imageSize, imageSize))
+            using (var tokenGlow = new Image<Rgba32>(base_image_size, base_image_size))
             {
                 tokenGlow.Mutate(ctx => ctx
                     .Fill(colors.Mid, roundedHexagon)
-                    .GaussianBlur(tokenGlowBlur));
+                    .GaussianBlur(base_token_glow_blur));
 
                 mod.Mutate(ctx => ctx.DrawImage(tokenGlow));
             }
 
-            using (var token = new Image<Rgba32>(imageSize, imageSize))
+            using (var token = new Image<Rgba32>(base_image_size, base_image_size))
             {
                 token.Mutate(ctx => ctx
                     .Fill(colors.Dark, roundedHexagon));
@@ -172,41 +140,41 @@ namespace poyosu.Builders
                 mod.Mutate(ctx => ctx.DrawImage(token));
             }
 
-            using (var tokenContents = new Image<Rgba32>(imageSize, imageSize))
+            using (var tokenContents = new Image<Rgba32>(base_image_size, base_image_size))
             {
-                using (var iconOuterSpread = new Image<Rgba32>(imageSize, imageSize))
+                using (var iconOuterSpread = new Image<Rgba32>(base_image_size, base_image_size))
                 {
                     iconOuterSpread.Mutate(ctx => ctx
                         .DrawImage(icon, new Point(xOffset, yOffset))
                         .SetColor(colors.Mid)
-                        .GaussianBlur(outerSpreadGlowBlur));
+                        .GaussianBlur(base_outer_spread_glow_blur));
 
                     tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterSpread));
                 }
-                using (var iconInnerSpread = new Image<Rgba32>(imageSize, imageSize))
+                using (var iconInnerSpread = new Image<Rgba32>(base_image_size, base_image_size))
                 {
                     iconInnerSpread.Mutate(ctx => ctx
                         .DrawImage(icon, new Point(xOffset, yOffset))
                         .SetColor(colors.Mid)
-                        .GaussianBlur(innerSpreadGlowBlur));
+                        .GaussianBlur(base_inner_spread_glow_blur));
 
                     tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerSpread));
                 }
-                using (var iconOuterGlow = new Image<Rgba32>(imageSize, imageSize))
+                using (var iconOuterGlow = new Image<Rgba32>(base_image_size, base_image_size))
                 {
                     iconOuterGlow.Mutate(ctx => ctx
                         .DrawImage(icon, new Point(xOffset, yOffset))
                         .SetColor(colors.Mid)
-                        .GaussianBlur(outerGlowBlur));
+                        .GaussianBlur(base_outer_glow_blur));
 
                     tokenContents.Mutate(ctx => ctx.DrawImage(iconOuterGlow));
                 }
-                using (var iconInnerGlow = new Image<Rgba32>(imageSize, imageSize))
+                using (var iconInnerGlow = new Image<Rgba32>(base_image_size, base_image_size))
                 {
                     iconInnerGlow.Mutate(ctx => ctx
                         .DrawImage(icon, new Point(xOffset, yOffset))
                         .SetColor(colors.Light)
-                        .GaussianBlur(innerGlowBlur));
+                        .GaussianBlur(base_inner_glow_blur));
 
                     tokenContents.Mutate(ctx => ctx.DrawImage(iconInnerGlow));
                 }
@@ -218,19 +186,12 @@ namespace poyosu.Builders
                     AlphaCompositionMode = PixelAlphaCompositionMode.DestOut
                 };
 
-                tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, imageSize, imageSize).Clip(roundedHexagon)));
+                tokenContents.Mutate(x => x.Fill(graphicOptions, Rgba32.LimeGreen, new RectangularPolygon(0, 0, base_image_size, base_image_size).Clip(roundedHexagon)));
 
                 mod.Mutate(ctx => ctx.DrawImage(tokenContents));
             }
 
-            if (parameters.HD)
-            {
-                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x"));
-            }
-            else
-            {
-                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}"));
-            }
+            mod.SaveToFileWithHD(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x"), parameters.HD);
 
             await Task.CompletedTask;
         }
