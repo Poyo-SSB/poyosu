@@ -223,11 +223,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                mod.SaveToFile(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
             }
             else
             {
-                mod.SaveToFile(System.IO.Path.Combine(path, $"selection-mod-{filename}.png"));
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}.png"));
             }
 
             await Task.CompletedTask;

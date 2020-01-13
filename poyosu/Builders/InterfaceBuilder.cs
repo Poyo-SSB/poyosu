@@ -103,11 +103,11 @@ namespace poyosu.Builders
 
                 if (parameters.HD)
                 {
-                    rankingPanel.SaveToFile(Path.Combine(path, $"ranking-panel@2x.png"));
+                    rankingPanel.SaveToFileAsPng(Path.Combine(path, $"ranking-panel@2x.png"));
                 }
                 else
                 {
-                    rankingPanel.SaveToFile(Path.Combine(path, $"ranking-panel.png"));
+                    rankingPanel.SaveToFileAsPng(Path.Combine(path, $"ranking-panel.png"));
                 }
             }
 
@@ -123,11 +123,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                menuButton.SaveToFile(Path.Combine(path, $"menu-button-background@2x.png"));
+                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background@2x.png"));
             }
             else
             {
-                menuButton.SaveToFile(Path.Combine(path, $"menu-button-background.png"));
+                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background.png"));
             }
 
             await Task.CompletedTask;
@@ -179,11 +179,11 @@ namespace poyosu.Builders
 
                 if (parameters.HD)
                 {
-                    button.SaveToFile(Path.Combine(path, $"selection-{name}@2x.png"));
+                    button.SaveToFileAsPng(Path.Combine(path, $"selection-{name}@2x.png"));
                 }
                 else
                 {
-                    button.SaveToFile(Path.Combine(path, $"selection-{name}.png"));
+                    button.SaveToFileAsPng(Path.Combine(path, $"selection-{name}.png"));
                 }
             }
 
@@ -203,11 +203,11 @@ namespace poyosu.Builders
 
                 if (parameters.HD)
                 {
-                    hovered.SaveToFile(Path.Combine(path, $"selection-{name}-over@2x.png"));
+                    hovered.SaveToFileAsPng(Path.Combine(path, $"selection-{name}-over@2x.png"));
                 }
                 else
                 {
-                    hovered.SaveToFile(Path.Combine(path, $"selection-{name}-over.png"));
+                    hovered.SaveToFileAsPng(Path.Combine(path, $"selection-{name}-over.png"));
                 }
             }
 

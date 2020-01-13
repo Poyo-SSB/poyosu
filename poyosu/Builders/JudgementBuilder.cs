@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -79,7 +79,7 @@ namespace poyosu.Builders
                 judgement.Mutate(ctx => ctx.DrawImage(text));
             }
 
-            judgement.SaveToFile(Path.Combine(path, $"hit300"));
+            judgement.SaveToFileWithHD(Path.Combine(path, $"hit{name}"), parameters.HD);
 
             if (parameters.AnimationEnabled)
             {

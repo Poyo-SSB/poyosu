@@ -27,7 +27,7 @@ namespace poyosu.Builders
         {
             if (!parameters.FollowpointEnabled)
             {
-                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, "followpoint.png"));
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
                 return;
             }
 
@@ -77,11 +77,11 @@ namespace poyosu.Builders
                         {
                             if (parameters.HD)
                             {
-                                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
+                                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
                             }
                             else
                             {
-                                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
+                                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
                             }
                         }
                         else
@@ -128,11 +128,11 @@ namespace poyosu.Builders
 
                             if (parameters.HD)
                             {
-                                frame.SaveToFile(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
+                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
                             }
                             else
                             {
-                                frame.SaveToFile(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
+                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
                             }
                         }
                     }
@@ -159,11 +159,11 @@ namespace poyosu.Builders
 
                     if (parameters.HD)
                     {
-                        followpoint.SaveToFile(System.IO.Path.Combine(path, "followpoint@2x.png"));
+                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint@2x.png"));
                     }
                     else
                     {
-                        followpoint.SaveToFile(System.IO.Path.Combine(path, "followpoint.png"));
+                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
                     }
                 }
             }

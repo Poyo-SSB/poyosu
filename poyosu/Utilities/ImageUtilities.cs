@@ -7,7 +7,7 @@ namespace poyosu.Utilities
 {
     public static class ImageUtilities
     {
-        public static void SaveToFile<T>(this Image<T> image, string path) where T : struct, IPixel<T>
+        public static void SaveToFileAsPng<T>(this Image<T> image, string path) where T : struct, IPixel<T>
         {
             using var stream = new FileStream(path + ".png", FileMode.Create);
             image.SaveAsPng(stream);
@@ -17,13 +17,13 @@ namespace poyosu.Utilities
         {
             if (hd)
             {
-                image.SaveToFile(path + "@2x.png");
+                image.SaveToFileAsPng(path + "@2x");
             }
             else
             {
                 using var clone = image.Clone();
                 clone.Mutate(ctx => ctx.Resize(clone.Width / 2, clone.Height / 2));
-                clone.SaveToFile(path + ".png");
+                clone.SaveToFileAsPng(path);
             }
         }
     }

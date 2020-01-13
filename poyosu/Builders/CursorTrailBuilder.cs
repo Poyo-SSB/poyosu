@@ -21,7 +21,7 @@ namespace poyosu.Builders
         {
             if (!parameters.CursorTrailEnabled)
             {
-                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, "cursortrail.png"));
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
                 return;
             }
 
@@ -73,16 +73,16 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                trail.SaveToFile(System.IO.Path.Combine(path, "cursortrail@2x.png"));
+                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail@2x.png"));
             }
             else
             {
-                trail.SaveToFile(System.IO.Path.Combine(path, "cursortrail.png"));
+                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
             }
 
             if (parameters.CursorTrailSmooth)
             {
-                Assets.ImageBlank.SaveToFile(System.IO.Path.Combine(path, "cursormiddle.png"));
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursormiddle.png"));
             }
 
             await Task.CompletedTask;

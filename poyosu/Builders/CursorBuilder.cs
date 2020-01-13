@@ -122,11 +122,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                cursor.SaveToFile(System.IO.Path.Combine(path, "cursor@2x.png"));
+                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor@2x.png"));
             }
             else
             {
-                cursor.SaveToFile(System.IO.Path.Combine(path, "cursor.png"));
+                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor.png"));
             }
 
             await Task.CompletedTask;

@@ -102,11 +102,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                button.SaveToFile(Path.Combine(path, $"pause-{name}@2x.png"));
+                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}@2x.png"));
             }
             else
             {
-                button.SaveToFile(Path.Combine(path, $"pause-{name}.png"));
+                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}.png"));
             }
 
             await Task.CompletedTask;
