@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -18,14 +18,16 @@ namespace poyosu.Builders
         private const int base_static_image_size = 400;
         private const int base_animated_image_size = 1280;
 
-        private const float base_font_size = 136f;
+        private const float base_label_proportion = 0.5f;
+        private const float base_label_image_proportion = 0.3f;
 
-        private const float base_glow_blur_big = 30;
-        private const float base_glow_blur_small = 10;
+        private const float base_glow_blur_big = 30f;
+        private const float base_glow_blur_small = 10f;
 
+        // adjust 100/50/S0 colors
         private static readonly Rgba32 color_300 = Rgba32.FromHex("44B5D9");
-        private static readonly Rgba32 color_100 = Rgba32.FromHex("21E449");
-        private static readonly Rgba32 color_50 = Rgba32.FromHex("F2D326");
+        private static readonly Rgba32 color_100 = Rgba32.FromHex("65DD2A");
+        private static readonly Rgba32 color_50 = Rgba32.FromHex("D1AA4F");
         private static readonly Rgba32 color_miss = Rgba32.FromHex("FF0000");
 
         public override string Folder => "judgements";
@@ -33,50 +35,58 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            int staticImageSize = base_static_image_size;
-            int animatedImageSize = base_animated_image_size;
+            using var image300 = GenerateTextImage("300");
+            using var image100 = GenerateTextImage("100");
+            using var image50 = GenerateTextImage("50");
 
-            float fontSize = base_font_size;
+            this.GenerateJudgement(path, parameters, base_label_proportion, image300, color_300, "300");
+            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphGeki, color_300, "300g");
+            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphKatu, color_300, "300k");
+            this.GenerateJudgement(path, parameters, base_label_proportion, image100, color_100, "100");
+            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphKatu, color_100, "100k");
+            this.GenerateJudgement(path, parameters, base_label_proportion, image50, color_50, "50");
+            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageIconTimes, color_miss, "0");
 
-            float glowBlurBig = base_glow_blur_big;
-            float glowBlurSmall = base_glow_blur_small;
+            await Task.CompletedTask;
+        }
 
-            if (!parameters.HD)
-            {
-                staticImageSize /= 2;
-                animatedImageSize /= 2;
+        private Image<Rgba32> GenerateTextImage(string label)
+        {
+            var text = new Image<Rgba32>(1024, 1024);
+            text.Mutate(ctx => ctx
+                .DrawText(new TextGraphicsOptions(true)
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                }, label, new Font(Assets.ExoBlack, 512), Rgba32.White, new PointF(512, 512)));
+            return text;
+        }
 
-                fontSize /= 2;
-
-                glowBlurBig /= 2;
-                glowBlurSmall /= 2;
-            }
-
-            using var judgement = new Image<Rgba32>(staticImageSize, staticImageSize);
+        private void GenerateJudgement(string path, Parameters parameters, float size, Image<Rgba32> label, Rgba32 color, string name)
+        {
+            using var judgement = new Image<Rgba32>(base_static_image_size, base_static_image_size);
 
             var center = new PointF(judgement.Width / 2f, judgement.Height / 2f);
-
-            using (var text = new Image<Rgba32>(staticImageSize, staticImageSize))
+            
+            using (label)
             {
-                text.Mutate(ctx => ctx
-                    .DrawText(new TextGraphicsOptions(true)
-                    {
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center
-                    }, "300", new Font(Assets.ExoBlack, fontSize), Rgba32.White, center));
+                label.Mutate(ctx => ctx
+                    .Resize(
+                        (int)(base_static_image_size * size),
+                        (int)(base_static_image_size * size))
+                    .Pad(base_static_image_size, base_static_image_size));
 
-                using var textGlowBig = text.Clone();
+                using var labelGlowBig = label.Clone();
+                labelGlowBig.Mutate(ctx => ctx.SetColor(color));
 
-                textGlowBig.Mutate(ctx => ctx.SetColor(color_300));
+                using var labelGlowSmall = labelGlowBig.Clone();
 
-                using var textGlowSmall = textGlowBig.Clone();
+                labelGlowBig.Mutate(ctx => ctx.GaussianBlur(base_glow_blur_big));
+                labelGlowSmall.Mutate(ctx => ctx.GaussianBlur(base_glow_blur_small));
 
-                textGlowBig.Mutate(ctx => ctx.GaussianBlur(glowBlurBig));
-                textGlowSmall.Mutate(ctx => ctx.GaussianBlur(glowBlurSmall));
-
-                judgement.Mutate(ctx => ctx.DrawImage(textGlowBig));
-                judgement.Mutate(ctx => ctx.DrawImage(textGlowSmall));
-                judgement.Mutate(ctx => ctx.DrawImage(text));
+                judgement.Mutate(ctx => ctx.DrawImage(labelGlowBig));
+                judgement.Mutate(ctx => ctx.DrawImage(labelGlowSmall));
+                judgement.Mutate(ctx => ctx.DrawImage(label));
             }
 
             judgement.SaveToFileWithHD(Path.Combine(path, $"hit{name}"), parameters.HD);
@@ -85,8 +95,6 @@ namespace poyosu.Builders
             {
                 int frames = (int)Math.Floor(parameters.AnimationFramerate / parameters.JudgementLength);
             }
-
-            await Task.CompletedTask;
         }
     }
 }
