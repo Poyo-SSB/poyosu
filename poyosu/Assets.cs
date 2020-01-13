@@ -54,6 +54,7 @@ namespace poyosu
         public static Image<Rgba32> ImageIconCoop => Image.Load<Rgba32>("Resources/osu/icon-coop.png");
         public static Image<Rgba32> ImageIconFadeIn => Image.Load<Rgba32>("Resources/osu/icon-fadein.png");
         public static Image<Rgba32> ImageIconFadeOut => Image.Load<Rgba32>("Resources/osu/icon-fadeout.png");
+        public static Image<Rgba32> ImageIconMirror => Image.Load<Rgba32>("Resources/osu/icon-mirror.png");
 
         public static Image<Rgba32> ImageIconCog => Image.Load<Rgba32>("Resources/fa/icon-cog.png");
         public static Image<Rgba32> ImageIconCogs => Image.Load<Rgba32>("Resources/fa/icon-cogs.png");

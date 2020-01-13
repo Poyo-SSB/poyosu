@@ -41,6 +41,7 @@ namespace poyosu.Builders
         private static readonly ColorSet default_nofail_color = new ColorSet("01092D", "566ED8", "BCC8FE");
         private static readonly ColorSet default_suddendeath_color = new ColorSet("2F1700", "F29B4B", "FEDEC1");
         private static readonly ColorSet default_random_color = new ColorSet("002910", "37D574", "B2FECE");
+        private static readonly ColorSet default_mirror_color = new ColorSet("002910", "068A19", "95F0A2");
         private static readonly ColorSet default_relax_color = new ColorSet("002229", "3ABED5", "B2F2FE");
         private static readonly ColorSet default_relax2_color = new ColorSet("001029", "3B7ED4", "B3D3FE");
         private static readonly ColorSet default_scorev2_color = new ColorSet("0C0C0C", "565656", "EDEDED");
@@ -92,6 +93,7 @@ namespace poyosu.Builders
                 this.CreateMod(path, parameters, "nightcore", Assets.ImageIconNightcore, 0.8f, default_nightcore_color),
                 this.CreateMod(path, parameters, "nofail", Assets.ImageIconNoFail, 0.9f, default_nofail_color),
                 this.CreateMod(path, parameters, "perfect", Assets.ImageIconPerfect, 0.78f, default_suddendeath_color),
+                this.CreateMod(path, parameters, "mirror", Assets.ImageIconMirror, 1.2f, default_mirror_color),
                 this.CreateMod(path, parameters, "random", Assets.ImageIconRandom, 0.9f, default_random_color),
                 this.CreateMod(path, parameters, "relax", Assets.ImageIconRelax, 0.9f, default_relax_color, 3, 2),
                 this.CreateMod(path, parameters, "relax2", Assets.ImageIconAutopilot, 0.8f, default_relax2_color, -2, 2),
@@ -223,11 +225,11 @@ namespace poyosu.Builders
 
             if (parameters.HD)
             {
-                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x.png"));
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x"));
             }
             else
             {
-                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}.png"));
+                mod.SaveToFileAsPng(System.IO.Path.Combine(path, $"selection-mod-{filename}"));
             }
 
             await Task.CompletedTask;
