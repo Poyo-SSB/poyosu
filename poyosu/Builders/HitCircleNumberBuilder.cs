@@ -49,14 +49,7 @@ namespace poyosu.Builders
                     }, i.ToString(), new Font(Assets.UniSansBold, fontSize), Rgba32.White, center)
                     .Trim());
 
-                if (parameters.HD)
-                {
-                    text.SaveToFileAsPng(Path.Combine(path, $"default-{i}@2x.png"));
-                }
-                else
-                {
-                    text.SaveToFileAsPng(Path.Combine(path, $"default-{i}.png"));
-                }
+                text.SaveToFileWithHD(Path.Combine(path, $"default-{i}"), parameters.HD);
             }
 
             await Task.CompletedTask;

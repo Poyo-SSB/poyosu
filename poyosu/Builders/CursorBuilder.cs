@@ -120,14 +120,7 @@ namespace poyosu.Builders
                 cursor.Mutate(ctx => ctx.DrawImage(fillCenter));
             }
 
-            if (parameters.HD)
-            {
-                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor@2x.png"));
-            }
-            else
-            {
-                cursor.SaveToFileAsPng(System.IO.Path.Combine(path, "cursor.png"));
-            }
+            cursor.SaveToFileWithHD(System.IO.Path.Combine(path, $"cursor"), parameters.HD);
 
             await Task.CompletedTask;
         }

@@ -126,14 +126,7 @@ namespace poyosu.Builders
                                 .Mask(mask)
                                 .Pad(imageWidth, imageHeight + (2 * imagePadding)));
 
-                            if (parameters.HD)
-                            {
-                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
-                            }
-                            else
-                            {
-                                frame.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
-                            }
+                            frame.SaveToFileWithHD(System.IO.Path.Combine(path, $"followpoint-{i}"), parameters.HD);
                         }
                     }
                 }
@@ -157,14 +150,7 @@ namespace poyosu.Builders
                         .Mask(mask)
                         .Pad(imageWidth, imageHeight + (2 * imagePadding)));
 
-                    if (parameters.HD)
-                    {
-                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint@2x.png"));
-                    }
-                    else
-                    {
-                        followpoint.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
-                    }
+                    followpoint.SaveToFileWithHD(System.IO.Path.Combine(path, $"followpoint"), parameters.HD);
                 }
             }
 

@@ -21,7 +21,7 @@ namespace poyosu.Builders
         {
             if (!parameters.CursorTrailEnabled)
             {
-                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
+                Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"cursortrail"), parameters.HD);
                 return;
             }
 
@@ -71,19 +71,8 @@ namespace poyosu.Builders
                 Logger.Log($"The cursor trail size is less than {minSize}--the trail may not render in-game. Adjust cursor_trail_radius to fix this.", Logger.MessageType.Warning);
             }
 
-            if (parameters.HD)
-            {
-                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail@2x.png"));
-            }
-            else
-            {
-                trail.SaveToFileAsPng(System.IO.Path.Combine(path, "cursortrail.png"));
-            }
-
-            if (parameters.CursorTrailSmooth)
-            {
-                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "cursormiddle.png"));
-            }
+            trail.SaveToFileWithHD(System.IO.Path.Combine(path, $"cursortrail"), parameters.HD);
+            Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"cursormiddle"), parameters.HD);
 
             await Task.CompletedTask;
         }

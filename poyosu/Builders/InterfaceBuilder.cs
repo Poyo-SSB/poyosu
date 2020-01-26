@@ -101,14 +101,7 @@ namespace poyosu.Builders
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY3, rankingBorderWidth, rankingBorderHeight)));
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY4, rankingBorderWidth, rankingBorderHeight)));
 
-                if (parameters.HD)
-                {
-                    rankingPanel.SaveToFileAsPng(Path.Combine(path, $"ranking-panel@2x.png"));
-                }
-                else
-                {
-                    rankingPanel.SaveToFileAsPng(Path.Combine(path, $"ranking-panel.png"));
-                }
+                rankingPanel.SaveToFileWithHD(Path.Combine(path, $"ranking-panel"), parameters.HD);
             }
 
             await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, wide_selection_width, "mode");
@@ -121,14 +114,7 @@ namespace poyosu.Builders
             menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, buttonTopMargin, buttonWidth, buttonHeight)));
             menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, buttonTopMargin, buttonBorder, buttonHeight)));
 
-            if (parameters.HD)
-            {
-                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background@2x.png"));
-            }
-            else
-            {
-                menuButton.SaveToFileAsPng(Path.Combine(path, $"menu-button-background.png"));
-            }
+            menuButton.SaveToFileWithHD(Path.Combine(path, $"menu-button-background"), parameters.HD);
 
             await Task.CompletedTask;
         }
@@ -177,14 +163,7 @@ namespace poyosu.Builders
                     button.Mutate(ctx => ctx.DrawImage(icon, baseCenter));
                 }
 
-                if (parameters.HD)
-                {
-                    button.SaveToFileAsPng(Path.Combine(path, $"selection-{name}@2x.png"));
-                }
-                else
-                {
-                    button.SaveToFileAsPng(Path.Combine(path, $"selection-{name}.png"));
-                }
+                button.SaveToFileWithHD(Path.Combine(path, $"selection-{name}"), parameters.HD);
             }
 
             using (var hovered = new Image<Rgba32>(width, height))
@@ -201,14 +180,7 @@ namespace poyosu.Builders
                     hovered.Mutate(ctx => ctx.DrawImage(icon, center));
                 }
 
-                if (parameters.HD)
-                {
-                    hovered.SaveToFileAsPng(Path.Combine(path, $"selection-{name}-over@2x.png"));
-                }
-                else
-                {
-                    hovered.SaveToFileAsPng(Path.Combine(path, $"selection-{name}-over.png"));
-                }
+                hovered.SaveToFileWithHD(Path.Combine(path, $"selection-{name}-over"), parameters.HD);
             }
 
             await Task.CompletedTask;

@@ -191,7 +191,7 @@ namespace poyosu.Builders
                 mod.Mutate(ctx => ctx.DrawImage(tokenContents));
             }
 
-            mod.SaveToFileWithHD(System.IO.Path.Combine(path, $"selection-mod-{filename}@2x"), parameters.HD);
+            mod.SaveToFileWithHD(System.IO.Path.Combine(path, $"selection-mod-{filename}"), parameters.HD);
 
             await Task.CompletedTask;
         }

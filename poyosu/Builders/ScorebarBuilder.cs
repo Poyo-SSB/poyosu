@@ -132,14 +132,7 @@ namespace poyosu.Builders
                         }, parameters.ScorebarLabelName, new Font(Assets.UniSansSemiBold, fontSize), Rgba32.White, textPoint));
                 }
 
-                if (parameters.HD)
-                {
-                    bg.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-bg@2x.png"));
-                }
-                else
-                {
-                    bg.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-bg.png"));
-                };
+                bg.SaveToFileWithHD(System.IO.Path.Combine(path, $"scorebar-bg"), parameters.HD);
             }
 
             using var color = new Image<Rgba32>(bgWidth, bgHeight);
@@ -164,14 +157,7 @@ namespace poyosu.Builders
 
             color.Mutate(ctx => ctx.Crop(new Rectangle(colorOffsetX, colorOffsetY, bgWidth - colorOffsetX, bgHeight - colorOffsetY)));
 
-            if (parameters.HD)
-            {
-                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour@2x.png"));
-            }
-            else
-            {
-                color.SaveToFileAsPng(System.IO.Path.Combine(path, "scorebar-colour.png"));
-            }
+            color.SaveToFileWithHD(System.IO.Path.Combine(path, $"scorebar-colour"), parameters.HD);
         }
     }
 }

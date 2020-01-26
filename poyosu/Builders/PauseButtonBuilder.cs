@@ -100,14 +100,7 @@ namespace poyosu.Builders
                 button.Mutate(ctx => ctx.DrawImage(text));
             }
 
-            if (parameters.HD)
-            {
-                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}@2x.png"));
-            }
-            else
-            {
-                button.SaveToFileAsPng(Path.Combine(path, $"pause-{name}.png"));
-            }
+            button.SaveToFileWithHD(Path.Combine(path, $"pause-{name}"), parameters.HD);
 
             await Task.CompletedTask;
         }
