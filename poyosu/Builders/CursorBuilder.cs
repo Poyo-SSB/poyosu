@@ -12,110 +12,59 @@ namespace poyosu.Builders
 {
     public class CursorBuilder : Builder
     {
-        private const int reference_image_size = 256;
+        private const int image_size = 256;
 
-        private const float base_fill_radius = 20;
-        private const float base_ring_radius = 26;
-        private const float base_inner_glow_radius = 26;
-        private const float base_outer_glow_radius = 52;
-        private const float base_border_radius = 24;
+        private const float fill_radius = 20;
+        private const float ring_radius = 26;
+        private const float inner_glow_radius = 26;
+        private const float outer_glow_radius = 52;
 
-        private const float base_fill_blur = 1.8f;
-        private const float base_ring_blur = 3.3f;
-        private const float base_inner_glow_blur = 12.6f;
-        private const float base_outer_glow_blur = 36f;
+        private const float fill_blur = 1.8f;
+        private const float ring_blur = 3.3f;
+        private const float inner_glow_blur = 12.6f;
+        private const float outer_glow_blur = 36f;
 
         public override string Folder => "cursor";
         public override string Name => "cursor";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            Rgba32 cursorInnerColor = parameters.CursorInnerColor;
-            Rgba32 cursorOuterColor = parameters.CursorOuterColor;
-            Rgba32 cursorGlowColor = parameters.CursorGlowColor;
-            bool cursorGlowEnabled = parameters.CursorGlowEnabled;
-            bool cursorBorderEnabled = parameters.CursorBorderEnabled;
+            using var cursor = new Image<Rgba32>(image_size, image_size);
 
-            float multiplier = parameters.CursorRadius / base_ring_radius;
+            var center = new PointF(image_size / 2f, image_size / 2f);
 
-            int imageSize = (int)Math.Ceiling(reference_image_size * multiplier);
-
-            if (!parameters.HD)
+            using (var outerGlow = new Image<Rgba32>(image_size, image_size))
             {
-                imageSize /= 2;
-                multiplier /= 2;
+                outerGlow.Mutate(ctx => ctx
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, outer_glow_radius))
+                    .GaussianBlur(outer_glow_blur));
+
+                cursor.Mutate(ctx => ctx.DrawImage(outerGlow));
             }
 
-            if (parameters.CursorTrailUltrasmooth)
+            using (var innerGlow = new Image<Rgba32>(image_size, image_size))
             {
-                imageSize /= 2;
-                multiplier /= 2;
+                innerGlow.Mutate(ctx => ctx
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, inner_glow_radius))
+                    .GaussianBlur(inner_glow_blur));
+
+                cursor.Mutate(ctx => ctx.DrawImage(innerGlow));
             }
 
-            var center = new PointF(imageSize / 2f, imageSize / 2f);
-
-            float fillRadius = base_fill_radius * multiplier;
-            float ringRadius = base_ring_radius * multiplier;
-            float innerGlowRadius = base_inner_glow_radius * multiplier;
-            float outerGlowRadius = base_outer_glow_radius * multiplier;
-            float borderRadius = base_border_radius * multiplier;
-
-            float fillBlur = base_fill_blur * multiplier;
-            float ringBlur = base_ring_blur * multiplier;
-            float innerGlowBlur = base_inner_glow_blur * multiplier;
-            float outerGlowBlur = base_outer_glow_blur * multiplier;
-
-            using var cursor = new Image<Rgba32>(imageSize, imageSize);
-
-            if (cursorGlowEnabled)
+            using (var ring = new Image<Rgba32>(image_size, image_size))
             {
-                using (var outerGlow = new Image<Rgba32>(imageSize, imageSize))
-                {
-                    outerGlow.Mutate(ctx => ctx
-                        .Fill(cursorGlowColor, new EllipsePolygon(center, outerGlowRadius))
-                        .GaussianBlur(outerGlowBlur));
+                ring.Mutate(ctx => ctx
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, ring_radius))
+                    .GaussianBlur(ring_blur));
 
-                    cursor.Mutate(ctx => ctx.DrawImage(outerGlow));
-                }
-
-                if (!cursorBorderEnabled)
-                {
-                    using (var innerGlow = new Image<Rgba32>(imageSize, imageSize))
-                    {
-                        innerGlow.Mutate(ctx => ctx
-                            .Fill(cursorOuterColor, new EllipsePolygon(center, innerGlowRadius))
-                            .GaussianBlur(innerGlowBlur));
-
-                        cursor.Mutate(ctx => ctx.DrawImage(innerGlow));
-                    }
-
-                    using var ring = new Image<Rgba32>(imageSize, imageSize);
-
-                    ring.Mutate(ctx => ctx
-                        .Fill(cursorOuterColor, new EllipsePolygon(center, ringRadius))
-                        .GaussianBlur(ringBlur));
-
-                    cursor.Mutate(ctx => ctx.DrawImage(ring));
-                }
+                cursor.Mutate(ctx => ctx.DrawImage(ring));
             }
 
-            if (cursorBorderEnabled)
+            using (var fillCenter = new Image<Rgba32>(image_size, image_size))
             {
-                using var border = new Image<Rgba32>(imageSize, imageSize);
-
-                border.Mutate(ctx => ctx.Fill(cursorOuterColor, new EllipsePolygon(center, borderRadius)));
-
-                cursor.Mutate(ctx => ctx.DrawImage(border));
-            }
-
-            using (var fillCenter = new Image<Rgba32>(imageSize, imageSize))
-            {
-                fillCenter.Mutate(ctx => ctx.Fill(cursorInnerColor, new EllipsePolygon(center, fillRadius)));
-
-                if (!cursorBorderEnabled)
-                {
-                    fillCenter.Mutate(ctx => ctx.GaussianBlur(fillBlur));
-                }
+                fillCenter.Mutate(ctx => ctx
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, fill_radius))
+                    .GaussianBlur(fill_blur));
 
                 cursor.Mutate(ctx => ctx.DrawImage(fillCenter));
             }

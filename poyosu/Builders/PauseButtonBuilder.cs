@@ -50,16 +50,6 @@ namespace poyosu.Builders
             float smallBlur = base_glow_small_blur;
             float bigBlur = base_glow_big_blur;
 
-            if (!parameters.HD)
-            {
-                width /= 2;
-                height /= 2;
-                fontSize /= 2;
-                tinyBlur /= 2;
-                smallBlur /= 2;
-                bigBlur /= 2;
-            }
-
             using var button = new Image<Rgba32>(width, height);
 
             var center = new PointF(width / 2f, height / 2f);

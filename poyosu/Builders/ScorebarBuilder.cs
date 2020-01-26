@@ -41,19 +41,6 @@ namespace poyosu.Builders
             int colorOffsetX = color_offset_x;
             int colorOffsetY = color_offset_y;
 
-            if (!parameters.HD)
-            {
-                barWidth /= 2;
-                barHeight /= 2;
-                barBorder /= 2;
-                barPadding /= 2;
-                textPadding /= 2;
-                flagPadding /= 2;
-                flagWidth /= 2;
-                fontSize /= 2;
-                colorOffsetX /= 2;
-                colorOffsetY /= 2;
-            }
 
             int bgWidth = barPadding + barWidth;
             int bgHeight = barPadding + barHeight + textPadding;

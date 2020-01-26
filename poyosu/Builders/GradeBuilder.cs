@@ -76,20 +76,6 @@ namespace poyosu.Builders
             
             float glowBlur = base_glow_blur;
 
-            if (!parameters.HD)
-            {
-                largeSize /= 2;
-                smallSize /= 2;
-
-                hexagonSize /= 2;
-                borderRadius /= 2;
-
-                fontSize /= 2;
-                textGlowBlur /= 2;
-
-                glowBlur /= 2;
-            }
-
             using var grade = new Image<Rgba32>(largeSize, largeSize);
 
             var center = new PointF(grade.Width / 2f, grade.Height / 2f);

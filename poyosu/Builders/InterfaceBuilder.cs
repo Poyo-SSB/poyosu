@@ -70,27 +70,6 @@ namespace poyosu.Builders
             int buttonWidth = base_menu_button_width;
             int buttonHeight = base_menu_button_height;
 
-            if (!parameters.HD)
-            {
-                rankingImageWidth /= 2;
-                rankingImageHeight /= 2;
-                rankingTop /= 2;
-                rankingBorderMargin /= 2;
-                rankingBorderWidth /= 2;
-                rankingBorderHeight /= 2;
-                rankingBorderY1 /= 2;
-                rankingBorderY2 /= 2;
-                rankingBorderY3 /= 2;
-                rankingBorderY4 /= 2;
-
-                buttonImageWidth /= 2;
-                buttonImageHeight /= 2;
-                buttonTopMargin /= 2;
-                buttonBorder /= 2;
-                buttonWidth /= 2;
-                buttonHeight /= 2;
-            }
-
             using (var rankingPanel = new Image<Rgba32>(rankingImageWidth, rankingImageHeight))
             {
                 rankingPanel.Mutate(ctx => ctx.Fill(color_background));
@@ -128,17 +107,6 @@ namespace poyosu.Builders
             int blur = base_selection_glow_blur;
 
             double size = 0.3;
-
-            if (!parameters.HD)
-            {
-                width /= 2;
-                height /= 2;
-                topHeight /= 2;
-
-                blur /= 2;
-
-                size /= 2;
-            }
 
             icon?.Mutate(ctx => ctx.Resize((int)(icon.Width * size), (int)(icon.Height * size)));
 

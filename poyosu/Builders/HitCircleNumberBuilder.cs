@@ -28,13 +28,6 @@ namespace poyosu.Builders
             int height = base_image_height;
             float fontSize = base_font_size;
 
-            if (!parameters.HD)
-            {
-                width /= 2;
-                height /= 2;
-                fontSize /= 2;
-            }
-
             var center = new PointF(width / 2f, height / 2f);
 
             for (int i = 0; i <= 9; i++)

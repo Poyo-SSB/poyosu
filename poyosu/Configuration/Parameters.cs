@@ -26,18 +26,10 @@ namespace poyosu.Configuration
             Rgba32.FromHex("EF98F5"),
         };
 
-        [JsonProperty("cursor_inner_color")]
-        public Rgba32 CursorInnerColor { get; private set; } = Rgba32.FromHex("FFFFFF");
-        [JsonProperty("cursor_outer_color")]
-        public Rgba32 CursorOuterColor { get; private set; } = Rgba32.FromHex("FF7FB3");
-        [JsonProperty("cursor_glow_color")]
-        public Rgba32 CursorGlowColor { get; private set; } = Rgba32.FromHex("FF7FB3");
-        [JsonProperty("cursor_glow_enabled")]
-        public bool CursorGlowEnabled { get; private set; } = true;
+        [JsonProperty("cursor_color")]
+        public Rgba32 CursorColor { get; private set; } = Rgba32.FromHex("FF7FB3");
         [JsonProperty("cursor_radius")]
         public float CursorRadius { get; private set; } = 26;
-        [JsonProperty("cursor_border_enabled")]
-        public bool CursorBorderEnabled { get; private set; } = false;
 
         [JsonProperty("cursor_trail_enabled")]
         public bool CursorTrailEnabled { get; private set; } = true;
@@ -47,8 +39,6 @@ namespace poyosu.Configuration
         public float CursorTrailRadius { get; private set; } = 13;
         [JsonProperty("cursor_trail_smooth")]
         public bool CursorTrailSmooth { get; private set; } = true;
-        [JsonProperty("cursor_trail_ultrasmooth")]
-        public bool CursorTrailUltrasmooth { get; private set; } = true;
 
         [JsonProperty("scorebar_label_enabled")]
         public bool ScorebarLabelEnabled { get; private set; } = true;

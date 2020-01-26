@@ -29,12 +29,6 @@ namespace poyosu.Builders
             Rgba32 color = parameters.CursorTrailColor;
             float radius = parameters.CursorTrailRadius;
 
-            if (!parameters.HD)
-            {
-                radius /= 2;
-                minSize /= 2;
-            }
-
             if (parameters.CursorTrailUltrasmooth)
             {
                 radius /= 2;

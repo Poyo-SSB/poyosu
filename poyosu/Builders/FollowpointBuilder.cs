@@ -36,13 +36,6 @@ namespace poyosu.Builders
             int imageWidth = base_image_width;
             int imagePadding = base_image_padding;
 
-            if (!parameters.HD)
-            {
-                followpointWidth /= 2;
-                imageWidth /= 2;
-                imagePadding /= 2;
-            }
-
             int imageHeight = (int)Math.Ceiling(followpointWidth);
 
             using (var followpoint = new Image<Rgba32>(imageWidth, imageHeight))
