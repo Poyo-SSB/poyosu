@@ -26,6 +26,7 @@ namespace poyosu.Builders
 
         public override string Folder => "cursor";
         public override string Name => "cursor";
+        
 
         public override async Task Generate(string path, Parameters parameters)
         {
@@ -33,10 +34,28 @@ namespace poyosu.Builders
 
             var center = new PointF(image_size / 2f, image_size / 2f);
 
+            float multiplier = parameters.CursorRadius / ring_radius;
+
+            if (parameters.CursorTrailSmooth)
+            {
+                // divide by two for ultrasmooth
+                multiplier /= 2;
+            }
+
+            float fillRadius = fill_radius * multiplier;
+            float ringRadius = ring_radius * multiplier;
+            float innerGlow_radius = inner_glow_radius * multiplier;
+            float outerGlow_radius = outer_glow_radius * multiplier;
+
+            float fillBlur = fill_blur * multiplier;
+            float ringBlur = ring_blur * multiplier;
+            float innerGlow_blur = inner_glow_blur * multiplier;
+            float outerGlow_blur = outer_glow_blur * multiplier;
+
             using (var outerGlow = new Image<Rgba32>(image_size, image_size))
             {
                 outerGlow.Mutate(ctx => ctx
-                    .Fill(parameters.CursorColor, new EllipsePolygon(center, outer_glow_radius))
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, outerGlow_radius))
                     .GaussianBlur(outer_glow_blur));
 
                 cursor.Mutate(ctx => ctx.DrawImage(outerGlow));
@@ -45,7 +64,7 @@ namespace poyosu.Builders
             using (var innerGlow = new Image<Rgba32>(image_size, image_size))
             {
                 innerGlow.Mutate(ctx => ctx
-                    .Fill(parameters.CursorColor, new EllipsePolygon(center, inner_glow_radius))
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, innerGlow_radius))
                     .GaussianBlur(inner_glow_blur));
 
                 cursor.Mutate(ctx => ctx.DrawImage(innerGlow));
@@ -54,7 +73,7 @@ namespace poyosu.Builders
             using (var ring = new Image<Rgba32>(image_size, image_size))
             {
                 ring.Mutate(ctx => ctx
-                    .Fill(parameters.CursorColor, new EllipsePolygon(center, ring_radius))
+                    .Fill(parameters.CursorColor, new EllipsePolygon(center, ringRadius))
                     .GaussianBlur(ring_blur));
 
                 cursor.Mutate(ctx => ctx.DrawImage(ring));
@@ -63,7 +82,7 @@ namespace poyosu.Builders
             using (var fillCenter = new Image<Rgba32>(image_size, image_size))
             {
                 fillCenter.Mutate(ctx => ctx
-                    .Fill(parameters.CursorColor, new EllipsePolygon(center, fill_radius))
+                    .Fill(Rgba32.White, new EllipsePolygon(center, fillRadius))
                     .GaussianBlur(fill_blur));
 
                 cursor.Mutate(ctx => ctx.DrawImage(fillCenter));

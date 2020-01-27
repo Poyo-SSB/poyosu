@@ -27,6 +27,12 @@ namespace poyosu.Builders
 
             int size = (int)(parameters.CursorTrailRadius * 2);
 
+            if (parameters.CursorTrailSmooth)
+            {
+                // divide by two for ultrasmooth
+                size /= 2;
+            }
+
             var colors = new ColorStop[gaussian_samples];
 
             for (int i = 0; i < gaussian_samples; i++)

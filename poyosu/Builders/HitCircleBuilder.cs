@@ -24,7 +24,7 @@ namespace poyosu.Builders
         {
             if (!parameters.SliderEndEnabled)
             {
-                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "sliderendcircle.png"));
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "sliderendcircle"));
             }
 
             using var hitCircle = new Image<Rgba32>(image_size, image_size);

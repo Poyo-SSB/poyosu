@@ -27,7 +27,7 @@ namespace poyosu.Builders
         {
             if (!parameters.FollowpointEnabled)
             {
-                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint.png"));
+                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "followpoint"));
                 return;
             }
 
@@ -68,14 +68,7 @@ namespace poyosu.Builders
                     {
                         if (i < delayFrames)
                         {
-                            if (parameters.HD)
-                            {
-                                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}@2x.png"));
-                            }
-                            else
-                            {
-                                Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, $"followpoint-{i}.png"));
-                            }
+                            Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"followpoint-{i}"), parameters.HD);
                         }
                         else
                         {

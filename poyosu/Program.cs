@@ -52,16 +52,16 @@ namespace poyosu
 
                 await Task.WhenAll(new List<Task>
                 {
-                    // new CursorBuilder().Build(parameters),
-                    // new CursorTrailBuilder().Build(parameters),
-                    // new ModBuilder().Build(parameters),
-                    // new ScorebarBuilder().Build(parameters),
-                    // new FollowpointBuilder().Build(parameters),
-                    // new GradeBuilder().Build(parameters),
-                    // new InterfaceBuilder().Build(parameters),
-                    // new PauseButtonBuilder().Build(parameters),
-                    // new HitCircleBuilder().Build(parameters),
-                    // new HitCircleNumberBuilder().Build(parameters),
+                    new CursorBuilder().Build(parameters),
+                    new CursorTrailBuilder().Build(parameters),
+                    new ModBuilder().Build(parameters),
+                    new ScorebarBuilder().Build(parameters),
+                    new FollowpointBuilder().Build(parameters),
+                    new GradeBuilder().Build(parameters),
+                    new InterfaceBuilder().Build(parameters),
+                    new PauseButtonBuilder().Build(parameters),
+                    new HitCircleBuilder().Build(parameters),
+                    new HitCircleNumberBuilder().Build(parameters),
                     new JudgementBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
