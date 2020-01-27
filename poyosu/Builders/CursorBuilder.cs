@@ -15,18 +15,19 @@ namespace poyosu.Builders
         private const int image_size = 256;
 
         private const float fill_radius = 20;
-        private const float ring_radius = 26;
-        private const float inner_glow_radius = 26;
-        private const float outer_glow_radius = 52;
-
         private const float fill_blur = 1.8f;
-        private const float ring_blur = 3.3f;
+
+        private const float inner_glow_radius = 26;
         private const float inner_glow_blur = 12.6f;
+
+        private const float ring_radius = 26;
+        private const float ring_blur = 3.3f;
+
+        private const float outer_glow_radius = 52;
         private const float outer_glow_blur = 36f;
 
         public override string Folder => "cursor";
         public override string Name => "cursor";
-        
 
         public override async Task Generate(string path, Parameters parameters)
         {

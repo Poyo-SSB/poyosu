@@ -14,18 +14,18 @@ namespace poyosu.Builders
 {
     public class MenuButtonBuilder : Builder
     {
-        private const int menu_button_selection_width = 148;
-        private const int menu_button_wide_selection_width = 178;
-        private const int menu_button_selection_height = 180;
-        private const int menu_button_selection_top = 6;
+        private const int selection_width = 148;
+        private const int wide_selection_width = 178;
+        private const int selection_height = 180;
+        private const int selection_top = 6;
 
-        private const int menu_glow_blur = 12;
-        private const float menu_glow_opacity = 0.5f;
+        private const int glow_blur = 12;
+        private const float glow_opacity = 0.5f;
 
-        private static readonly Rgba32 color_menu_mode = Rgba32.FromHex("8B3BEE");
-        private static readonly Rgba32 color_menu_mods = Rgba32.FromHex("D747AD");
-        private static readonly Rgba32 color_menu_options = Rgba32.FromHex("0096ED");
-        private static readonly Rgba32 color_menu_random = Rgba32.FromHex("8ED700");
+        private static readonly Rgba32 color_mode = Rgba32.FromHex("8B3BEE");
+        private static readonly Rgba32 color_mods = Rgba32.FromHex("D747AD");
+        private static readonly Rgba32 color_options = Rgba32.FromHex("0096ED");
+        private static readonly Rgba32 color_random = Rgba32.FromHex("8ED700");
 
         public override string Folder => "selectionbutton";
         public override string Name => "menu buttons";
@@ -33,10 +33,10 @@ namespace poyosu.Builders
         public override async Task Generate(string path, Parameters parameters)
         {
             // menu button
-            await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, menu_button_wide_selection_width, "mode");
-            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, menu_button_selection_width, "mods");
-            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, menu_button_selection_width, "options");
-            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, menu_button_selection_width, "random");
+            await this.GenerateSelectionButton(path, parameters, color_mode, null, wide_selection_width, "mode");
+            await this.GenerateSelectionButton(path, parameters, color_mods, Assets.ImageIconStar, selection_width, "mods");
+            await this.GenerateSelectionButton(path, parameters, color_options, Assets.ImageIconCog, selection_width, "options");
+            await this.GenerateSelectionButton(path, parameters, color_random, Assets.ImageIconDice, selection_width, "random");
 
             await Task.CompletedTask;
         }
@@ -44,10 +44,10 @@ namespace poyosu.Builders
         private async Task GenerateSelectionButton(string path, Parameters parameters, Rgba32 color, Image<Rgba32> buttonIcon, int baseWidth, string name)
         {
             int width = baseWidth;
-            int height = menu_button_selection_height;
-            int topHeight = menu_button_selection_top;
+            int height = selection_height;
+            int topHeight = selection_top;
 
-            int blur = menu_glow_blur;
+            int blur = glow_blur;
 
             double size = 0.3;
 
@@ -70,7 +70,7 @@ namespace poyosu.Builders
                         glow.Mutate(ctx => ctx
                             .Pad(glow.Width * 3, glow.Height * 3)
                             .GaussianBlur(blur));
-                        button.Mutate(ctx => ctx.DrawImage(glow, glowCenter, menu_glow_opacity));
+                        button.Mutate(ctx => ctx.DrawImage(glow, glowCenter, glow_opacity));
                     }
 
                     button.Mutate(ctx => ctx.DrawImage(icon, baseCenter));

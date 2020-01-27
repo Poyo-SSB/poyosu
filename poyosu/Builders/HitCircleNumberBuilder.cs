@@ -15,27 +15,26 @@ namespace poyosu.Builders
 {
     public class HitCircleNumberBuilder : Builder
     {
-        private const int base_image_width = 256;
-        private const int base_image_height = 256;
-        private const float base_font_size = 128;
+        private const int image_size = 256;
+        private const float font_size = 128;
 
         public override string Folder => "defaulthitnumber";
         public override string Name => "hit numbers";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            var center = new PointF(base_image_width / 2f, base_image_height / 2f);
+            var center = new PointF(image_size / 2f, image_size / 2f);
 
             for (int i = 0; i <= 9; i++)
             {
-                using var text = new Image<Rgba32>(base_image_width, base_image_height);
+                using var text = new Image<Rgba32>(image_size, image_size);
 
                 text.Mutate(ctx => ctx
                     .DrawText(new TextGraphicsOptions(true)
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, i.ToString(), new Font(Assets.UniSansBold, base_font_size), Rgba32.White, center)
+                    }, i.ToString(), new Font(Assets.UniSansBold, font_size), Rgba32.White, center)
                     .Trim());
 
                 text.SaveToFileWithHD(Path.Combine(path, $"default-{i}"), parameters.HD);
