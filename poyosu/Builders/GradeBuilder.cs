@@ -23,32 +23,32 @@ namespace poyosu.Builders
         private static readonly Rgba32 color_sh = Rgba32.FromHex("BDBDBD");
         private static readonly Rgba32 color_xh = Rgba32.FromHex("BDBDBD");
 
-        private const int base_large_size = 900;
-        private const int base_small_size = 80;
+        private const int large_size = 900;
+        private const int small_size = 80;
 
-        private const float base_hexagon_size = 355;
-        private const float base_border_radius = 80;
+        private const float hexagon_size = 355;
+        private const float border_radius = 80;
 
-        private const float base_font_size = 350f;
-        private const float base_text_glow_blur = 24;
-        private const float base_text_glow_opacity = 0.55f;
+        private const float font_size = 350f;
+        private const float text_glow_blur = 24;
+        private const float text_glow_opacity = 0.55f;
 
-        private const float base_glow_blur = 40;
+        private const float glow_blur = 40;
 
-        private const float base_border_ratio = 0.86f;
+        private const float border_ratio = 0.86f;
 
         public override string Folder => "grades";
         public override string Name => "grades";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            var center = new PointF(base_large_size / 2f, base_large_size / 2f);
+            var center = new PointF(large_size / 2f, large_size / 2f);
 
-            var hexagon = RegularPolygonGenerator.Generate(6, base_hexagon_size, 0, center);
-            IPath token = PolygonRounder.Round(hexagon, base_border_radius, 32);
+            var hexagon = RegularPolygonGenerator.Generate(6, hexagon_size, 0, center);
+            IPath token = PolygonRounder.Round(hexagon, border_radius, 32);
 
-            var smallHexagon = RegularPolygonGenerator.Generate(6, base_border_ratio * base_hexagon_size, 0, center);
-            IPath smallToken = PolygonRounder.Round(smallHexagon, base_border_ratio * base_border_radius, 32);
+            var smallHexagon = RegularPolygonGenerator.Generate(6, border_ratio * hexagon_size, 0, center);
+            IPath smallToken = PolygonRounder.Round(smallHexagon, border_ratio * border_radius, 32);
 
             await Task.WhenAll(new List<Task>
             {
@@ -65,49 +65,38 @@ namespace poyosu.Builders
 
         private async Task DrawGrade(string path, Parameters parameters, IPath token, IPath smallToken, Rgba32 color, string label, string name, bool two, float xOffset = 0)
         {
-            int largeSize = base_large_size;
-            int smallSize = base_small_size;
-            
-            float hexagonSize = base_hexagon_size;
-            float borderRadius = base_border_radius;
-            
-            float fontSize = base_font_size;
-            float textGlowBlur = base_text_glow_blur;
-            
-            float glowBlur = base_glow_blur;
-
-            using var grade = new Image<Rgba32>(largeSize, largeSize);
+            using var grade = new Image<Rgba32>(large_size, large_size);
 
             var center = new PointF(grade.Width / 2f, grade.Height / 2f);
 
-            using (var outerGlow = new Image<Rgba32>(largeSize, largeSize))
+            using (var outerGlow = new Image<Rgba32>(large_size, large_size))
             {
                 outerGlow.Mutate(ctx => ctx
                     .Fill(color, token)
-                    .GaussianBlur(glowBlur));
+                    .GaussianBlur(glow_blur));
                 grade.Mutate(ctx => ctx.DrawImage(outerGlow));
             }
 
-            using (var outerRing = new Image<Rgba32>(largeSize, largeSize))
+            using (var outerRing = new Image<Rgba32>(large_size, large_size))
             {
                 outerRing.Mutate(ctx => ctx.Fill(Rgba32.White, token));
                 grade.Mutate(ctx => ctx.DrawImage(outerRing));
             }
 
-            using (var innerToken = new Image<Rgba32>(largeSize, largeSize))
+            using (var innerToken = new Image<Rgba32>(large_size, large_size))
             {
                 innerToken.Mutate(ctx => ctx.Fill(color, smallToken));
                 grade.Mutate(ctx => ctx.DrawImage(innerToken));
             }
 
-            using (var text = new Image<Rgba32>(largeSize, largeSize))
+            using (var text = new Image<Rgba32>(large_size, large_size))
             {
                 text.Mutate(ctx => ctx
                     .DrawText(new TextGraphicsOptions(true)
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, label, new Font(Assets.ExoBlack, fontSize), Rgba32.White, center));
+                    }, label, new Font(Assets.ExoBlack, font_size), Rgba32.White, center));
 
                 if (two)
                 {
@@ -116,7 +105,7 @@ namespace poyosu.Builders
                         {
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
-                        }, label, new Font(Assets.ExoBlack, fontSize), Rgba32.White, center + new Point((int)(fontSize * 0.45f), (int)(fontSize * 0.09f))));
+                        }, label, new Font(Assets.ExoBlack, font_size), Rgba32.White, center + new Point((int)(font_size * 0.45f), (int)(font_size * 0.09f))));
                 }
 
                 text.Mutate(ctx => ctx.Trim());
@@ -125,16 +114,16 @@ namespace poyosu.Builders
                 {
                     textGlow.Mutate(ctx => ctx
                         .Pad(text.Width * 2, text.Height * 2)
-                        .GaussianBlur(textGlowBlur));
+                        .GaussianBlur(text_glow_blur));
 
-                    grade.Mutate(ctx => ctx.DrawImage(textGlow, new Point(((largeSize - textGlow.Width) / 2) + (int)(fontSize * xOffset), (largeSize - textGlow.Height) / 2), base_text_glow_opacity));
+                    grade.Mutate(ctx => ctx.DrawImage(textGlow, new Point(((large_size - textGlow.Width) / 2) + (int)(font_size * xOffset), (large_size - textGlow.Height) / 2), text_glow_opacity));
                 }
 
-                grade.Mutate(ctx => ctx.DrawImage(text, new Point(((largeSize - text.Width) / 2) + (int)(fontSize * xOffset), (largeSize - text.Height) / 2)));
+                grade.Mutate(ctx => ctx.DrawImage(text, new Point(((large_size - text.Width) / 2) + (int)(font_size * xOffset), (large_size - text.Height) / 2)));
             }
 
             grade.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-{name}"), parameters.HD);
-            grade.Mutate(ctx => ctx.Resize(grade.Width * smallSize / largeSize, grade.Height * smallSize / largeSize));
+            grade.Mutate(ctx => ctx.Resize(grade.Width * small_size / large_size, grade.Height * small_size / large_size));
             grade.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-{name}-small"), parameters.HD);
 
             await Task.CompletedTask;

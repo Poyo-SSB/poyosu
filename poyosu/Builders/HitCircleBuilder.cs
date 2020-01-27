@@ -14,6 +14,9 @@ namespace poyosu.Builders
 {
     public class HitCircleBuilder : Builder
     {
+        private const int image_size = 234;
+        private const int hit_circle_border = 15;
+
         public override string Folder => "hitcircle";
         public override string Name => "hit circles";
 
@@ -24,11 +27,13 @@ namespace poyosu.Builders
                 Assets.ImageBlank.SaveToFileAsPng(System.IO.Path.Combine(path, "sliderendcircle.png"));
             }
 
-            using var hitCircle = new Image<Rgba32>(234, 234);
+            using var hitCircle = new Image<Rgba32>(image_size, image_size);
+
+            var center = new PointF(image_size / 2f, image_size / 2f);
 
             hitCircle.Mutate(c => c
-                .Fill(Rgba32.FromHex("000000A0"), new EllipsePolygon(new PointF(117, 117), new SizeF(206, 206)))
-                .Draw(Rgba32.FromHex("FFFFFF"), 15, new EllipsePolygon(new PointF(117, 117), new SizeF(234 - 15, 234 - 15))));
+                .Fill(Rgba32.FromHex("000000A0"), new EllipsePolygon(center, new SizeF(image_size - (hit_circle_border / 2), image_size - hit_circle_border / 2)))
+                .Draw(Rgba32.FromHex("FFFFFF"), hit_circle_border, new EllipsePolygon(center, new SizeF(image_size - hit_circle_border, image_size - hit_circle_border))));
 
             hitCircle.SaveToFileWithHD(System.IO.Path.Combine(path, $"hitcircle"), parameters.HD);
             Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"hitcircleoverlay"), parameters.HD);
