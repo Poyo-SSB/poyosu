@@ -24,22 +24,18 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            int width = base_image_width;
-            int height = base_image_height;
-            float fontSize = base_font_size;
-
-            var center = new PointF(width / 2f, height / 2f);
+            var center = new PointF(base_image_width / 2f, base_image_height / 2f);
 
             for (int i = 0; i <= 9; i++)
             {
-                using var text = new Image<Rgba32>(width, height);
+                using var text = new Image<Rgba32>(base_image_width, base_image_height);
 
                 text.Mutate(ctx => ctx
                     .DrawText(new TextGraphicsOptions(true)
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, i.ToString(), new Font(Assets.UniSansBold, fontSize), Rgba32.White, center)
+                    }, i.ToString(), new Font(Assets.UniSansBold, base_font_size), Rgba32.White, center)
                     .Trim());
 
                 text.SaveToFileWithHD(Path.Combine(path, $"default-{i}"), parameters.HD);
