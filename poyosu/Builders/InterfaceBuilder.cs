@@ -14,30 +14,30 @@ namespace poyosu.Builders
 {
     public class InterfaceBuilder : Builder
     {
-        private const int base_ranking_panel_image_width = 2732;
-        private const int base_ranking_panel_image_height = 1333;
-        private const int base_ranking_panel_top = 8;
-        private const int base_ranking_panel_border_margin = 20;
-        private const int base_ranking_panel_border_width = 1252;
-        private const int base_ranking_panel_border_height = 4;
-        private const int base_ranking_panel_border_y1 = 209;
-        private const int base_ranking_panel_border_y2 = 401;
-        private const int base_ranking_panel_border_y3 = 593;
-        private const int base_ranking_panel_border_y4 = 783;
+        private const int ranking_panel_image_width = 2732;
+        private const int ranking_panel_image_height = 1333;
+        private const int ranking_panel_top = 8;
+        private const int ranking_panel_border_margin = 20;
+        private const int ranking_panel_border_width = 1252;
+        private const int ranking_panel_border_height = 4;
+        private const int ranking_panel_border_y1 = 209;
+        private const int ranking_panel_border_y2 = 401;
+        private const int ranking_panel_border_y3 = 593;
+        private const int ranking_panel_border_y4 = 783;
 
-        private const int base_menu_button_image_width = 1398;
-        private const int base_menu_button_image_height = 206;
-        private const int base_menu_button_top_margin = 18;
-        private const int base_menu_button_border = 17;
-        private const int base_menu_button_width = 1378;
-        private const int base_menu_button_height = 172;
+        private const int menu_button_image_width = 1398;
+        private const int menu_button_image_height = 206;
+        private const int menu_button_top_margin = 18;
+        private const int menu_button_border = 17;
+        private const int menu_button_width = 1378;
+        private const int menu_button_height = 172;
 
         private static readonly Rgba32 color_background = Rgba32.FromHex("000000D9");
 
-        private const int base_selection_width = 148;
+        private const int regular_selection_width = 148;
         private const int wide_selection_width = 178;
-        private const int base_selection_height = 180;
-        private const int base_selection_top = 6;
+        private const int selection_height = 180;
+        private const int selection_top = 6;
 
         private const int base_selection_glow_blur = 12;
         private const float base_selection_glow_opacity = 0.5f;
@@ -52,63 +52,46 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            int rankingImageWidth = base_ranking_panel_image_width;
-            int rankingImageHeight = base_ranking_panel_image_height;
-            int rankingTop = base_ranking_panel_top;
-            int rankingBorderMargin = base_ranking_panel_border_margin;
-            int rankingBorderWidth = base_ranking_panel_border_width;
-            int rankingBorderHeight = base_ranking_panel_border_height;
-            int rankingBorderY1 = base_ranking_panel_border_y1;
-            int rankingBorderY2 = base_ranking_panel_border_y2;
-            int rankingBorderY3 = base_ranking_panel_border_y3;
-            int rankingBorderY4 = base_ranking_panel_border_y4;
-
-            int buttonImageWidth = base_menu_button_image_width;
-            int buttonImageHeight = base_menu_button_image_height;
-            int buttonTopMargin = base_menu_button_top_margin;
-            int buttonBorder = base_menu_button_border;
-            int buttonWidth = base_menu_button_width;
-            int buttonHeight = base_menu_button_height;
-
-            using (var rankingPanel = new Image<Rgba32>(rankingImageWidth, rankingImageHeight))
+            using (var rankingPanel = new Image<Rgba32>(ranking_panel_image_width, ranking_panel_image_height))
             {
                 rankingPanel.Mutate(ctx => ctx.Fill(color_background));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, 0, rankingImageWidth, base_ranking_panel_top)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, 0, ranking_panel_image_width, ranking_panel_border_height)));
 
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY1, rankingBorderWidth, rankingBorderHeight)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY2, rankingBorderWidth, rankingBorderHeight)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY3, rankingBorderWidth, rankingBorderHeight)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(rankingBorderMargin, rankingBorderY4, rankingBorderWidth, rankingBorderHeight)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y1, ranking_panel_border_width, ranking_panel_border_height)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y2, ranking_panel_border_width, ranking_panel_border_height)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y3, ranking_panel_border_width, ranking_panel_border_height)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y4, ranking_panel_border_width, ranking_panel_border_height)));
 
                 rankingPanel.SaveToFileWithHD(Path.Combine(path, $"ranking-panel"), parameters.HD);
             }
 
             await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, wide_selection_width, "mode");
-            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, base_selection_width, "mods");
-            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, base_selection_width, "options");
-            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, base_selection_width, "random");
+            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, regular_selection_width, "mods");
+            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, regular_selection_width, "options");
+            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, regular_selection_width, "random");
 
-            using var menuButton = new Image<Rgba32>(buttonImageWidth, buttonImageHeight);
+            using var menuButton = new Image<Rgba32>(menu_button_image_width, menu_button_image_height);
 
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, buttonTopMargin, buttonWidth, buttonHeight)));
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, buttonTopMargin, buttonBorder, buttonHeight)));
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, menu_button_top_margin, menu_button_width, menu_button_height)));
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, menu_button_top_margin, menu_button_border, menu_button_height)));
 
             menuButton.SaveToFileWithHD(Path.Combine(path, $"menu-button-background"), parameters.HD);
 
             await Task.CompletedTask;
         }
 
-        private async Task GenerateSelectionButton(string path, Parameters parameters, Rgba32 color, Image<Rgba32> icon, int baseWidth, string name)
+        private async Task GenerateSelectionButton(string path, Parameters parameters, Rgba32 color, Image<Rgba32> buttonIcon, int baseWidth, string name)
         {
             int width = baseWidth;
-            int height = base_selection_height;
-            int topHeight = base_selection_top;
+            int height = selection_height;
+            int topHeight = selection_top;
 
             int blur = base_selection_glow_blur;
 
             double size = 0.3;
 
-            icon?.Mutate(ctx => ctx.Resize((int)(icon.Width * size), (int)(icon.Height * size)));
+            var icon = buttonIcon?.Clone();
+            icon.Mutate(ctx => ctx.Resize((int)(buttonIcon.Width * size), (int)(buttonIcon.Height * size)));
 
             using (var button = new Image<Rgba32>(width, height))
             {
