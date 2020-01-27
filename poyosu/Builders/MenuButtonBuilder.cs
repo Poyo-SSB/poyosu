@@ -12,73 +12,31 @@ using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
-    public class InterfaceBuilder : Builder
+    public class MenuButtonBuilder : Builder
     {
-        private const int ranking_panel_image_width = 2732;
-        private const int ranking_panel_image_height = 1333;
-        private const int ranking_panel_top = 8;
-        private const int ranking_panel_border_margin = 20;
-        private const int ranking_panel_border_width = 1252;
-        private const int ranking_panel_border_height = 4;
-        private const int ranking_panel_border_y1 = 209;
-        private const int ranking_panel_border_y2 = 401;
-        private const int ranking_panel_border_y3 = 593;
-        private const int ranking_panel_border_y4 = 783;
-
-        private const int song_button_image_width = 1398;
-        private const int song_button_image_height = 206;
-        private const int song_button_top_margin = 18;
-        private const int song_button_border = 17;
-        private const int song_button_width = 1378;
-        private const int song_button_height = 172;
-
-        private static readonly Rgba32 color_background = Rgba32.FromHex("000000D9");
-
         private const int menu_button_selection_width = 148;
         private const int menu_button_wide_selection_width = 178;
         private const int menu_button_selection_height = 180;
         private const int menu_button_selection_top = 6;
 
-        private const int base_selection_glow_blur = 12;
-        private const float base_selection_glow_opacity = 0.5f;
+        private const int menu_glow_blur = 12;
+        private const float menu_glow_opacity = 0.5f;
 
-        private static readonly Rgba32 color_selection_mode = Rgba32.FromHex("8B3BEE");
-        private static readonly Rgba32 color_selection_mods = Rgba32.FromHex("D747AD");
-        private static readonly Rgba32 color_selection_options = Rgba32.FromHex("0096ED");
-        private static readonly Rgba32 color_selection_random = Rgba32.FromHex("8ED700");
+        private static readonly Rgba32 color_menu_mode = Rgba32.FromHex("8B3BEE");
+        private static readonly Rgba32 color_menu_mods = Rgba32.FromHex("D747AD");
+        private static readonly Rgba32 color_menu_options = Rgba32.FromHex("0096ED");
+        private static readonly Rgba32 color_menu_random = Rgba32.FromHex("8ED700");
 
-        public override string Folder => "interface";
-        public override string Name => "interface";
+        public override string Folder => "selectionbutton";
+        public override string Name => "menu buttons";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            // ranking panel
-            using (var rankingPanel = new Image<Rgba32>(ranking_panel_image_width, ranking_panel_image_height))
-            {
-                rankingPanel.Mutate(ctx => ctx.Fill(color_background));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, 0, ranking_panel_image_width, ranking_panel_top)));
-
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y1, ranking_panel_border_width, ranking_panel_border_height)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y2, ranking_panel_border_width, ranking_panel_border_height)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y3, ranking_panel_border_width, ranking_panel_border_height)));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y4, ranking_panel_border_width, ranking_panel_border_height)));
-
-                rankingPanel.SaveToFileWithHD(Path.Combine(path, $"ranking-panel"), parameters.HD);
-            }
-
             // menu button
             await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, menu_button_wide_selection_width, "mode");
             await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, menu_button_selection_width, "mods");
             await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, menu_button_selection_width, "options");
             await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, menu_button_selection_width, "random");
-
-            // song button background
-            using var menuButton = new Image<Rgba32>(song_button_image_width, song_button_image_height);
-
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, song_button_top_margin, song_button_width, song_button_height)));
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, song_button_top_margin, song_button_border, song_button_height)));
-
-            menuButton.SaveToFileWithHD(Path.Combine(path, $"menu-button-background"), parameters.HD);
 
             await Task.CompletedTask;
         }
@@ -89,7 +47,7 @@ namespace poyosu.Builders
             int height = menu_button_selection_height;
             int topHeight = menu_button_selection_top;
 
-            int blur = base_selection_glow_blur;
+            int blur = menu_glow_blur;
 
             double size = 0.3;
 
@@ -112,7 +70,7 @@ namespace poyosu.Builders
                         glow.Mutate(ctx => ctx
                             .Pad(glow.Width * 3, glow.Height * 3)
                             .GaussianBlur(blur));
-                        button.Mutate(ctx => ctx.DrawImage(glow, glowCenter, base_selection_glow_opacity));
+                        button.Mutate(ctx => ctx.DrawImage(glow, glowCenter, menu_glow_opacity));
                     }
 
                     button.Mutate(ctx => ctx.DrawImage(icon, baseCenter));
