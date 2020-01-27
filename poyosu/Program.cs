@@ -58,11 +58,14 @@ namespace poyosu
                     new ScorebarBuilder().Build(parameters),
                     new FollowpointBuilder().Build(parameters),
                     new GradeBuilder().Build(parameters),
-                    new InterfaceBuilder().Build(parameters),
+                    new MenuButtonBuilder().Build(parameters),
+                    new SongButtonBuilder().Build(parameters),
+                    new RankingPanelBuilder().Build(parameters),
                     new PauseButtonBuilder().Build(parameters),
                     new HitCircleBuilder().Build(parameters),
                     new HitCircleNumberBuilder().Build(parameters),
                     new JudgementBuilder().Build(parameters),
+                    new ReverseArrowBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());
