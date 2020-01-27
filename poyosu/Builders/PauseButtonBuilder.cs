@@ -15,12 +15,12 @@ namespace poyosu.Builders
 {
     public class PauseButtonBuilder : Builder
     {
-        private const int base_image_width = 740;
-        private const int base_image_height = 220;
-        private const float base_font_size = 128;
-        private const float base_glow_tiny_blur = 3;
-        private const float base_glow_small_blur = 10;
-        private const float base_glow_big_blur = 18;
+        private const int image_width = 740;
+        private const int image_height = 220;
+        private const float font_size = 128;
+        private const float glow_tiny_blur = 3;
+        private const float glow_small_blur = 10;
+        private const float glow_big_blur = 18;
 
         private static readonly Rgba32 color_back = Rgba32.FromHex("E8193B");
         private static readonly Rgba32 color_retry = Rgba32.FromHex("F69100");
@@ -42,32 +42,24 @@ namespace poyosu.Builders
 
         private async Task GenerateButton(string path, Parameters parameters, Rgba32 color, string label, string name)
         {
-            int width = base_image_width;
-            int height = base_image_height;
-            float fontSize = base_font_size;
+            using var button = new Image<Rgba32>(image_width, image_height);
 
-            float tinyBlur = base_glow_tiny_blur;
-            float smallBlur = base_glow_small_blur;
-            float bigBlur = base_glow_big_blur;
+            var center = new PointF(image_width / 2f, image_height / 2f);
 
-            using var button = new Image<Rgba32>(width, height);
-
-            var center = new PointF(width / 2f, height / 2f);
-
-            using (var text = new Image<Rgba32>(width, height))
+            using (var text = new Image<Rgba32>(image_width, image_height))
             {
                 text.Mutate(ctx => ctx
                     .DrawText(new TextGraphicsOptions(true)
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                    }, label, new Font(Assets.UniSansBook, fontSize), Rgba32.White, center));
+                    }, label, new Font(Assets.UniSansBook, font_size), Rgba32.White, center));
 
                 using (var bigGlow = text.Clone())
                 {
                     bigGlow.Mutate(ctx => ctx
                         .SetColor(color)
-                        .GaussianBlur(bigBlur));
+                        .GaussianBlur(glow_big_blur));
                     button.Mutate(ctx => ctx.DrawImage(bigGlow));
                 }
 
@@ -75,7 +67,7 @@ namespace poyosu.Builders
                 {
                     smallGlow.Mutate(ctx => ctx
                         .SetColor(color)
-                        .GaussianBlur(smallBlur));
+                        .GaussianBlur(glow_small_blur));
                     button.Mutate(ctx => ctx.DrawImage(smallGlow));
                 }
 
@@ -83,7 +75,7 @@ namespace poyosu.Builders
                 {
                     tinyGlow.Mutate(ctx => ctx
                         .SetColor(color)
-                        .GaussianBlur(tinyBlur));
+                        .GaussianBlur(glow_tiny_blur));
                     button.Mutate(ctx => ctx.DrawImage(tinyGlow));
                 }
 
