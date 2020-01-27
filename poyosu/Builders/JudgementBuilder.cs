@@ -95,6 +95,7 @@ namespace poyosu.Builders
             if (parameters.AnimationEnabled)
             {
                 int frames = (int)Math.Floor(parameters.AnimationFramerate / parameters.JudgementLength);
+                // TODO
             }
         }
     }
