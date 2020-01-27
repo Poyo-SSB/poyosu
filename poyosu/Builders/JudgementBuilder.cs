@@ -15,14 +15,14 @@ namespace poyosu.Builders
 {
     public class JudgementBuilder : Builder
     {
-        private const int base_static_image_size = 400;
-        private const int base_animated_image_size = 1280;
+        private const int static_image_size = 400;
+        private const int animated_image_size = 1280;
 
-        private const float base_label_proportion = 0.5f;
-        private const float base_label_image_proportion = 0.3f;
+        private const float label_proportion = 0.5f;
+        private const float label_image_proportion = 0.3f;
 
-        private const float base_glow_blur_big = 30f;
-        private const float base_glow_blur_small = 10f;
+        private const float glow_blur_big = 30f;
+        private const float glow_blur_small = 10f;
 
         // adjust 100/50/S0 colors
         private static readonly Rgba32 color_300 = Rgba32.FromHex("44B5D9");
@@ -35,17 +35,17 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            using var image300 = GenerateTextImage("300");
-            using var image100 = GenerateTextImage("100");
-            using var image50 = GenerateTextImage("50");
+            using var image300 = this.GenerateTextImage("300");
+            using var image100 = this.GenerateTextImage("100");
+            using var image50 = this.GenerateTextImage("50");
 
-            this.GenerateJudgement(path, parameters, base_label_proportion, image300, color_300, "300");
-            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphGeki, color_300, "300g");
-            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphKatu, color_300, "300k");
-            this.GenerateJudgement(path, parameters, base_label_proportion, image100, color_100, "100");
-            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageGlyphKatu, color_100, "100k");
-            this.GenerateJudgement(path, parameters, base_label_proportion, image50, color_50, "50");
-            this.GenerateJudgement(path, parameters, base_label_image_proportion, Assets.ImageIconTimes, color_miss, "0");
+            this.GenerateJudgement(path, parameters, label_proportion, image300, color_300, "300");
+            this.GenerateJudgement(path, parameters, label_image_proportion, Assets.ImageGlyphGeki, color_300, "300g");
+            this.GenerateJudgement(path, parameters, label_image_proportion, Assets.ImageGlyphKatu, color_300, "300k");
+            this.GenerateJudgement(path, parameters, label_proportion, image100, color_100, "100");
+            this.GenerateJudgement(path, parameters, label_image_proportion, Assets.ImageGlyphKatu, color_100, "100k");
+            this.GenerateJudgement(path, parameters, label_proportion, image50, color_50, "50");
+            this.GenerateJudgement(path, parameters, label_image_proportion, Assets.ImageIconTimes, color_miss, "0");
 
             await Task.CompletedTask;
         }
@@ -64,32 +64,33 @@ namespace poyosu.Builders
 
         private void GenerateJudgement(string path, Parameters parameters, float size, Image<Rgba32> label, Rgba32 color, string name)
         {
-            using var judgement = new Image<Rgba32>(base_static_image_size, base_static_image_size);
-
-            var center = new PointF(judgement.Width / 2f, judgement.Height / 2f);
-            
-            using (label)
+            using (var judgement = new Image<Rgba32>(static_image_size, static_image_size))
             {
-                label.Mutate(ctx => ctx
-                    .Resize(
-                        (int)(base_static_image_size * size),
-                        (int)(base_static_image_size * size))
-                    .Pad(base_static_image_size, base_static_image_size));
+                var center = new PointF(judgement.Width / 2f, judgement.Height / 2f);
 
-                using var labelGlowBig = label.Clone();
-                labelGlowBig.Mutate(ctx => ctx.SetColor(color));
+                using (label)
+                {
+                    label.Mutate(ctx => ctx
+                        .Resize(
+                            (int)(static_image_size * size),
+                            (int)(static_image_size * size))
+                        .Pad(static_image_size, static_image_size));
 
-                using var labelGlowSmall = labelGlowBig.Clone();
+                    using var labelGlowBig = label.Clone();
+                    labelGlowBig.Mutate(ctx => ctx.SetColor(color));
 
-                labelGlowBig.Mutate(ctx => ctx.GaussianBlur(base_glow_blur_big));
-                labelGlowSmall.Mutate(ctx => ctx.GaussianBlur(base_glow_blur_small));
+                    using var labelGlowSmall = labelGlowBig.Clone();
 
-                judgement.Mutate(ctx => ctx.DrawImage(labelGlowBig));
-                judgement.Mutate(ctx => ctx.DrawImage(labelGlowSmall));
-                judgement.Mutate(ctx => ctx.DrawImage(label));
+                    labelGlowBig.Mutate(ctx => ctx.GaussianBlur(glow_blur_big));
+                    labelGlowSmall.Mutate(ctx => ctx.GaussianBlur(glow_blur_small));
+
+                    judgement.Mutate(ctx => ctx.DrawImage(labelGlowBig));
+                    judgement.Mutate(ctx => ctx.DrawImage(labelGlowSmall));
+                    judgement.Mutate(ctx => ctx.DrawImage(label));
+                }
+
+                judgement.SaveToFileWithHD(Path.Combine(path, $"hit{name}"), parameters.HD);
             }
-
-            judgement.SaveToFileWithHD(Path.Combine(path, $"hit{name}"), parameters.HD);
 
             if (parameters.AnimationEnabled)
             {
