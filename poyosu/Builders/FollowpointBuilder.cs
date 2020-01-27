@@ -12,8 +12,8 @@ namespace poyosu.Builders
 {
     public class FollowpointBuilder : Builder
     {
-        private const int base_image_width = 256;
-        private const int base_image_padding = 2;
+        private const int image_width = 256;
+        private const int image_padding = 2;
 
         private const int base_reference_fps = 60;
         private const int base_delay_frames = 22;
@@ -33,14 +33,14 @@ namespace poyosu.Builders
 
             float followpointWidth = parameters.FollowpointWidth;
 
-            int imageWidth = base_image_width;
-            int imagePadding = base_image_padding;
+            int imageWidth = image_width;
+            int imagePadding = image_padding;
 
-            int imageHeight = (int)Math.Ceiling(followpointWidth);
+            int imageHeight = (int)Math.Ceiling(parameters.FollowpointWidth);
 
             using (var followpoint = new Image<Rgba32>(imageWidth, imageHeight))
             {
-                var rectangle = new RectangularPolygon(0, (imageHeight - followpointWidth) / 2f, imageWidth, followpointWidth);
+                var rectangle = new RectangularPolygon(0, (imageHeight - parameters.FollowpointWidth) / 2f, imageWidth, parameters.FollowpointWidth);
 
                 followpoint.Mutate(ctx => ctx
                     .Fill(Rgba32.White, rectangle));
