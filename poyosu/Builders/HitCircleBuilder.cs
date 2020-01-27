@@ -32,7 +32,7 @@ namespace poyosu.Builders
             var center = new PointF(image_size / 2f, image_size / 2f);
 
             hitCircle.Mutate(c => c
-                .Fill(Rgba32.FromHex("000000A0"), new EllipsePolygon(center, new SizeF(image_size - (hit_circle_border / 2), image_size - hit_circle_border / 2)))
+                .Fill(Rgba32.FromHex("000000A0"), new EllipsePolygon(center, new SizeF(image_size - (hit_circle_border / 2), image_size - (hit_circle_border / 2))))
                 .Draw(Rgba32.FromHex("FFFFFF"), hit_circle_border, new EllipsePolygon(center, new SizeF(image_size - hit_circle_border, image_size - hit_circle_border))));
 
             hitCircle.SaveToFileWithHD(System.IO.Path.Combine(path, $"hitcircle"), parameters.HD);
