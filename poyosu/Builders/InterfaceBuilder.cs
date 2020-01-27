@@ -25,19 +25,19 @@ namespace poyosu.Builders
         private const int ranking_panel_border_y3 = 593;
         private const int ranking_panel_border_y4 = 783;
 
-        private const int menu_button_image_width = 1398;
-        private const int menu_button_image_height = 206;
-        private const int menu_button_top_margin = 18;
-        private const int menu_button_border = 17;
-        private const int menu_button_width = 1378;
-        private const int menu_button_height = 172;
+        private const int song_button_image_width = 1398;
+        private const int song_button_image_height = 206;
+        private const int song_button_top_margin = 18;
+        private const int song_button_border = 17;
+        private const int song_button_width = 1378;
+        private const int song_button_height = 172;
 
         private static readonly Rgba32 color_background = Rgba32.FromHex("000000D9");
 
-        private const int regular_selection_width = 148;
-        private const int wide_selection_width = 178;
-        private const int selection_height = 180;
-        private const int selection_top = 6;
+        private const int menu_button_selection_width = 148;
+        private const int menu_button_wide_selection_width = 178;
+        private const int menu_button_selection_height = 180;
+        private const int menu_button_selection_top = 6;
 
         private const int base_selection_glow_blur = 12;
         private const float base_selection_glow_opacity = 0.5f;
@@ -52,10 +52,11 @@ namespace poyosu.Builders
 
         public override async Task Generate(string path, Parameters parameters)
         {
+            // ranking panel
             using (var rankingPanel = new Image<Rgba32>(ranking_panel_image_width, ranking_panel_image_height))
             {
                 rankingPanel.Mutate(ctx => ctx.Fill(color_background));
-                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, 0, ranking_panel_image_width, ranking_panel_border_height)));
+                rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, 0, ranking_panel_image_width, ranking_panel_top)));
 
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y1, ranking_panel_border_width, ranking_panel_border_height)));
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(ranking_panel_border_margin, ranking_panel_border_y2, ranking_panel_border_width, ranking_panel_border_height)));
@@ -65,15 +66,17 @@ namespace poyosu.Builders
                 rankingPanel.SaveToFileWithHD(Path.Combine(path, $"ranking-panel"), parameters.HD);
             }
 
-            await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, wide_selection_width, "mode");
-            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, regular_selection_width, "mods");
-            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, regular_selection_width, "options");
-            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, regular_selection_width, "random");
+            // menu button
+            await this.GenerateSelectionButton(path, parameters, color_selection_mode, null, menu_button_wide_selection_width, "mode");
+            await this.GenerateSelectionButton(path, parameters, color_selection_mods, Assets.ImageIconStar, menu_button_selection_width, "mods");
+            await this.GenerateSelectionButton(path, parameters, color_selection_options, Assets.ImageIconCog, menu_button_selection_width, "options");
+            await this.GenerateSelectionButton(path, parameters, color_selection_random, Assets.ImageIconDice, menu_button_selection_width, "random");
 
-            using var menuButton = new Image<Rgba32>(menu_button_image_width, menu_button_image_height);
+            // song button background
+            using var menuButton = new Image<Rgba32>(song_button_image_width, song_button_image_height);
 
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, menu_button_top_margin, menu_button_width, menu_button_height)));
-            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, menu_button_top_margin, menu_button_border, menu_button_height)));
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, song_button_top_margin, song_button_width, song_button_height)));
+            menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, song_button_top_margin, song_button_border, song_button_height)));
 
             menuButton.SaveToFileWithHD(Path.Combine(path, $"menu-button-background"), parameters.HD);
 
@@ -83,15 +86,14 @@ namespace poyosu.Builders
         private async Task GenerateSelectionButton(string path, Parameters parameters, Rgba32 color, Image<Rgba32> buttonIcon, int baseWidth, string name)
         {
             int width = baseWidth;
-            int height = selection_height;
-            int topHeight = selection_top;
+            int height = menu_button_selection_height;
+            int topHeight = menu_button_selection_top;
 
             int blur = base_selection_glow_blur;
 
             double size = 0.3;
 
             var icon = buttonIcon?.Clone();
-            icon.Mutate(ctx => ctx.Resize((int)(buttonIcon.Width * size), (int)(buttonIcon.Height * size)));
 
             using (var button = new Image<Rgba32>(width, height))
             {
@@ -100,6 +102,8 @@ namespace poyosu.Builders
 
                 if (icon != null)
                 {
+                icon.Mutate(ctx => ctx.Resize((int)(buttonIcon.Width * size), (int)(buttonIcon.Height * size)));
+
                     var baseCenter = new Point((width - icon.Width) / 2, (topHeight - icon.Height + height) / 2);
                     var glowCenter = new Point((width - (3 * icon.Width)) / 2, (topHeight - (3 * icon.Height) + height) / 2);
                     
