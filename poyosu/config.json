@@ -3,7 +3,7 @@
 		"folder": "test",
 
 		"hd": true,
-		"animation_framerate": 0,
+		"animation_framerate": 60,
 
 		"scorebar_name": "Poyo",
 		"scorebar_flag": "US",
