@@ -20,8 +20,8 @@ namespace poyosu.Builders
 
         private const float label_static_proportion = 0.5f;
         private const float label_static_image_proportion = 0.3f;
-        private const float label_animated_proportion = label_static_proportion * 0.75f;
-        private const float label_animated_image_proportion = label_static_image_proportion * 0.75f;
+        private const float label_animated_proportion = label_static_proportion * 0.65f;
+        private const float label_animated_image_proportion = label_static_image_proportion * 0.65f;
 
         private const float glow_static_blur_big = 30f;
         private const float glow_static_blur_small = 10f;
@@ -118,9 +118,10 @@ namespace poyosu.Builders
                     var center = new PointF(frame.Width / 2f, frame.Height / 2f);
 
                     float time = i / (frames - 1f);
+                    float easeTime = 1  - ((time - 1) * (time - 1));
 
-                    float scaleMultiplier = 1 + (time * 0.35f);
-                    float opacityMultiplier = Math.Min(1, -6 * (time - 1));
+                    float scaleMultiplier = 1 + (easeTime * 0.35f);
+                    float opacityMultiplier = Math.Min(1, -3 * (time - 1));
 
                     using (var text = label.Clone())
                     {
