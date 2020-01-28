@@ -59,6 +59,12 @@ namespace poyosu.Configuration
 
         [JsonProperty("judgement_length")]
         public float JudgementLength { get; internal set; } = 1;
+        [JsonProperty("judgement_300_enabled")]
+        public bool Judgement300Enabled { get; internal set; } = false;
+        [JsonProperty("judgement_100_enabled")]
+        public bool Judgement100Enabled { get; internal set; } = true;
+        [JsonProperty("judgement_50_enabled")]
+        public bool Judgement50Enabled { get; internal set; } = true;
 
         public void Populate(Config config)
         {
@@ -87,6 +93,7 @@ namespace poyosu.Configuration
             this.SliderEndEnabled = config.SliderEndEnabled;
 
             this.JudgementLength = config.JudgementLength;
+            this.Judgement300Enabled = config.Judgement300Enabled;
         }
     }
 }

@@ -12,7 +12,8 @@
 
 		"slider_end_enabled": false,
 
-		"judgement_length": 1,
+		"judgement_length": 0.6,
+		"judgement_300_enabled": false,
 
 		"parameters": {}
 	}

@@ -27,6 +27,8 @@ namespace poyosu.Configuration
 
         [JsonProperty("judgement_length")]
         public float JudgementLength;
+        [JsonProperty("judgement_300_enabled")]
+        public bool Judgement300Enabled;
 
         [JsonProperty("parameters")]
         public JObject Parameters;

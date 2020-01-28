@@ -62,12 +62,12 @@ namespace poyosu
                     //new SongButtonBuilder().Build(parameters),
                     //new RankingPanelBuilder().Build(parameters),
                     //new PauseButtonBuilder().Build(parameters),
-                    new HitCircleBuilder().Build(parameters),
+                    //new HitCircleBuilder().Build(parameters),
                     //new HitCircleNumberBuilder().Build(parameters),
-                    //new JudgementBuilder().Build(parameters),
+                    new JudgementBuilder().Build(parameters),
                     //new ReverseArrowBuilder().Build(parameters),
-                    new ApproachCircleBuilder().Build(parameters),
-                    new FollowCircleBuilder().Build(parameters),
+                    //new ApproachCircleBuilder().Build(parameters),
+                    //new FollowCircleBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());
