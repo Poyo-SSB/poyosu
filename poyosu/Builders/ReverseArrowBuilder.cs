@@ -1,29 +1,36 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using poyosu.Configuration;
 using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.Primitives;
+using SixLabors.Shapes;
 
 namespace poyosu.Builders
 {
-    public class StarsBuilder : Builder
+    public class ReverseArrowBuilder : Builder
     {
-        private const int image_size = 100;
+        private const int image_size = 120;
 
-        public override string Folder => "stars";
-        public override string Name => "stars";
+        public override string Folder => "reversearrow";
+        public override string Name => "reverse arrow";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            Assets.ImageBlank.SaveToFileWithHD(Path.Combine(path, $"star2"), parameters.HD);
+            using var menuButton = new Image<Rgba32>(image_size, image_size);
 
-            using var star = Assets.ImageIconStar.Clone();
+            var line1 = new Path(new LinearLineSegment(new PointF(67, 60), new PointF(36, 88)));
+            var line2 = new Path(new LinearLineSegment(new PointF(36, 32), new PointF(67, 60)));
 
-            star.Mutate(ctx => ctx.Resize(image_size, image_size));
+            menuButton.Mutate(ctx => ctx
+                .Draw(new Pen(Rgba32.White, 20), line1)
+                .Draw(new Pen(Rgba32.White, 20), line2)
+                .Fill(Rgba32.White, new EllipsePolygon(new PointF(36, 32), 10))
+                .Fill(Rgba32.White, new EllipsePolygon(new PointF(67, 60), 10))
+                .Fill(Rgba32.White, new EllipsePolygon(new PointF(36, 88), 10)));
 
-            star.SaveToFileWithHD(Path.Combine(path, $"star"), parameters.HD);
+            menuButton.SaveToFileWithHD(System.IO.Path.Combine(path, $"reversearrow"), parameters.HD);
 
             await Task.CompletedTask;
         }

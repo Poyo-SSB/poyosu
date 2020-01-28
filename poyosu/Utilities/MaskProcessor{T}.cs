@@ -4,7 +4,6 @@ using SixLabors.ImageSharp.Primitives;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.Primitives;
-using System.Numerics;
 
 namespace poyosu.Utilities
 {

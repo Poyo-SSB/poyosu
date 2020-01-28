@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using poyosu.Configuration;
 using poyosu.Utilities;
 using SixLabors.ImageSharp;
@@ -9,28 +10,41 @@ using SixLabors.Shapes;
 
 namespace poyosu.Builders
 {
-    public class ReverseArrowBuilder : Builder
+    public class StarsBuilder : Builder
     {
-        private const int image_size = 120;
+        private const int star_image_size = 100;
+        private const int star2_image_size = 96;
 
-        public override string Folder => "reversearrow";
-        public override string Name => "reverse arrow";
+        public override string Folder => "stars";
+        public override string Name => "stars";
 
         public override async Task Generate(string path, Parameters parameters)
         {
-            using var menuButton = new Image<Rgba32>(image_size, image_size);
+            if (parameters.EnableUiStars)
+            {
+                using var star = new Image<Rgba32>(star2_image_size, star2_image_size);
 
-            var line1 = new Path(new LinearLineSegment(new PointF(67, 60), new PointF(36, 88)));
-            var line2 = new Path(new LinearLineSegment(new PointF(36, 32), new PointF(67, 60)));
+                var center = new PointF(star2_image_size / 2f, star2_image_size / 2f);
 
-            menuButton.Mutate(ctx => ctx
-                .Draw(new Pen(Rgba32.White, 20), line1)
-                .Draw(new Pen(Rgba32.White, 20), line2)
-                .Fill(Rgba32.White, new EllipsePolygon(new PointF(36, 32), 10))
-                .Fill(Rgba32.White, new EllipsePolygon(new PointF(67, 60), 10))
-                .Fill(Rgba32.White, new EllipsePolygon(new PointF(36, 88), 10)));
+                var brush = new EllipticGradientBrush(
+                    new PointF(star2_image_size / 2f, star2_image_size / 2f),
+                    new PointF(star2_image_size, star2_image_size / 2f),
+                    1, GradientRepetitionMode.None, new ColorStop(0, Rgba32.White), new ColorStop(0, Rgba32.Transparent));
 
-            menuButton.SaveToFileWithHD(System.IO.Path.Combine(path, $"reversearrow"), parameters.HD);
+                star.Mutate(ctx => ctx.Fill(brush, new EllipsePolygon(center, star2_image_size / 2f)));
+
+                star.SaveToFileWithHD(System.IO.Path.Combine(path, $"star2"), parameters.HD);
+            }
+            else
+            {
+                Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"star2"), parameters.HD);
+            }
+
+            using (var star = Assets.ImageIconStar.Clone())
+            {
+                star.Mutate(ctx => ctx.Resize(star_image_size, star_image_size));
+                star.SaveToFileWithHD(System.IO.Path.Combine(path, $"star"), parameters.HD);
+            }
 
             await Task.CompletedTask;
         }

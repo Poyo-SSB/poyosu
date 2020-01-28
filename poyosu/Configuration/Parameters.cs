@@ -66,6 +66,9 @@ namespace poyosu.Configuration
         [JsonProperty("judgement_50_enabled")]
         public bool Judgement50Enabled { get; internal set; } = true;
 
+        [JsonProperty("enable_ui_stars")]
+        public bool EnableUiStars { get; internal set; } = false;
+
         public void Populate(Config config)
         {
             // This is run before values are populated from JSON.
