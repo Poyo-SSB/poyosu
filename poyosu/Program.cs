@@ -53,7 +53,7 @@ namespace poyosu
                 await Task.WhenAll(new List<Task>
                 {
                     //new CursorBuilder().Build(parameters),
-                    new CursorTrailBuilder().Build(parameters),
+                    //new CursorTrailBuilder().Build(parameters),
                     //new ModBuilder().Build(parameters),
                     //new ScorebarBuilder().Build(parameters),
                     //new FollowpointBuilder().Build(parameters),
@@ -68,7 +68,8 @@ namespace poyosu
                     //new ReverseArrowBuilder().Build(parameters),
                     //new ApproachCircleBuilder().Build(parameters),
                     //new FollowCircleBuilder().Build(parameters),
-                    new StarsBuilder().Build(parameters),
+                    //new StarsBuilder().Build(parameters),
+                    new SpinnerBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());
