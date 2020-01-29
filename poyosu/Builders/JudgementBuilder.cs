@@ -7,7 +7,6 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
@@ -56,7 +55,7 @@ namespace poyosu.Builders
         {
             var text = new Image<Rgba32>(1024, 1024);
             text.Mutate(ctx => ctx
-                .DrawText(new TextGraphicsOptions(true)
+                .DrawText(new TextGraphicsOptions
                 {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center
@@ -99,12 +98,12 @@ namespace poyosu.Builders
                     judgement.Mutate(ctx => ctx.DrawImage(text));
                 }
 
-                judgement.SaveToFileWithHD(Path.Combine(path, $"hit{name}"), parameters.HD);
+                judgement.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}"), parameters.HD);
             }
 
             if (!enabled)
             {
-                Assets.ImageBlank.SaveToFileWithHD(Path.Combine(path, $"hit{name}-0"), parameters.HD);
+                Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}-0"), parameters.HD);
             }
             else if (parameters.AnimationEnabled)
             {
@@ -144,12 +143,12 @@ namespace poyosu.Builders
 
                     frame.Mutate(ctx => ctx.Opacity(opacityMultiplier));
 
-                    frame.SaveToFileWithHD(Path.Combine(path, $"hit{name}-{i}"), parameters.HD);
+                    frame.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}-{i}"), parameters.HD);
                 }
 
                 // TODO: Add rings around combo finishers
 
-                Assets.ImageBlank.SaveToFileWithHD(Path.Combine(path, $"hit{name}-{frames - 1}"), parameters.HD);
+                Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}-{frames - 1}"), parameters.HD);
             }
         }
     }

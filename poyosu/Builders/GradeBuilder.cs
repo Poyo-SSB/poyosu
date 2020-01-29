@@ -5,8 +5,6 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -92,7 +90,7 @@ namespace poyosu.Builders
             using (var text = new Image<Rgba32>(large_size, large_size))
             {
                 text.Mutate(ctx => ctx
-                    .DrawText(new TextGraphicsOptions(true)
+                    .DrawText(new TextGraphicsOptions
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
@@ -101,14 +99,14 @@ namespace poyosu.Builders
                 if (two)
                 {
                     text.Mutate(ctx => ctx
-                        .DrawText(new TextGraphicsOptions(true)
+                        .DrawText(new TextGraphicsOptions
                         {
                             HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
                         }, label, new Font(Assets.ExoBlack, font_size), Rgba32.White, center + new Point((int)(font_size * 0.45f), (int)(font_size * 0.09f))));
                 }
 
-                text.Mutate(ctx => ctx.Trim());
+                text.Trim();
 
                 using (var textGlow = text.Clone())
                 {

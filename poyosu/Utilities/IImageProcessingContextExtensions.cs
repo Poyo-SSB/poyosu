@@ -1,8 +1,6 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Primitives;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Utilities
 {
@@ -25,9 +23,6 @@ namespace poyosu.Utilities
             };
         }
 
-        public static IImageProcessingContext Premultiply(this IImageProcessingContext source)
-            => source.ApplyProcessor(new PremultiplyProcessor());
-
         public static IImageProcessingContext DrawImage(this IImageProcessingContext source, Image image)
             => source.DrawImage(image, 1);
 
@@ -35,9 +30,18 @@ namespace poyosu.Utilities
             => source.DrawImage(image, point, 1);
 
         public static IImageProcessingContext Mask(this IImageProcessingContext source, Image image)
-            => source.ApplyProcessor(new MaskProcessor(image));
+        {
+            image = image.CloneAs<Rgba32>();
 
-        public static IImageProcessingContext Trim(this IImageProcessingContext source)
-            => source.ApplyProcessor(new TrimProcessor());
+            image.Mutate(ctx => ctx.Filter(new ColorMatrix
+            {
+                M14 = -1f,
+                M24 = -1f,
+                M34 = -1f,
+                M54 = 1f
+            }));
+
+            return source.DrawImage(image, PixelColorBlendingMode.Normal, PixelAlphaCompositionMode.DestOut, 1);
+        }
     }
 }

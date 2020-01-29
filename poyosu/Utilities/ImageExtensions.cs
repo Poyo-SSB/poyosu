@@ -1,15 +1,15 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Processing.Processors;
-using SixLabors.Primitives;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace poyosu.Utilities
 {
-    public class TrimProcessor<TPixel> : IImageProcessor<TPixel>
-        where TPixel : struct, IPixel<TPixel>
+    public static class ImageExtensions
     {
-        public void Apply(Image<TPixel> source, Rectangle sourceRectangle)
+        public static void Trim(this Image<Rgba32> source)
         {
             int left;
             int top;

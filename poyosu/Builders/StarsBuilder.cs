@@ -5,15 +5,15 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 
 namespace poyosu.Builders
 {
     public class StarsBuilder : Builder
     {
-        private const int star_image_size = 100;
+        private const int star_image_size = 90;
         private const int star2_image_size = 96;
+
+        private const float star2_opacity = 0.1f;
 
         public override string Folder => "stars";
         public override string Name => "stars";
@@ -27,9 +27,11 @@ namespace poyosu.Builders
                 var center = new PointF(star2_image_size / 2f, star2_image_size / 2f);
 
                 var brush = new EllipticGradientBrush(
-                    new PointF(star2_image_size / 2f, star2_image_size / 2f),
+                    center,
                     new PointF(star2_image_size, star2_image_size / 2f),
-                    1, GradientRepetitionMode.None, new ColorStop(0, Rgba32.White), new ColorStop(0, Rgba32.Transparent));
+                    1, GradientRepetitionMode.None,
+                    new ColorStop(0f, new Rgba32(1f, 1f, 1f, star2_opacity)),
+                    new ColorStop(0.5f, new Rgba32(1f, 1f, 1f, 0f)));
 
                 star.Mutate(ctx => ctx.Fill(brush, new EllipsePolygon(center, star2_image_size / 2f)));
 

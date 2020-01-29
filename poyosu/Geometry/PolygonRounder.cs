@@ -1,5 +1,4 @@
-﻿using SixLabors.Primitives;
-using SixLabors.Shapes;
+﻿using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;

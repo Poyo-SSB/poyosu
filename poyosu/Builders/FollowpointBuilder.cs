@@ -5,8 +5,6 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 
 namespace poyosu.Builders
 {
@@ -104,7 +102,7 @@ namespace poyosu.Builders
 
                             mask.Mutate(ctx => ctx
                                 .Fill(taperGradient)
-                                .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient));
+                                .Fill(new GraphicsOptions { ColorBlendingMode = PixelColorBlendingMode.Multiply }, baseGradient));
 
                             using Image<Rgba32> frame = followpoint.Clone();
 
@@ -129,8 +127,8 @@ namespace poyosu.Builders
 
                     mask.Mutate(ctx => ctx
                         .Fill(taperGradient)
-                        .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Multiply, 1), baseGradient)
-                        .Fill(new GraphicsOptions(true, PixelColorBlendingMode.Add, 1), baseGradient));
+                        .Fill(new GraphicsOptions { ColorBlendingMode = PixelColorBlendingMode.Multiply }, baseGradient)
+                        .Fill(new GraphicsOptions { ColorBlendingMode = PixelColorBlendingMode.Add }, baseGradient));
 
                     followpoint.Mutate(ctx => ctx
                         .Mask(mask)

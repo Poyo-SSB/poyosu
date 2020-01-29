@@ -5,7 +5,6 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
@@ -28,7 +27,7 @@ namespace poyosu.Builders
             menuButton.Mutate(ctx => ctx.Fill(Rgba32.Black, new RectangleF(0, top_margin, width, height)));
             menuButton.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(0, top_margin, border, height)));
 
-            menuButton.SaveToFileWithHD(Path.Combine(path, $"menu-button-background"), parameters.HD);
+            menuButton.SaveToFileWithHD(System.IO.Path.Combine(path, $"menu-button-background"), parameters.HD);
 
             await Task.CompletedTask;
         }

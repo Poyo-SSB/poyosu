@@ -3,8 +3,6 @@ using SixLabors.ImageSharp;
 using poyosu.Utilities;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 using System.Threading.Tasks;
 
 namespace poyosu.Builders

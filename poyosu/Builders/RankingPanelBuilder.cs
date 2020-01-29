@@ -5,7 +5,6 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
@@ -42,7 +41,7 @@ namespace poyosu.Builders
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(border_margin, border_y3, border_width, border_height)));
                 rankingPanel.Mutate(ctx => ctx.Fill(Rgba32.White, new RectangleF(border_margin, border_y4, border_width, border_height)));
 
-                rankingPanel.SaveToFileWithHD(Path.Combine(path, $"ranking-panel"), parameters.HD);
+                rankingPanel.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-panel"), parameters.HD);
             }
 
             await Task.CompletedTask;

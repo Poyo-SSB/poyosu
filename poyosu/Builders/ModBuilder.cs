@@ -4,8 +4,6 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -180,7 +178,7 @@ namespace poyosu.Builders
 
                 tokenContents.Mutate(ctx => ctx.DrawImage(icon, new Point(xOffset, yOffset)));
 
-                var graphicOptions = new GraphicsOptions(true)
+                var graphicOptions = new GraphicsOptions
                 {
                     AlphaCompositionMode = PixelAlphaCompositionMode.DestOut
                 };

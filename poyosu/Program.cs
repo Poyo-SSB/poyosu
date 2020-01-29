@@ -53,7 +53,7 @@ namespace poyosu
                 await Task.WhenAll(new List<Task>
                 {
                     //new CursorBuilder().Build(parameters),
-                    //new CursorTrailBuilder().Build(parameters),
+                    new CursorTrailBuilder().Build(parameters),
                     //new ModBuilder().Build(parameters),
                     //new ScorebarBuilder().Build(parameters),
                     //new FollowpointBuilder().Build(parameters),

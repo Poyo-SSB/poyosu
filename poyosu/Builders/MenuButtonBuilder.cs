@@ -5,7 +5,6 @@ using poyosu.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
@@ -73,7 +72,7 @@ namespace poyosu.Builders
                     button.Mutate(ctx => ctx.DrawImage(icon, baseCenter));
                 }
 
-                button.SaveToFileWithHD(Path.Combine(path, $"selection-{name}"), parameters.HD);
+                button.SaveToFileWithHD(System.IO.Path.Combine(path, $"selection-{name}"), parameters.HD);
             }
 
             using (var hovered = new Image<Rgba32>(width, height))
@@ -90,7 +89,7 @@ namespace poyosu.Builders
                     hovered.Mutate(ctx => ctx.DrawImage(icon, center));
                 }
 
-                hovered.SaveToFileWithHD(Path.Combine(path, $"selection-{name}-over"), parameters.HD);
+                hovered.SaveToFileWithHD(System.IO.Path.Combine(path, $"selection-{name}-over"), parameters.HD);
             }
 
             await Task.CompletedTask;

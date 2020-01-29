@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-dev000149" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-dev002724" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.0-unstable0024" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-unstable0418" />
   </ItemGroup>
 
   <ItemGroup>

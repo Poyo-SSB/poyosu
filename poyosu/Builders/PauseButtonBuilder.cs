@@ -6,7 +6,6 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace poyosu.Builders
 {
@@ -46,7 +45,7 @@ namespace poyosu.Builders
             using (var text = new Image<Rgba32>(image_width, image_height))
             {
                 text.Mutate(ctx => ctx
-                    .DrawText(new TextGraphicsOptions(true)
+                    .DrawText(new TextGraphicsOptions
                     {
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
@@ -79,7 +78,7 @@ namespace poyosu.Builders
                 button.Mutate(ctx => ctx.DrawImage(text));
             }
 
-            button.SaveToFileWithHD(Path.Combine(path, $"pause-{name}"), parameters.HD);
+            button.SaveToFileWithHD(System.IO.Path.Combine(path, $"pause-{name}"), parameters.HD);
 
             await Task.CompletedTask;
         }

@@ -6,8 +6,6 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
 
 namespace poyosu.Builders
 {
@@ -100,7 +98,7 @@ namespace poyosu.Builders
                     }
 
                     bg.Mutate(ctx => ctx
-                        .DrawText(new TextGraphicsOptions(true)
+                        .DrawText(new TextGraphicsOptions
                         {
                             HorizontalAlignment = HorizontalAlignment.Left,
                             VerticalAlignment = VerticalAlignment.Center
