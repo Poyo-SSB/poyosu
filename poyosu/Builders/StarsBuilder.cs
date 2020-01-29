@@ -13,7 +13,8 @@ namespace poyosu.Builders
         private const int star_image_size = 90;
         private const int star2_image_size = 96;
 
-        private const float star2_opacity = 0.1f;
+        private const float star2_opacity_center = 0.05f;
+        private const float star2_opacity_edge = 0.1f;
 
         public override string Folder => "stars";
         public override string Name => "stars";
@@ -30,8 +31,8 @@ namespace poyosu.Builders
                     center,
                     new PointF(star2_image_size, star2_image_size / 2f),
                     1, GradientRepetitionMode.None,
-                    new ColorStop(0f, new Rgba32(1f, 1f, 1f, star2_opacity)),
-                    new ColorStop(0.5f, new Rgba32(1f, 1f, 1f, 0f)));
+                    new ColorStop(0f, new Rgba32(1f, 1f, 1f, star2_opacity_center)),
+                    new ColorStop(1f, new Rgba32(1f, 1f, 1f, star2_opacity_edge)));
 
                 star.Mutate(ctx => ctx.Fill(brush, new EllipsePolygon(center, star2_image_size / 2f)));
 
