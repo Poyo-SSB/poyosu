@@ -22,7 +22,7 @@ namespace poyosu.Builders
 
             using (var spinnerBottom = new Image<Rgba32>(image_size, image_size))
             {
-                spinnerBottom.Mutate(c => c
+                spinnerBottom.Mutate(ctx => ctx
                     .Draw(Rgba32.White, border_thickness, new EllipsePolygon(center, new SizeF(image_size - border_thickness, image_size - border_thickness)))
                     .Fill(Rgba32.White, new EllipsePolygon(center, axle_size / 2f)));
 
@@ -41,7 +41,7 @@ namespace poyosu.Builders
 
                 var line = builder.Build();
 
-                spinnerMiddle.Mutate(c => c
+                spinnerMiddle.Mutate(ctx => ctx
                     .Fill(Rgba32.White, line)
                     .Fill(Rgba32.White, line.RotateDegree(120f, center))
                     .Fill(Rgba32.White, line.RotateDegree(240f, center)));

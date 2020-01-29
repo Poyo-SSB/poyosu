@@ -21,7 +21,7 @@ namespace poyosu.Builders
 
             using var approachCircle = new Image<Rgba32>(image_size, image_size);
 
-            approachCircle.Mutate(c => c
+            approachCircle.Mutate(ctx => ctx
                 .Draw(Rgba32.White, border_thickness, new EllipsePolygon(center, new SizeF(image_size - border_thickness, image_size - border_thickness))));
 
             approachCircle.SaveToFileWithHD(System.IO.Path.Combine(path, $"approachcircle"), parameters.HD);

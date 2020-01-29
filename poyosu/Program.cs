@@ -68,8 +68,8 @@ namespace poyosu
                     //new ReverseArrowBuilder().Build(parameters),
                     //new ApproachCircleBuilder().Build(parameters),
                     //new FollowCircleBuilder().Build(parameters),
-                    //new StarsBuilder().Build(parameters),
-                    new SpinnerBuilder().Build(parameters),
+                    new StarsBuilder().Build(parameters),
+                    //new SpinnerBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());

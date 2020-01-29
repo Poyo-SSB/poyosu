@@ -21,7 +21,7 @@ namespace poyosu.Builders
 
             var center = new PointF(image_size / 2f, image_size / 2f);
 
-            approachCircle.Mutate(c => c
+            approachCircle.Mutate(ctx => ctx
                 .Draw(Rgba32.FromHex("FFFFFF"), border, new EllipsePolygon(center, new SizeF(image_size - border, image_size - border))));
 
             approachCircle.SaveToFileWithHD(System.IO.Path.Combine(path, $"sliderfollowcircle"), parameters.HD);
