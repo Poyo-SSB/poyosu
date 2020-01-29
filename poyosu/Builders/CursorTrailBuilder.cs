@@ -46,7 +46,7 @@ namespace poyosu.Builders
 
             using var trail = new Image<Rgba32>(size, size);
 
-            var center = new PointF(parameters.CursorTrailRadius, parameters.CursorTrailRadius);
+            var center = new PointF(size / 2f, size / 2f);
 
             var brush = new EllipticGradientBrush(
                 new PointF(size / 2f, size / 2f),
