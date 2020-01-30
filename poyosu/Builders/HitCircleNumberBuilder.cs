@@ -15,7 +15,7 @@ namespace poyosu.Builders
         private const int image_size = 256;
         private const float font_size = 128;
 
-        public override string Folder => "defaulthitnumber";
+        public override string Folder => "hitnumbers";
         public override string Name => "hit numbers";
 
         public override async Task Generate(string path, Parameters parameters)

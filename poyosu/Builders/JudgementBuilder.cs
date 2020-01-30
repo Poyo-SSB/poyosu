@@ -12,7 +12,7 @@ namespace poyosu.Builders
 {
     public class JudgementBuilder : Builder
     {
-        private const int static_image_size = 400;
+        private const int static_image_size = 340;
         private const int animated_image_size = 500;
 
         private const float label_static_proportion = 0.5f;
