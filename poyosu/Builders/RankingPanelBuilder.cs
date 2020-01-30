@@ -44,6 +44,11 @@ namespace poyosu.Builders
                 rankingPanel.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-panel"), parameters.HD);
             }
 
+            Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-title"), parameters.HD);
+            Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-maxcombo"), parameters.HD);
+            Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"ranking-accuracy"), parameters.HD);
+            
+            // TODO: ranking-graph, ranking-perfect, ranking-winner
             await Task.CompletedTask;
         }
     }
