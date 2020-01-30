@@ -70,7 +70,8 @@ namespace poyosu
                     //new FollowCircleBuilder().Build(parameters),
                     //new StarsBuilder().Build(parameters),
                     //new SpinnerBuilder().Build(parameters),
-                    new SnowBuilder().Build(parameters),
+                    //new SnowBuilder().Build(parameters),
+                    new WelcomeTextBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());
