@@ -11,14 +11,14 @@ namespace poyosu.Builders
 {
     public class WelcomeTextBuilder : Builder
     {
-        private const int image_width = 800;
-        private const int image_height = 800;
+        private const int image_width = 1000;
+        private const int image_height = 1000;
         private const float font_size = 192;
         private const float glow_tiny_blur = 28;
         private const float glow_small_blur = 10;
         private const float glow_big_blur = 18;
 
-        private static readonly Rgba32 color = Rgba32.FromHex("3AA7FF");
+        private static readonly Rgba32 color = Rgba32.FromHex("008CFF");
 
         public override string Folder => "welcometext";
         public override string Name => "welcome text";
@@ -64,6 +64,8 @@ namespace poyosu.Builders
 
                 image.Mutate(ctx => ctx.DrawImage(text));
             }
+
+            image.Trim();
 
             image.SaveToFileWithHD(System.IO.Path.Combine(path, $"welcome_text"), parameters.HD);
 
