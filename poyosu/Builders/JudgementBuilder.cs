@@ -146,7 +146,7 @@ namespace poyosu.Builders
                     frame.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}-{i}"), parameters.HD);
                 }
 
-                // TODO: Add rings around combo finishers
+                // for future consideration: rings around combo finishers?
 
                 Assets.ImageBlank.SaveToFileWithHD(System.IO.Path.Combine(path, $"hit{name}-{frames - 1}"), parameters.HD);
             }
