@@ -71,7 +71,8 @@ namespace poyosu
                     //new StarsBuilder().Build(parameters),
                     //new SpinnerBuilder().Build(parameters),
                     //new SnowBuilder().Build(parameters),
-                    new WelcomeTextBuilder().Build(parameters),
+                    //new WelcomeTextBuilder().Build(parameters),
+                    new ModeIconBuilder().Build(parameters),
 
                     new SkinIniBuilder().Build(parameters)
                 }.AsParallel());
